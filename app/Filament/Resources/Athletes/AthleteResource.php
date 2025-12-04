@@ -1,0 +1,60 @@
+<?php
+
+namespace App\Filament\Resources\Athletes;
+
+use App\Filament\Resources\Athletes\Pages\CreateAthlete;
+use App\Filament\Resources\Athletes\Pages\EditAthlete;
+use App\Filament\Resources\Athletes\Pages\ListAthletes;
+use App\Filament\Resources\Athletes\Schemas\AthleteForm;
+use App\Filament\Resources\Athletes\Tables\AthletesTable;
+use App\Models\Athlete;
+use BackedEnum;
+use UnitEnum;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Table;
+use App\Filament\Resources\Athletes\RelationManagers\AchievementsRelationManager;
+use App\Filament\Resources\Athletes\RelationManagers\HealthScreeningsRelationManager;
+
+
+class AthleteResource extends Resource
+{
+    protected static ?string $model = Athlete::class;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
+
+    // ⬅️ TYPE-NYA DISAMAIN DENGAN PARENT: UnitEnum|string|null
+    protected static UnitEnum|string|null $navigationGroup = 'Athlete Management';
+
+    protected static ?int $navigationSort = 2;
+
+    protected static ?string $recordTitleAttribute = 'name';
+
+    public static function form(Schema $schema): Schema
+    {
+        return AthleteForm::configure($schema);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return AthletesTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            AchievementsRelationManager::class,
+            HealthScreeningsRelationManager::class,
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListAthletes::route('/'),
+            'create' => CreateAthlete::route('/create'),
+            'edit' => EditAthlete::route('/{record}/edit'),
+        ];
+    }
+}
