@@ -9,6 +9,7 @@ use App\Filament\Resources\AthletePerformances\Schemas\AthletePerformanceForm;
 use App\Filament\Resources\AthletePerformances\Tables\AthletePerformancesTable;
 use App\Models\AthletePerformance;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -18,7 +19,15 @@ class AthletePerformanceResource extends Resource
 {
     protected static ?string $model = AthletePerformance::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    // ganti ke icon yang lebih cocok
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChartBar;
+
+    protected static UnitEnum|string|null $navigationGroup = 'Athlete Management';
+    protected static ?int $navigationSort = 6;
+
+    protected static ?string $recordTitleAttribute = null; 
+    // record perf sebenarnya tidak punya “judul”
+    // jadi kita biarkan null → Filament tidak memaksakan
 
     public static function form(Schema $schema): Schema
     {
@@ -32,17 +41,15 @@ class AthletePerformanceResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => ListAthletePerformances::route('/'),
+            'index'  => ListAthletePerformances::route('/'),
             'create' => CreateAthletePerformance::route('/create'),
-            'edit' => EditAthletePerformance::route('/{record}/edit'),
+            'edit'   => EditAthletePerformance::route('/{record}/edit'),
         ];
     }
 }
