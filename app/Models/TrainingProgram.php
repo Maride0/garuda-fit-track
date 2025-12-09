@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\TrainingSession;
 use App\Models\Athlete;
+use App\Models\TestRecord;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\PerformanceEvaluation;
 
 class TrainingProgram extends Model
 {
@@ -77,7 +80,7 @@ class TrainingProgram extends Model
 
     // ───────────── RELATIONS ─────────────
 
-    public function sessions()
+     public function sessions()
     {
         return $this->hasMany(TrainingSession::class, 'program_id', 'program_id');
     }
@@ -85,15 +88,25 @@ class TrainingProgram extends Model
     public function athletes()
     {
         return $this->belongsToMany(
-                Athlete::class,
-                'athlete_training_program',
-                'program_id',
-                'athlete_id',
-                'program_id',
-            )
-            ->withPivot(['status', 'role', 'join_date'])
-            ->withTimestamps();
+            Athlete::class,
+            'athlete_training_program',
+            'program_id',
+            'athlete_id',
+            'program_id',
+        )
+        ->withPivot(['status', 'role', 'join_date'])
+        ->withTimestamps();
     }
+
+    public function testRecords()
+    {
+        return $this->hasMany(TestRecord::class, 'training_program_id', 'program_id');
+        
+    }
+    //     public function performanceEvaluations()
+    // {
+    //     return $this->hasMany(PerformanceEvaluation::class, 'training_program_id', 'program_id');
+    // }
 
     // ───────────── ACCESSORS ─────────────
 
@@ -129,13 +142,12 @@ class TrainingProgram extends Model
             ->whereDate('start_date', '<=', now())
             ->whereDate('end_date', '>=', now());
     }
-    public function performances()
+     public function performanceEvaluations(): HasMany
     {
-        return $this->hasMany(AthletePerformance::class, 'training_program_id', 'program_id');
-    }
-
-    public function performanceEvaluations()
-    {
-        return $this->hasMany(PerformanceEvaluation::class, 'training_program_id', 'program_id');
+        return $this->hasMany(
+            PerformanceEvaluation::class,
+            'training_program_id', // FK di tabel performance_evaluations
+            'program_id'           // PK string di training_programs
+        );
     }
 }

@@ -35,6 +35,10 @@ class SessionsRelationManager extends RelationManager
                     ->label('Waktu Mulai')
                     ->seconds(false),
 
+                TimePicker::make('end_time')
+                    ->label('Waktu Selesai')
+                    ->seconds(false),
+
                 TextInput::make('duration_minutes')
                     ->label('Durasi (menit)')
                     ->numeric()
@@ -46,13 +50,7 @@ class SessionsRelationManager extends RelationManager
                     ->label('Lokasi')
                     ->maxLength(255),
 
-                TextInput::make('participants_count')
-                    ->label('Perkiraan Jumlah Atlet')
-                    ->numeric()
-                    ->minValue(1)
-                    ->default(null),
-
-                Textarea::make('activities')
+                Textarea::make('activities_notes')
                     ->label('Rencana Latihan / Aktivitas')
                     ->rows(4)
                     ->columnSpanFull(),
@@ -60,12 +58,19 @@ class SessionsRelationManager extends RelationManager
                 Select::make('status')
                     ->label('Status Sesi')
                     ->options([
-                        'scheduled' => 'Scheduled',
-                        'completed' => 'Completed',
-                        'cancelled' => 'Cancelled',
+                        'scheduled'  => 'Scheduled',
+                        'on_going'   => 'On Going',
+                        'completed'  => 'Completed',
+                        'cancelled'  => 'Cancelled',
                     ])
                     ->default('scheduled')
-                    ->required(),
+                    ->required()
+                    ->reactive(),
+
+                TextInput::make('cancel_reason')
+                    ->label('Alasan Pembatalan')
+                    ->maxLength(255)
+                    ->visible(fn (callable $get) => $get('status') === 'cancelled'),
             ]);
     }
 
@@ -84,6 +89,12 @@ class SessionsRelationManager extends RelationManager
                     ->time('H:i')
                     ->sortable(),
 
+                TextColumn::make('end_time')
+                    ->label('Selesai')
+                    ->time('H:i')
+                    ->sortable()
+                    ->toggleable(),
+
                 TextColumn::make('duration_minutes')
                     ->label('Durasi')
                     ->formatStateUsing(fn ($state) => $state ? $state . ' menit' : '—'),
@@ -93,19 +104,14 @@ class SessionsRelationManager extends RelationManager
                     ->wrap()
                     ->toggleable(),
 
-                TextColumn::make('participants_count')
-                    ->label('Atlet')
-                    ->numeric()
-                    ->alignRight()
-                    ->toggleable(),
-
                 TextColumn::make('status')
                     ->label('Status')
                     ->badge()
                     ->colors([
-                        'scheduled' => 'info',
-                        'completed' => 'success',
-                        'cancelled' => 'danger',
+                        'info'    => 'scheduled',
+                        'warning' => 'on_going',
+                        'success' => 'completed',
+                        'danger'  => 'cancelled',
                     ]),
             ])
             ->defaultSort('date', 'asc')

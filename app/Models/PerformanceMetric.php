@@ -9,12 +9,13 @@ class PerformanceMetric extends Model
 {
     protected $table = 'performance_metrics';
 
-    protected $primaryKey = 'metric_id';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    // ✅ pakai primary key default: "id"
+    // jadi yang ini semua DIHAPUS:
+    // protected $primaryKey = 'metric_id';
+    // public $incrementing = false;
+    // protected $keyType = 'string';
 
     protected $fillable = [
-        'metric_id',
         'name',
         'code',
         'sport_category',
@@ -28,9 +29,11 @@ class PerformanceMetric extends Model
         'is_active' => 'boolean',
     ];
 
-    public function performances(): HasMany
+    public function testRecords(): HasMany
     {
-        return $this->hasMany(AthletePerformance::class, 'metric_id', 'metric_id');
+        // FK di tabel test_records = metric_id
+        // PK di performance_metrics = id
+        return $this->hasMany(TestRecord::class, 'metric_id', 'id');
     }
 
     /**

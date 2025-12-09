@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,16 +12,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Hapus default user factory kalau nggak dipakai
-        // User::factory(10)->create();
+        // Matikan FK biar seeding nggak error
+        Schema::disableForeignKeyConstraints();
 
-        // Panggil semua seeder yang kamu mau jalankan
         $this->call([
-            // AthletesTableSeeder::class,
-            // AchievementsTableSeeder::class,
-            // TrainingProgramSeeder::class,
+            // --- Master Data & Athlete Base ---
+            AthletesTableSeeder::class,
+            AthleteFillAllSportsSeeder::class,
+
+            // --- Performance & Achievements ---
+            AchievementsTableSeeder::class,
+            AthleteAchievementsSeeder::class,
+            PerformanceMetricSeeder::class,
+
+            // --- Training ---
+            TrainingProgramSeeder::class,
+            TrainingSessionSeeder::class,
+
+            // --- Finance ---
             ExpenseSeeder::class,
+
+            // --- Health & Therapy (HARUS terakhir) ---
+            HealthScreeningsTableSeeder::class,
+            TherapySchedulesTableSeeder::class,
         ]);
+
+        Schema::enableForeignKeyConstraints();
     }
-    
 }

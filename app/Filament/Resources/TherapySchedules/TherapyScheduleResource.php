@@ -19,8 +19,17 @@ class TherapyScheduleResource extends Resource
 {
     protected static ?string $model = TherapySchedule::class;
 
-    protected static UnitEnum|string|null $navigationGroup = 'Health Management';
-    protected static ?int $navigationSort = 6;
+    public static function getPluralLabel(): string
+    {
+        return 'Jadwal Terapi';
+    }
+    public static function getLabel(): string
+    {
+        return 'Jadwal Terapi';
+    }
+
+    protected static UnitEnum|string|null $navigationGroup = 'Manajemen Kesehatan';
+    protected static ?int $navigationSort = 8;
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentList;
 
     public static function form(Schema $schema): Schema

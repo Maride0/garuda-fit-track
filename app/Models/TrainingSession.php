@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Carbon\Carbon;
 
 class TrainingSession extends Model
 {
@@ -13,16 +15,18 @@ class TrainingSession extends Model
         'program_id',
         'date',
         'start_time',
+        'end_time',
         'duration_minutes',
         'location',
-        'participants_count',
-        'activities',
+        'activities_notes',
         'status',
+        'cancel_reason',
     ];
 
     protected $casts = [
-        'date'       => 'date',
-        'start_time' => 'datetime:H:i',
+        'date' => 'date',
+        // start_time & end_time kita simpan sebagai string "H:i"
+        // biar gampang di-handle di accessor
     ];
 
     /*
@@ -31,7 +35,7 @@ class TrainingSession extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function program()
+    public function program(): BelongsTo
     {
         return $this->belongsTo(TrainingProgram::class, 'program_id', 'program_id');
     }
@@ -43,16 +47,36 @@ class TrainingSession extends Model
     */
 
     /**
-     * Hitung jam selesai (end_time) secara on the fly dari start_time + duration_minutes.
+     * Hitung jam selesai (end_time) secara on the fly dari start_time + duration_minutes
+     * kalau end_time di DB masih null.
      */
-    public function getEndTimeAttribute(): ?string
+    public function getEndTimeAttribute($value)
     {
-        if (! $this->start_time || ! $this->duration_minutes) {
+        // Kalau sudah ada di database (diisi manual), pakai itu saja
+        if ($value) {
+            return $value;
+        }
+
+        if (!$this->start_time || !$this->duration_minutes) {
             return null;
         }
 
-        $start = \Carbon\Carbon::createFromFormat('H:i:s', $this->start_time);
-        $end   = $start->copy()->addMinutes($this->duration_minutes);
+        // Bisa jadi start_time itu string "08:00" atau "08:00:00" atau Carbon
+        if ($this->start_time instanceof Carbon) {
+            $time = $this->start_time->format('H:i:s');
+        } else {
+            $time = (string) $this->start_time;
+        }
+
+        if (strlen($time) === 5) {
+            // "08:00"
+            $start = Carbon::createFromFormat('H:i', $time);
+        } else {
+            // "08:00:00"
+            $start = Carbon::createFromFormat('H:i:s', $time);
+        }
+
+        $end = $start->copy()->addMinutes($this->duration_minutes);
 
         return $end->format('H:i');
     }
@@ -62,7 +86,7 @@ class TrainingSession extends Model
      */
     public function getDurationLabelAttribute(): ?string
     {
-        if (! $this->duration_minutes) {
+        if (!$this->duration_minutes) {
             return null;
         }
 

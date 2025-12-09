@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\AthletePerformances\Tables;
+namespace App\Filament\Resources\TestRecords\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -9,7 +9,7 @@ use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class AthletePerformancesTable
+class TestRecordsTable
 {
     public static function configure(Table $table): Table
     {

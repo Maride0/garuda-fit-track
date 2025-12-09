@@ -7,7 +7,6 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Table;
 
 class PerformanceMetricsTable
@@ -17,29 +16,37 @@ class PerformanceMetricsTable
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->label('Metric')
+                    ->label('Parameter')
                     ->searchable()
                     ->sortable()
                     ->description(fn ($record) => $record->code),
 
                 BadgeColumn::make('sport_category')
-                    ->label('Category')
+                    ->label('Kategori')
                     ->colors([
                         'success' => 'olympic',
                         'info'    => 'non_olympic',
                         'warning' => 'para_sport',
                         'gray'    => 'other',
                     ])
+                    ->formatStateUsing(fn ($state) => match ($state) {
+                        'general'     => 'Umum / Multicabang',
+                        'olympic'     => 'Olimpiade',
+                        'non_olympic' => 'Non-Olimpiade',
+                        'para_sport'  => 'Para Sport',
+                        'other'       => 'Lainnya',
+                        default       => '-',
+                    })
                     ->sortable(),
 
                 TextColumn::make('sport')
-                    ->label('Sport')
+                    ->label('Cabang Olahraga')
                     ->placeholder('-')
                     ->sortable()
                     ->searchable(),
 
                 TextColumn::make('default_unit')
-                    ->label('Unit')
+                    ->label('Satuan')
                     ->sortable(),
 
                 BadgeColumn::make('is_active')
@@ -48,34 +55,36 @@ class PerformanceMetricsTable
                         'success' => true,
                         'danger'  => false,
                     ])
-                    ->formatStateUsing(fn ($state) => $state ? 'Active' : 'Inactive'),
+                    ->formatStateUsing(fn ($state) => $state ? 'Aktif' : 'Nonaktif'),
 
                 TextColumn::make('metric_id')
-                    ->label('ID')
+                    ->label('ID Parameter')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('created_at')
-                    ->label('Created')
-                    ->date()
+                    ->label('Tanggal Dibuat')
+                    ->date('d M Y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('updated_at')
-                    ->label('Updated')
-                    ->date()
+                    ->label('Terakhir Diperbarui')
+                    ->date('d M Y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->filters([
-                // nanti kita tambahin filter category, active/non-active
-            ])
+            ->filters([])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+                    ->label('Ubah'),
             ])
+            ->recordActionsColumnLabel('Aksi') // ⬅️ ini yang bikin header kolom "Aksi"
+
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->label('Hapus Terpilih'),
                 ]),
             ]);
     }

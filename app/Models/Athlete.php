@@ -201,9 +201,9 @@ class Athlete extends Model
         ->withPivot('join_date')
         ->withTimestamps();
     }
-    public function performances()
+    public function testRecords()
     {
-        return $this->hasMany(AthletePerformance::class, 'athlete_id', 'athlete_id');
+        return $this->hasMany(TestRecord::class, 'athlete_id', 'athlete_id');
     }
 
     public function performanceEvaluations()

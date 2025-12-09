@@ -33,9 +33,17 @@ class TrainingProgramForm
                                 'weekly'          => 'Weekly',
                                 'pre_competition' => 'Pre competition',
                                 'recovery'        => 'Recovery',
+                                'other'           => 'Other',
                             ])
                             ->default('weekly')
-                            ->required(),
+                            ->required()
+                            ->live(),
+
+                        TextInput::make('type_other')
+                            ->label('Tipe Program (Lainnya)')
+                            ->placeholder('Contoh: Tes Fisik Berkala, General Testing')
+                            ->visible(fn (callable $get) => $get('type') === 'other')
+                            ->maxLength(100),
 
                         Select::make('intensity')
                             ->label('Intensitas')

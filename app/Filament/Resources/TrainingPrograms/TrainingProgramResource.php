@@ -16,15 +16,25 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use App\Filament\Resources\TrainingPrograms\RelationManagers\AthletesRelationManager;
 use App\Filament\Resources\TrainingPrograms\RelationManagers\SessionsRelationManager;
+use App\Filament\Resources\TrainingPrograms\RelationManagers\PerformanceEvaluationsRelationManager;
 
 class TrainingProgramResource extends Resource
 {
     protected static ?string $model = TrainingProgram::class;
 
+    public static function getPluralLabel(): string
+    {
+        return 'Program Latihan';
+    }
+
+    public static function getLabel(): string
+    {
+        return 'Program Latihan';
+    }
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentCheck;
 
-    // ⬅️ masuk grup yang sama dengan Athlete & Achievement
-    protected static UnitEnum|string|null $navigationGroup = 'Athlete Management';
+    protected static UnitEnum|string|null $navigationGroup = 'Pengembangan Atlet';
 
     // ⬅️ urutan ketiga di grup itu
     protected static ?int $navigationSort = 4;
@@ -46,6 +56,7 @@ class TrainingProgramResource extends Resource
         return [
             SessionsRelationManager::class,
             AthletesRelationManager::class,
+            PerformanceEvaluationsRelationManager::class,
         ];
     }
 

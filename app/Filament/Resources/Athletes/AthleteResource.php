@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Athletes;
 use App\Filament\Resources\Athletes\Pages\CreateAthlete;
 use App\Filament\Resources\Athletes\Pages\EditAthlete;
 use App\Filament\Resources\Athletes\Pages\ListAthletes;
+use App\Filament\Resources\Athletes\Pages\ViewAthlete;
 use App\Filament\Resources\Athletes\Schemas\AthleteForm;
 use App\Filament\Resources\Athletes\Tables\AthletesTable;
 use App\Models\Athlete;
@@ -16,16 +17,28 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use App\Filament\Resources\Athletes\RelationManagers\AchievementsRelationManager;
 use App\Filament\Resources\Athletes\RelationManagers\HealthScreeningsRelationManager;
+use App\Filament\Resources\Athletes\RelationManagers\AthletesRelationManager;
+use App\Filament\Resources\Athletes\RelationManagers\PerformanceEvaluationsRelationManager;
 
 
 class AthleteResource extends Resource
 {
     protected static ?string $model = Athlete::class;
 
+     public static function getPluralLabel(): string
+    {
+        return 'Atlet';
+    }
+
+    public static function getLabel(): string
+    {
+        return 'Atlet';
+    }
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
     // ⬅️ TYPE-NYA DISAMAIN DENGAN PARENT: UnitEnum|string|null
-    protected static UnitEnum|string|null $navigationGroup = 'Athlete Management';
+    protected static UnitEnum|string|null $navigationGroup = 'Manajemen Atlet';
 
     protected static ?int $navigationSort = 2;
 
@@ -46,6 +59,8 @@ class AthleteResource extends Resource
         return [
             AchievementsRelationManager::class,
             HealthScreeningsRelationManager::class,
+            PerformanceEvaluationsRelationManager::class,
+            AthletesRelationManager::class,
         ];
     }
 
@@ -55,6 +70,7 @@ class AthleteResource extends Resource
             'index' => ListAthletes::route('/'),
             'create' => CreateAthlete::route('/create'),
             'edit' => EditAthlete::route('/{record}/edit'),
+            'view' => ViewAthlete::route('/{record}'),
         ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\AthletePerformances\Schemas;
+namespace App\Filament\Resources\TestRecords\Schemas;
 
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
@@ -9,7 +9,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
-class AthletePerformanceForm
+class TestRecordForm
 {
     public static function configure(Schema $schema): Schema
     {
@@ -33,7 +33,7 @@ class AthletePerformanceForm
                             ->required(),
                     ]),
 
-                Section::make('Performance Details')
+                Section::make('Test Record Details')
                     ->columns(2)
                     ->schema([
                         DatePicker::make('test_date')

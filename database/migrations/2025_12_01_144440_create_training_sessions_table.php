@@ -9,37 +9,39 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('training_sessions', function (Blueprint $table) {
-            // ID internal, biarin auto increment karena ini nggak ditampilin ke user
             $table->id();
 
             // Relasi ke training_programs (string PK)
             $table->string('program_id', 50);
 
             // ───────────── BASIC SESSION INFO ─────────────
-            $table->date('date');                 // Tanggal sesi
-            $table->time('start_time')->nullable(); // Waktu mulai
+            $table->date('date');                    // Tanggal sesi
+            $table->time('start_time')->nullable();  // Waktu mulai
+            $table->time('end_time')->nullable();    // Waktu berakhir (opsional)
 
-            // Durasi dalam menit (sesuai dropdown UI: 60 / 90 / 120 / dst)
+            // durasi (menit) — sesuai UI: 60 / 90 / 120 etc
             $table->unsignedSmallInteger('duration_minutes')->nullable();
 
-            $table->string('location')->nullable(); // Lokasi latihan
+            // Lokasi sesi latihan
+            $table->string('location')->nullable();
 
-            // Jumlah peserta di sesi ini (boleh null, bisa diisi manual)
-            $table->unsignedSmallInteger('participants_count')->nullable();
+            // Catatan / aktivitas latihan
+            $table->text('activities_notes')->nullable();
 
-            // Daftar aktivitas / catatan sesi (textarea "Aktivitas")
-            $table->text('activities')->nullable();
+            // ───────────── SESSION STATUS ─────────────
+            // scheduled, on_going, completed, cancelled
+            $table->enum('status', ['scheduled', 'on_going', 'completed', 'cancelled'])
+                ->default('scheduled');
 
-            // Status sesi: terjadwal / selesai / batal
-            $table->enum('status', ['scheduled', 'completed', 'cancelled'])
-                  ->default('scheduled');
+            // Alasan pembatalan (opsional)
+            $table->string('cancel_reason')->nullable();
 
             $table->timestamps();
 
-            // Index buat query "sesi mendatang / minggu ini"
+            // Index buat query jadwal (future/past)
             $table->index('date');
 
-            // Foreign key ke training_programs.program_id
+            // Foreign key
             $table->foreign('program_id')
                   ->references('program_id')->on('training_programs')
                   ->onDelete('cascade');

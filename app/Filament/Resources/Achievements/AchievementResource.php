@@ -19,13 +19,22 @@ class AchievementResource extends Resource
 {
     protected static ?string $model = Achievement::class;
 
+     public static function getPluralLabel(): string
+    {
+        return 'Prestasi';
+    }
+
+    public static function getLabel(): string
+    {
+        return 'Prestasi';
+    }
+
     // icon lebih cocok kalau trophy, tapi bebas kalau kamu mau ganti lagi
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTrophy;
 
     // ⬅️ sama grup dengan Athlete
-    protected static UnitEnum|string|null $navigationGroup = 'Athlete Management';
-
-    // ⬅️ Athletes tadi 1, jadi ini kita set 2
+    protected static UnitEnum|string|null $navigationGroup = 'Manajemen Atlet';
+    
     protected static ?int $navigationSort = 3;
 
     protected static ?string $recordTitleAttribute = 'achievement_name';

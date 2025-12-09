@@ -19,8 +19,18 @@ class HealthScreeningResource extends Resource
 {
     protected static ?string $model = HealthScreening::class;
 
-    protected static UnitEnum|string|null $navigationGroup = 'Health Management';
-    protected static ?int $navigationSort = 5;
+    public static function getPluralLabel(): string
+    {
+        return 'Skrining Kesehatan';
+    }
+
+    public static function getLabel(): string
+    {
+        return 'Skrining Kesehatan';
+    }
+
+    protected static UnitEnum|string|null $navigationGroup = 'Manajemen Kesehatan';
+    protected static ?int $navigationSort = 7;
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHeart;
 
     public static function getRecordTitle($record): ?string

@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class AthletePerformance extends Model
+class TestRecord extends Model
 {
-    protected $table = 'athlete_performances';
+    protected $table = 'test_records';
 
     protected $fillable = [
         'athlete_id',
@@ -34,7 +34,7 @@ class AthletePerformance extends Model
 
     public function metric(): BelongsTo
     {
-        return $this->belongsTo(PerformanceMetric::class, 'metric_id', 'metric_id');
+        return $this->belongsTo(PerformanceMetric::class, 'metric_id', 'id');
     }
 
     public function trainingProgram(): BelongsTo

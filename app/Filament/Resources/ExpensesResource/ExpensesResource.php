@@ -18,8 +18,18 @@ class ExpensesResource extends Resource
 {
     protected static ?string $model = Expense::class;
 
-    protected static UnitEnum|string|null $navigationGroup = 'Finance';
-    protected static ?int $navigationSort = 7;
+    public static function getPluralLabel(): string
+    {
+        return 'Pengeluaran';
+    }
+
+    public static function getLabel(): string
+    {
+        return 'Pengeluaran';
+    }
+
+    protected static UnitEnum|string|null $navigationGroup = 'Keuangan';
+    protected static ?int $navigationSort = 8;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBanknotes;
 

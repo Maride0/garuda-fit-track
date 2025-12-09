@@ -19,9 +19,19 @@ class PerformanceMetricResource extends Resource
 {
     protected static ?string $model = PerformanceMetric::class;
 
+    public static function getPluralLabel(): string
+    {
+        return 'Parameter Kinerja Atlet';
+    }
+
+    public static function getLabel(): string
+    {
+        return 'Parameter Kinerja Atlet';
+    }
+
     // Ganti icon kalau mau, ini placeholder lucu
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChartBar;
-    protected static UnitEnum|string|null $navigationGroup = 'Athlete Management';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedAdjustmentsVertical;
+    protected static UnitEnum|string|null $navigationGroup = 'Pengembangan Atlet';
     protected static ?int $navigationSort = 5;
 
     protected static ?string $recordTitleAttribute = 'name';

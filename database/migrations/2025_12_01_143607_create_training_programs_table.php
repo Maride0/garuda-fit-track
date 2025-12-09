@@ -19,9 +19,18 @@ return new class extends Migration
             // ─────────────────────────────────────────────
             $table->string('name'); // Nama program
 
-            // Tipe Program (sesuai UI: Harian, Mingguan, Pra-pertandingan, Recovery)
-            $table->enum('type', ['daily', 'weekly', 'pre_competition', 'recovery'])
-                  ->default('weekly');
+            // Tipe Program
+            $table->enum('type', [
+                'daily',
+                'weekly',
+                'pre_competition',
+                'recovery',
+                'testing_only',
+                'other',
+            ])->default('weekly');
+
+            // Untuk tipe program custom / lainnya
+            $table->string('type_other')->nullable();
 
             // Intensitas (Low, Medium, High)
             $table->enum('intensity', ['low', 'medium', 'high'])

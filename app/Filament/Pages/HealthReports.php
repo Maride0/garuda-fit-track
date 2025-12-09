@@ -22,7 +22,7 @@
 
 //     public static function getNavigationGroup(): ?string
 //     {
-//         return 'Health Management';
+//         return 'Manajemen Kesehatan';
 //     }
 
 //     public function getView(): string

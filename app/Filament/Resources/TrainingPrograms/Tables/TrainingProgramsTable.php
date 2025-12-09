@@ -91,9 +91,12 @@ class TrainingProgramsTable
             ->filters([
                 // kamu bisa tambahin filter status / type nanti kalau mau
             ])
-            ->actions([
-                EditAction::make(),
+            ->recordActions([
+                EditAction::make()
+                    ->label('Ubah'),
             ])
+            ->recordActionsColumnLabel('Aksi') // ⬅️ ini yang bikin header kolom "Aksi"
+
             ->bulkActions([
                 // kalau mau DeleteBulkAction tinggal aktifin
                 // Tables\Actions\BulkActionGroup::make([

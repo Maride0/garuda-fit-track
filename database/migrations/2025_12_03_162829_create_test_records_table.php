@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('athlete_performances', function (Blueprint $table) {
+        Schema::create('test_records', function (Blueprint $table) {
             $table->id();
 
             // Relasi ke athletes (PK string kayak ATH0001)
@@ -54,6 +54,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('athlete_performances');
+        Schema::dropIfExists('test_records');
     }
 };
