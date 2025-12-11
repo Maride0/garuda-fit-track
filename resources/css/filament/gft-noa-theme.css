@@ -1,0 +1,224 @@
+/* =========================
+   GFT × NOA – Base theme
+   ========================= */
+
+/* Load base Filament theme dulu */
+@import '../../../vendor/filament/filament/resources/css/theme.css';
+
+/* Token warna biar rapi */
+:root {
+    --gft-crimson:        #A52828;
+    --gft-crimson-light:  #C73737;
+    --gft-crimson-dark:   #8E1F1F;
+    --gft-gold:           #E2B100;
+    --gft-yellow:         #FACC2E;
+    --gft-navy:           #001C8E;
+    --gft-bg:             #FAFAF5;
+    --gft-card:           #FAFAF5;
+    --gft-muted:          #6B7280;
+}
+
+/* Pakainya: */
+body {
+    background: var(--gft-bg);
+}
+
+/* Ukuran font dasar */
+/* html {
+    font-size: 14px !important;
+} */
+
+/* =========================
+   Sidebar – GFT × NOA
+   ========================= */
+
+@media (min-width: 1024px) {
+    .fi-sidebar {
+        background: linear-gradient(var(--gft-crimson-light), var(--gft-crimson-dark)) !important;
+        --sidebar-width: 20rem; /* boleh kamu kecilin lagi kalau mau */
+    }
+
+    /* Label group: SISTEM, MANAJEMEN ATLET, dst */
+    .fi-sidebar-group-label {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgba(255, 255, 255, 0.55) !important;
+    }
+
+    /* Wrapper nav */
+    .fi-sidebar-nav {
+        padding-inline: 0.9rem;
+    }
+
+    /* Tiap item */
+    .fi-sidebar-nav-item {
+        margin-block: 0.12rem;
+    }
+
+    /* Tombol nav (ikon + teks) */
+    .fi-sidebar-nav-item-button {
+        border-radius: 999px !important;
+        padding-inline: 1rem !important;
+        color: #F9FAFB !important;            
+    }
+
+    /* Ikon & label ikut warna parent */
+    .fi-sidebar-nav-item-icon,
+    .fi-sidebar-item-label {
+        color: #f5f5f5 !important;
+        font-size: 0.92rem;
+        font-weight: 500;
+        letter-spacing: 0.1px;
+    }
+
+    /* ITEM AKTIF – pill putih ala Figma */
+    .fi-sidebar-nav .fi-active > a,
+    .fi-sidebar-nav .fi-active > .fi-sidebar-item-button,
+    .fi-sidebar-item-active > a,
+    .fi-sidebar-item-active > .fi-sidebar-item-button {
+        background: rgba(255, 255, 255, 0.12);
+        border-left: 3px solid #FACC2E;
+        box-shadow: #11182733 0px 5px 16px;
+        font-weight: 600;
+    }
+
+    .fi-sidebar-item:hover > a,
+    .fi-sidebar-item:hover > .fi-sidebar-item-button {
+        background: rgba(255, 255, 255, 0.10);
+        /* border-left: 3px solid #FACC2E; */
+    }
+
+    .fi-sidebar-nav svg {
+        color: #F5F5F5 !important;
+    }
+}
+/* =========================
+   Main layout & header
+   ========================= */
+
+/* Background area konten */
+/* Main area lebih rapat */
+.fi-main {
+    padding: 0.5rem 1rem !important;
+    background: var(--gft-bg) !important;
+}
+
+/* Konten jangan di-center */
+.fi-main-content {
+    max-width: 100% !important;
+    margin-inline: 0 !important;
+    padding: 0 !important;
+}
+
+/* Heading utama ("Dashboard") */
+.fi-header-heading {
+    color: var(--gft-navy) !important;
+    font-weight: 700 !important;
+    background: transparent !important; /* biar nyatu sama bg */
+}
+
+/* Garis emas + merah di bawah heading */
+.fi-header-heading::after {
+    content: "";
+    display: block;
+    margin-top: 6px;
+    height: 3px;
+    width: 96px;
+    background: linear-gradient(
+        to right,
+        var(--gft-crimson) 0% 30%,
+        var(--gft-yellow) 30% 70%,
+        var(--gft-gold) 70% 100%
+    );
+    border-radius: 999px;
+}
+
+/* =========================
+   Stats cards (widget angka)
+   ========================= */
+
+.fi-wi-stats-overview-stat {
+    background: var(--gft-card) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* Label kecil (Total Athletes, Active Programs, dst.) */
+.fi-wi-stats-overview-stat-label {
+    color: var(--gft-muted) !important;
+    font-weight: 500 !important;
+}
+
+/* Angka utama di card */
+.fi-wi-stats-overview-stat-value {
+    font-size: 26px !important;
+    font-weight: 700 !important;
+    color: #111827 !important;
+}
+
+/* =========================
+   Dashboard widgets (Health Overview,
+   Active Training Programs, dll.)
+   ========================= */
+
+.fi-widgets > .fi-widget {
+    background: var(--gft-card) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* Heading di header widget */
+.fi-widgets > .fi-widget .fi-section-header-heading {
+    color: var(--gft-navy) !important;
+    font-weight: 700 !important;
+}
+
+/* Samain tinggi dua kartu di dashboard */
+.fi-wi-health-overview-summary,
+.fi-wi-active-training-programs {
+    min-height: 360px;   /* adjust sesuai tinggi chart kamu */
+}
+
+/* =========================
+   DARK MODE CUSTOMIZATION
+   ========================= */
+
+/* 2. DARK MODE – full custom kamu */
+html.dark body {
+    background: #020617; /* semacam bg-slate-950 */
+}
+
+/* Sidebar dark */
+html.dark .fi-sidebar {
+    background: linear-gradient(#111827, #020617) !important;
+    color: #E5E7EB !important;
+}
+
+html.dark .fi-sidebar-nav a {
+    color: #E5E7EB !important;
+}
+
+html.dark .fi-sidebar-nav .fi-sidebar-item-active > a {
+    background: rgba(248, 250, 252, 0.15) !important;
+}
+
+/* Area utama */
+html.dark .fi-main {
+    background: #020617;
+}
+
+/* html.dark .fi-page {
+    background: #020617 !important;
+    color: #E5E7EB !important;
+    border-color: #111827 !important;
+} */
+
+/* Widget (termasuk chart card) */
+/* html.dark .fi-widget {
+    background: #020617 !important;
+    color: #E5E7EB !important;
+    border-color: #111827 !important;
+} */
