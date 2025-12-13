@@ -56,4 +56,49 @@ class TestRecord extends Model
 
         return $this->metric?->default_unit;
     }
+        protected function afterSave(): void
+    {
+        $evaluation = $this->record;
+
+        // Metric optional → kalau kosong, jangan bikin test record
+        if (! $evaluation->metric_id) {
+            return;
+        }
+
+        // Kalau dua-duanya kosong, skip
+        if (
+            $evaluation->metric_numeric_value === null &&
+            blank($evaluation->metric_text_value)
+        ) {
+            return;
+        }
+
+        TestRecord::updateOrCreate(
+            [
+                'source_type' => 'program_evaluation',
+                'source_id'   => $evaluation->id,
+            ],
+            [
+                'athlete_id' => $evaluation->athlete_id,
+                'program_id' => $evaluation->training_program_id,
+                'metric_id'  => $evaluation->metric_id,
+                'test_date'  => $evaluation->evaluation_date,
+                'phase'      => 'program_evaluation',
+                'source'     => 'Program Evaluation',
+
+                // pilih sesuai struktur kolom kamu
+                'value_numeric' => $evaluation->metric_numeric_value,
+                'value_text'    => $evaluation->metric_text_value,
+            ]
+        );
+    }
+    public function program()
+    {
+        return $this->belongsTo(
+            TrainingProgram::class,
+            'training_program_id',
+            'program_id'
+        );
+    }
+
 }

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Carbon\Carbon;
 use App\Models\TrainingProgram;
+use Illuminate\Support\Facades\Storage;
 
 class Athlete extends Model
 {
@@ -22,6 +23,7 @@ class Athlete extends Model
     // Mass assignment
     protected $fillable = [
         'athlete_id',
+        'avatar',
         'name',
         'gender',
         'birthdate',
@@ -210,5 +212,18 @@ class Athlete extends Model
     {
         return $this->hasMany(PerformanceEvaluation::class, 'athlete_id', 'athlete_id');
     }
+    public function getAvatarUrlAttribute(): ?string
+    {
+        if (! $this->avatar) {
+            return null;
+        }
+
+        if (Storage::disk('public')->exists($this->avatar)) {
+            return Storage::disk('public')->url($this->avatar);
+        }
+
+        return null;
+    }
+
 
 }

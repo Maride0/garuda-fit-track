@@ -11,28 +11,34 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ActiveTrainingPrograms extends TableWidget
 {
-    protected static ?int $sort = 2;
+    protected static ?int $sort = 3;
+
+    protected function getExtraAttributes(): array
+    {
+        return [
+            'class' => 'gft-table-card gft-active-programs-card',
+        ];
+    }
 
     public function table(Table $table): Table
-    {
-        return $table
+{
+    return $table
+            ->extraAttributes([
+                'class' => 'gft-active-programs-table',
+            ])
             ->query(fn (): Builder =>
                 TrainingProgram::query()
                     ->where('status', 'active')
-                    ->limit(5) // ⬅️ tampil 5 baris aja
+                    // ->limit(5)
             )
-
             ->columns([
-                TextColumn::make('name')
-                    ->label('Program'),
-                TextColumn::make('sport')
-                    ->label('Olahraga'),
-                TextColumn::make('coach_name')
-                    ->label('Pelatih'),
-                TextColumn::make('start_date')
-                    ->date()
-                    ->sortable(),
+                TextColumn::make('name')->label('Program'),
+                TextColumn::make('sport')->label('Olahraga'),
+                TextColumn::make('coach_name')->label('Pelatih'),
+                TextColumn::make('start_date')->date()->sortable(),
             ])
+            ->defaultPaginationPageOption(50) // ini opsional
+            // ->paginated(false)
             ->filters([
                 //
             ])
@@ -42,7 +48,6 @@ class ActiveTrainingPrograms extends TableWidget
             ->recordActions([
                 //
             ])
-            ->paginated(false)
             ->toolbarActions([
                 BulkActionGroup::make([
                     //
@@ -62,4 +67,5 @@ class ActiveTrainingPrograms extends TableWidget
         'xl'  => 2,
         '2xl' => 3, // misal di layar super gede mau 1:3
     ];
+
 }

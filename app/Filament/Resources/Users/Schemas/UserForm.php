@@ -21,9 +21,14 @@ class UserForm
                     ->required(),
                 TextInput::make('password')
                     ->password()
-                    ->required(),
+                    ->required(fn ($context) => $context === 'create')
+                    ->dehydrateStateUsing(fn ($state) => filled($state) ? bcrypt($state) : null)
+                    ->dehydrated(fn ($state) => filled($state)),
                 Select::make('role')
-                    ->options(['admin' => 'Admin', 'coach' => 'Coach', 'athlete' => 'Athlete'])
+                    ->options([
+                        'admin' => 'Admin',
+                        'supervisor' => 'Supervisor',
+                    ])
                     ->default('admin')
                     ->required(),
             ]);

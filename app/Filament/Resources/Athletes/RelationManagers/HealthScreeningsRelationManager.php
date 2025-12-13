@@ -18,7 +18,7 @@ class HealthScreeningsRelationManager extends RelationManager
 {
     protected static string $relationship = 'healthScreenings';
 
-    protected static ?string $title = 'Riwayat Screening';
+    protected static ?string $title = 'Riwayat Skrining Kesehatan';
 
     public function form(Schema $schema): Schema
     {
@@ -145,7 +145,7 @@ class HealthScreeningsRelationManager extends RelationManager
             ->headerActions([
                 Action::make('screen')
                     ->label(function () {
-                        $athlete = $this->getOwnerRecord(); // si athlete
+                        $athlete = $this->getOwnerRecord();
 
                         return $athlete?->status === 'not_screened'
                             ? 'Screening Awal'
@@ -159,12 +159,12 @@ class HealthScreeningsRelationManager extends RelationManager
                         return HealthScreeningResource::getUrl('create', [
                             'athlete_id' => $athlete?->athlete_id,
                         ]);
-                    }),
+                    })
+                    ->visible(fn () => auth()->user()?->role === 'admin'),
             ])
             ->recordActions([
                 ViewAction::make(),
             ])
-
             ->bulkActions([]);
-    }
+                }
 }

@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Athletes\Tables;
 
 use App\Filament\Resources\HealthScreenings\HealthScreeningResource;
+use App\Filament\Resources\Athletes\AthleteResource;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -11,18 +12,27 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Actions\DeleteAction;
 use Carbon\Carbon;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\ViewColumn;
 
 class AthletesTable
 {
     public static function configure(Table $table): Table
     {
+        $isAdmin = auth()->user()?->role === 'admin';
         return $table
-            ->defaultSort('created_at', 'desc')
+            ->defaultSort('created_at', 'asc')
             ->columns([
+               ViewColumn::make('avatar')
+                    ->label('')
+                    ->view('filament.tables.columns.athlete-avatar')
+                    ->toggleable(false),
+
                 TextColumn::make('athlete_id')
                     ->label('ID Atlet')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('name')
                     ->label('Nama Atlet')
@@ -172,20 +182,19 @@ class AthletesTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([])
-            ->actionsColumnLabel('Aksi')
-            ->recordActions([
+            ->actionsColumnLabel($isAdmin ? 'Aksi' : null)
+            ->recordActions($isAdmin ? [
                 Action::make('screen')
                     ->label(fn ($record) => $record->status === 'not_screened'
                         ? 'Screening Awal'
                         : 'Screening Ulang')
                     ->icon('heroicon-o-heart')
                     ->color('success')
-                    ->url(fn ($record) =>
-                        HealthScreeningResource::getUrl('create', [
-                            'athlete_id' => $record->athlete_id,
-                        ])
-                    ),
-            ])
+                    ->url(fn ($record) => HealthScreeningResource::getUrl('create', [
+                        'athlete_id' => $record->athlete_id,
+                    ])),
+            ] : [])
+
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

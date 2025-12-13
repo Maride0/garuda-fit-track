@@ -21,12 +21,14 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Components\Section;
+use App\Models\TestRecord;
+use Carbon\Carbon;
 
 class PerformanceEvaluationsRelationManager extends RelationManager
 {
     protected static string $relationship = 'performanceEvaluations';
 
-    protected static ?string $title = 'Program Evaluations';
+    protected static ?string $title = 'Evaluasi Performa Atlet';
 
     public static function getModelLabel(): string
     {
@@ -217,12 +219,25 @@ class PerformanceEvaluationsRelationManager extends RelationManager
             ])
 
             ->headerActions([
-                CreateAction::make(),
+                CreateAction::make()
+                    ->after(function ($record) {
+                        $this->syncTestRecord($record);
+                    }),
             ])
 
             ->actions([
-                EditAction::make(),
-                DeleteAction::make(),
+                EditAction::make()
+                    ->after(function ($record) {
+                        $this->syncTestRecord($record);
+                    }),
+
+                DeleteAction::make()
+                    ->after(function ($record) {
+                        // optional: kalau kamu mau delete test record saat evaluasi dihapus
+                        TestRecord::where('source_type', 'program_evaluation')
+                            ->where('source_id', (string) $record->id)
+                            ->delete();
+                    }),
             ])
 
             ->bulkActions([
@@ -256,5 +271,56 @@ class PerformanceEvaluationsRelationManager extends RelationManager
 
         $avg = array_sum($values) / count($values);
         $set('overall_rating', round($avg, 1)); // 0–100, 1 decimal
+    }
+    private function syncTestRecord($evaluation): void
+    {
+        if (! $evaluation->metric_id) return;
+
+        if ($evaluation->value_numeric === null && blank($evaluation->value_label)) return;
+
+        $value = $evaluation->value_numeric ?? $evaluation->value_label;
+
+        TestRecord::updateOrCreate(
+            [
+                'source_type' => 'program_evaluation',
+                'source_id'   => (string) $evaluation->id,
+            ],
+            [
+                'athlete_id'          => $evaluation->athlete_id,
+                'metric_id'           => $evaluation->metric_id,
+                'training_program_id' => $this->getOwnerRecord()->program_id,
+                'test_date'           => $evaluation->evaluation_date,
+                'phase'               => $this->resolvePhase($evaluation->evaluation_date),
+                'source'              => 'Program Evaluation',
+                'value'               => $evaluation->value_numeric ?? $evaluation->value_label,
+            ]
+        );
+
+    }
+     // 🔽 TARUH DI SINI
+    private function resolvePhase($evaluationDate): string
+    {
+        $program = $this->getOwnerRecord();
+
+        // ⬇️ INI tempat Carbon::parse-nya
+        $evaluationDate = Carbon::parse($evaluationDate);
+
+        if ($program->start_date && $evaluationDate->lt($program->start_date)) {
+            return 'pre';
+        }
+
+        if (
+            $program->start_date &&
+            $program->end_date &&
+            $evaluationDate->between($program->start_date, $program->end_date)
+        ) {
+            return 'mid';
+        }
+
+        if ($program->end_date && $evaluationDate->gt($program->end_date)) {
+            return 'post';
+        }
+
+        return 'other';
     }
 }

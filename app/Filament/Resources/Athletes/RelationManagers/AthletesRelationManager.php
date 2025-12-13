@@ -19,7 +19,8 @@ class AthletesRelationManager extends RelationManager
     // relasi di model Athlete: testRecords()
     protected static string $relationship = 'testRecords';
 
-    protected static ?string $title = 'Test Records';
+    protected static ?string $title = 'Tes Performa Atlet';
+    protected static ?string $label = 'Tes Performa Atlet';
 
     public function form(Schema $schema): Schema
     {

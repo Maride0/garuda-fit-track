@@ -19,7 +19,7 @@ class AthletesRelationManager extends RelationManager
 {
     protected static string $relationship = 'athletes';
 
-    protected static ?string $title = 'Athletes in Program';
+    protected static ?string $title = 'Atlet Program Latihan';
 
     public function form(Schema $schema): Schema
     {

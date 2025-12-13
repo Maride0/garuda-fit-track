@@ -25,6 +25,8 @@ class TrainingSession extends Model
 
     protected $casts = [
         'date' => 'date',
+        'start_time' => 'datetime:H:i', // opsional
+        'end_time' => 'datetime:H:i',   // opsional
         // start_time & end_time kita simpan sebagai string "H:i"
         // biar gampang di-handle di accessor
     ];
@@ -113,4 +115,5 @@ class TrainingSession extends Model
 
         return $query->whereBetween('date', [$startOfWeek, $endOfWeek]);
     }
+
 }

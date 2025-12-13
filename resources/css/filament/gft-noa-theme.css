@@ -2,8 +2,13 @@
    GFT × NOA – Base theme
    ========================= */
 
-/* Load base Filament theme dulu */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Load base Filament theme */
 @import '../../../vendor/filament/filament/resources/css/theme.css';
+
 
 /* Token warna biar rapi */
 :root {
@@ -28,75 +33,128 @@ body {
     font-size: 14px !important;
 } */
 
-/* =========================
-   Sidebar – GFT × NOA
-   ========================= */
+/* ============================================================
+   GFT × NOA — FINAL PATCH (Topbar + Sidebar)
+   ============================================================ */
 
-@media (min-width: 1024px) {
-    .fi-sidebar {
-        background: linear-gradient(var(--gft-crimson-light), var(--gft-crimson-dark)) !important;
-        --sidebar-width: 20rem; /* boleh kamu kecilin lagi kalau mau */
-    }
-
-    /* Label group: SISTEM, MANAJEMEN ATLET, dst */
-    .fi-sidebar-group-label {
-        font-size: 0.72rem;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: rgba(255, 255, 255, 0.55) !important;
-    }
-
-    /* Wrapper nav */
-    .fi-sidebar-nav {
-        padding-inline: 0.9rem;
-    }
-
-    /* Tiap item */
-    .fi-sidebar-nav-item {
-        margin-block: 0.12rem;
-    }
-
-    /* Tombol nav (ikon + teks) */
-    .fi-sidebar-nav-item-button {
-        border-radius: 999px !important;
-        padding-inline: 1rem !important;
-        color: #F9FAFB !important;            
-    }
-
-    /* Ikon & label ikut warna parent */
-    .fi-sidebar-nav-item-icon,
-    .fi-sidebar-item-label {
-        color: #f5f5f5 !important;
-        font-size: 0.92rem;
-        font-weight: 500;
-        letter-spacing: 0.1px;
-    }
-
-    /* ITEM AKTIF – pill putih ala Figma */
-    .fi-sidebar-nav .fi-active > a,
-    .fi-sidebar-nav .fi-active > .fi-sidebar-item-button,
-    .fi-sidebar-item-active > a,
-    .fi-sidebar-item-active > .fi-sidebar-item-button {
-        background: rgba(255, 255, 255, 0.12);
-        border-left: 3px solid #FACC2E;
-        box-shadow: #11182733 0px 5px 16px;
-        font-weight: 600;
-    }
-
-    .fi-sidebar-item:hover > a,
-    .fi-sidebar-item:hover > .fi-sidebar-item-button {
-        background: rgba(255, 255, 255, 0.10);
-        /* border-left: 3px solid #FACC2E; */
-    }
-
-    .fi-sidebar-nav svg {
-        color: #F5F5F5 !important;
-    }
+/* ---------- Brand text next to logo (optional) ---------- */
+.filament-brand-text,
+.fi-logo span {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-left: .5rem;
 }
+
+/* ---------- Topbar: logo position + spacing ---------- */
+.fi-topbar-start .fi-logo{
+  margin-inline-start: 0 !important; /* remove Filament default offset */
+}
+
+/* kalau mau ada napas kiri, bikin khusus DARK biar light ga kegeser */
+html.dark .fi-topbar{
+  padding-left: 1rem;
+}
+
+/* ---------- IMPORTANT: Sidebar should NOT be cut by topbar (LIGHT + DARK) ---------- */
+/* =========================================
+   Sidebar: FULL HEIGHT to the TOP
+   but content offset so it won't be cut
+   ========================================= */
+body.fi-body-has-topbar .fi-sidebar{
+  top: 0 !important;
+  height: 100dvh !important;
+}
+
+/* dorong isi sidebar turun setinggi topbar */
+body.fi-body-has-topbar .fi-sidebar-nav{
+  /* padding-top: var(--topbar-height) !important;
+  max-height: 100dvh !important; */
+  padding-top: calc(var(--topbar-height) + 10px) !important;
+
+}
+/* optional: rapihin header nav/group biar ga mepet */
+body.fi-body-has-topbar .fi-sidebar-nav-groups{
+  padding-top: 20px;
+}
+/* kalau ada header container internal yang bikin jarak aneh */
+body.fi-body-has-topbar .fi-sidebar-ctn{
+  max-height: 100dvh !important;
+}
+
+
+/* ============================================================
+   Sidebar – GFT × NOA (Desktop styling)
+   ============================================================ */
+@media (min-width: 1024px){
+
+  /* Sidebar surface */
+  .fi-sidebar{
+    background: linear-gradient(#B53333, #7F1D1D) !important;
+  }
+
+  /* Group label: SISTEM, MANAJEMEN ATLET, dst */
+  .fi-sidebar-group-label{
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: rgba(255,255,255,.55) !important;
+  }
+
+  /* Wrapper nav */
+  .fi-sidebar-nav{
+    padding-inline: .9rem;
+  }
+
+  /* Item spacing */
+  .fi-sidebar-nav-item{
+    margin-block: .12rem;
+  }
+
+  /* Button pill */
+  .fi-sidebar-nav-item-button{
+    border-radius: 999px !important;
+    padding-inline: 1rem !important;
+    color: #F9FAFB !important;
+  }
+
+  /* Icon + label */
+  .fi-sidebar-nav-item-icon,
+  .fi-sidebar-item-label{
+    color: #F5F5F5 !important;
+    font-size: .92rem;
+    font-weight: 500;
+    letter-spacing: .1px;
+  }
+
+  /* Active item */
+  .fi-sidebar-nav .fi-active > a,
+  .fi-sidebar-nav .fi-active > .fi-sidebar-item-button,
+  .fi-sidebar-item-active > a,
+  .fi-sidebar-item-active > .fi-sidebar-item-button{
+    background: rgba(255,255,255,.12);
+    border-left: 3px solid #FACC2E;
+    box-shadow: #11182733 0px 5px 16px;
+    font-weight: 600;
+  }
+
+  /* Hover */
+  .fi-sidebar-item:hover > a,
+  .fi-sidebar-item:hover > .fi-sidebar-item-button{
+    background: rgba(255,255,255,.10);
+  }
+
+  /* SVG safety */
+  .fi-sidebar-nav svg{
+    color: #F5F5F5 !important;
+  }
+}
+
 /* =========================
    Main layout & header
    ========================= */
-
+body.fi-body-has-topbar .fi-main{
+  padding-top: var(--topbar-height) !important;
+}
 /* Background area konten */
 /* Main area lebih rapat */
 .fi-main {
@@ -112,27 +170,35 @@ body {
 }
 
 /* Heading utama ("Dashboard") */
-.fi-header-heading {
-    color: var(--gft-navy) !important;
-    font-weight: 700 !important;
-    background: transparent !important; /* biar nyatu sama bg */
+.fi-header-heading,
+.fi-page-header-heading,
+.fi-header .fi-heading {
+  color: var(--gft-navy) !important;
+  font-weight: 700 !important;
 }
 
-/* Garis emas + merah di bawah heading */
-.fi-header-heading::after {
-    content: "";
-    display: block;
-    margin-top: 6px;
-    height: 3px;
-    width: 96px;
-    background: linear-gradient(
-        to right,
-        var(--gft-crimson) 0% 30%,
-        var(--gft-yellow) 30% 70%,
-        var(--gft-gold) 70% 100%
-    );
-    border-radius: 999px;
+/* underline NOA — versi aman (PASTI muncul) */
+.fi-header-heading::after,
+.fi-page-header-heading::after,
+.fi-header .fi-heading::after {
+  content: "";
+  display: block;
+  margin-top: 8px;
+
+  width: 140px;
+  height: 4px;
+  border-radius: 999px;
+
+  background: linear-gradient(
+  90deg,
+  #8E1F1F 0%,
+  #C62828 20%,
+  #FBC02D 50%,
+  #FFE082 70%,
+  rgba(255,255,255,0) 100%
+);
 }
+
 
 /* =========================
    Stats cards (widget angka)
@@ -209,16 +275,932 @@ html.dark .fi-sidebar-nav .fi-sidebar-item-active > a {
 html.dark .fi-main {
     background: #020617;
 }
+/* === FULL-WIDTH FIX (kill Filament container) === */
+main.fi-width-7xl {
+  max-width: none !important;
+  width: 100% !important;
+}
 
-/* html.dark .fi-page {
-    background: #020617 !important;
-    color: #E5E7EB !important;
-    border-color: #111827 !important;
-} */
+/* just in case ada wrapper lain yang nge-center */
+.fi-page-main,
+.fi-main-content {
+  max-width: none !important;
+  width: 100% !important;
+  margin-inline: 0 !important;
+}
+/* === DARK MODE TOKENS === */
+html.dark {
+  --gft-bg:   #020617;      /* slate-950 */
+  --gft-card: #0b1220;      /* dark surface */
+  --gft-muted:#94A3B8;      /* slate-400 */
+  --gft-navy: #E5E7EB;      /* biar heading nggak navy gelap */
+}
 
-/* Widget (termasuk chart card) */
-/* html.dark .fi-widget {
-    background: #020617 !important;
-    color: #E5E7EB !important;
-    border-color: #111827 !important;
-} */
+/* optional: biar card border/shadow cocok dark */
+html.dark .fi-widgets > .fi-widget,
+html.dark .fi-wi-stats-overview-stat {
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  box-shadow: none !important;
+}
+/* =========================
+   DARK MODE – SECTION / WIDGET WRAPPER FIX
+   ========================= */
+
+/* yang bikin wrapper putih biasanya ini */
+html.dark .fi-section {
+  background: var(--gft-card) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+/* kalau ada inner layer yang masih putih */
+html.dark .fi-section-content,
+html.dark .fi-section-content-ctn {
+  background: transparent !important;
+}
+
+/* heading section biar kebaca */
+html.dark .fi-section-header-heading,
+html.dark .fi-section-header-description {
+  color: #E5E7EB !important;
+}
+/* =========================
+   GFT TABLE – DARK MODE
+   ========================= */
+html.dark .gft-table {
+  --gft-card: #0b1220;
+  --gft-card-2: #0f172a;
+  --gft-border: rgba(255,255,255,.08);
+  --gft-text: #E5E7EB;
+  --gft-muted: #94A3B8;
+}
+
+/* wrapper table */
+html.dark .gft-table .fi-ta,
+html.dark .gft-table .fi-ta-ctn {
+  background: var(--gft-card) !important;
+  border: 1px solid var(--gft-border) !important;
+  box-shadow: none !important;
+}
+
+/* header / toolbar area */
+html.dark .gft-table .fi-ta-header,
+html.dark .gft-table .fi-ta-toolbar {
+  background: var(--gft-card) !important;
+  border-bottom: 1px solid var(--gft-border) !important;
+}
+
+/* table head + rows */
+html.dark .gft-table thead,
+html.dark .gft-table tbody {
+  background: transparent !important;
+}
+
+html.dark .gft-table th {
+  color: var(--gft-muted) !important;
+  border-bottom: 1px solid var(--gft-border) !important;
+}
+
+html.dark .gft-table td {
+  color: var(--gft-text) !important;
+  border-bottom: 1px solid rgba(255,255,255,.06) !important;
+}
+
+/* row hover biar “GFT feel” */
+html.dark .gft-table tbody tr:hover td {
+  background: rgba(255,255,255,.03) !important;
+}
+
+/* =========================
+   GFT CARD COMPONENT
+   ========================= */
+/* Card wrapper yang bisa dipakai di widget custom kamu */
+.gft-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--gft-card);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 18px;
+}
+
+/* Vertical gradient accent (mirip Figma) */
+.gft-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 6px;
+  height: 100%;
+
+  background: linear-gradient(
+    180deg,
+    var(--gft-crimson) 0%,
+    var(--gft-crimson-light) 25%,
+    var(--gft-gold) 55%,
+    var(--gft-yellow) 75%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+  opacity: 0.95;
+}
+
+/* Dark mode tweak biar ga “nyeplak” */
+html.dark .gft-card {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+html.dark .gft-card::before {
+  opacity: 0.75;
+}
+/* kasih position & overflow ke section container */
+.gft-section-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* stripnya */
+.gft-section-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    var(--gft-crimson) 0%,
+    var(--gft-crimson-light) 25%,
+    var(--gft-gold) 55%,
+    var(--gft-yellow) 75%,
+    rgba(255,255,255,0) 100%
+  );
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+  opacity: 0.95;
+  pointer-events: none;
+}
+.gft-section-card .fi-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.gft-section-card .fi-section::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0; /* top right bottom left */
+  width: 6px;
+  background: linear-gradient(
+    180deg,
+    var(--gft-crimson) 0%,
+    var(--gft-crimson-light) 25%,
+    var(--gft-gold) 55%,
+    var(--gft-yellow) 75%,
+    rgba(255,255,255,0) 100%
+  );
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+  opacity: 0.95;
+  pointer-events: none;
+}
+/* ===== Horizontal scrollbar ala Figma (LIGHT) ===== */
+.gft-hscroll {
+  scrollbar-gutter: stable;
+  padding-bottom: 10px;
+}
+.gft-hscroll::-webkit-scrollbar-corner {
+  background: transparent;
+}
+/* Chrome / Safari / Edge */
+.gft-hscroll::-webkit-scrollbar {
+  height: 10px;
+}
+
+.gft-hscroll::-webkit-scrollbar-track {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 28, 142, 0.10) 0%,
+    rgba(0, 28, 142, 0.18) 60%,
+    rgba(0, 28, 142, 0.10) 100%
+  );
+  border-radius: 999px;
+}
+
+.gft-hscroll::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 28, 142, 0.45) 0%,
+    rgba(0, 28, 142, 0.85) 55%,
+    rgba(0, 28, 142, 1) 100%
+  );
+  border: 2px solid transparent;      /* penting */
+  background-clip: padding-box;       /* penting */
+}
+
+
+.gft-hscroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 28, 142, 0.65) 0%,
+    rgba(0, 28, 142, 0.95) 60%,
+    rgba(0, 28, 142, 1) 100%
+  );
+}
+
+/* Firefox (LIGHT) */
+.gft-hscroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 28, 142, 0.85) rgba(0, 28, 142, 0.15);
+}
+/* ===== Dark Mode ===== */
+html.dark .gft-hscroll::-webkit-scrollbar-track {
+  background: linear-gradient(
+    90deg,
+    rgba(96, 165, 250, 0.10) 0%,
+    rgba(96, 165, 250, 0.18) 60%,
+    rgba(96, 165, 250, 0.10) 100%
+  );
+}
+
+html.dark .gft-hscroll::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 0 0 2px rgba(24,24,27,0.9) inset;
+}
+
+
+html.dark .gft-hscroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(96, 165, 250, 0.65) 0%,
+    rgba(96, 165, 250, 0.90) 60%,
+    rgba(96, 165, 250, 1) 100%
+  );
+}
+
+/* Firefox Dark */
+html.dark .gft-hscroll {
+  scrollbar-color: rgba(96, 165, 250, 0.85) rgba(96, 165, 250, 0.15);
+}
+/* ===============================
+   Health Overview – Top Gradient
+   Figma-like (soft, thin, subtle)
+   =============================== */
+/* wrapper widget */
+.gft-health-overview,
+.fi-wi-chart > section.fi-section {
+    position: relative;
+    overflow: hidden;
+}
+
+/* main accent line (tipis) */
+.gft-health-overview::before,
+.fi-wi-chart > section.fi-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;              /* ✅ full */
+    width: auto;           /* ✅ full */
+    height: 3px;
+    z-index: 2;
+
+    background: linear-gradient(
+        90deg,
+        rgba(165, 40, 40, 0.55),
+        rgba(244, 195, 0, 0.45),
+        rgba(37, 99, 235, 0.45),
+        rgba(37, 99, 235, 0.00)
+    );
+
+    border-bottom-right-radius: 0; /* ✅ no tail */
+}
+
+/* soft glow / feather (full width) */
+.gft-health-overview::after,
+.fi-wi-chart > section.fi-section::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;              /* ✅ full */
+    width: auto;           /* ✅ full */
+    height: 10px;
+    z-index: 1;
+
+    background: linear-gradient(
+        90deg,
+        rgba(165, 40, 40, 0.25),
+        rgba(244, 195, 0, 0.20),
+        rgba(37, 99, 235, 0.18),
+        rgba(37, 99, 235, 0.00)
+    );
+
+    filter: blur(20px);
+}
+/* ===============================
+   Health Overview – Underline FIX
+   =============================== */
+/* Health Overview – Underline (robust) */
+.fi-wi-chart > section.fi-section > header.fi-section-header :is(h1,h2,h3).fi-section-header-heading,
+.fi-wi-chart > section.fi-section > header.fi-section-header :is(h1,h2,h3) {
+    display: inline-block;
+    position: relative;
+}
+
+.fi-wi-chart > section.fi-section > header.fi-section-header :is(h1,h2,h3).fi-section-header-heading::after,
+.fi-wi-chart > section.fi-section > header.fi-section-header :is(h1,h2,h3)::after {
+    content: "";
+    display: block;
+    margin-top: 8px;
+    width: 48px;
+    height: 3px;
+    background: #A52828;
+    border-radius: 999px;
+}
+
+/* ===============================
+   Health Overview – Title styling
+   =============================== */
+
+.fi-wi-chart
+> section.fi-section
+> header.fi-section-header
+:is(h1,h2,h3) {
+    color: #1E3A8A;        /* sama kaya Athlete Performance Snapshot */
+    font-weight: 600;
+}
+
+/* ===============================
+   Active Training Programs ONLY
+   =============================== */
+
+/* title color */
+.fi-ta.gft-active-programs-table .fi-ta-header-heading {
+    color: #1E3A8A !important;
+    font-weight: 700;
+    display: inline-block;
+    position: relative;
+}
+
+/* underline */
+.fi-ta.gft-active-programs-table .fi-ta-header-heading::after {
+    content: "";
+    display: block;
+    margin-top: 8px;
+    width: 48px;
+    height: 3px;
+    border-radius: 999px;
+    background: #A52828;
+}
+
+/* ===============================
+   Top gradient — PINDAH KE HEADER CONTAINER
+   =============================== */
+
+.fi-ta.gft-active-programs-table .fi-ta-header-ctn {
+    position: relative;
+    overflow: hidden;
+}
+
+/* main line (di atas header, ga ketiban) */
+.fi-ta.gft-active-programs-table .fi-ta-header-ctn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 3px;
+    z-index: 5; /* di atas header */
+    pointer-events: none;
+
+    background: linear-gradient(
+        90deg,
+        rgba(165, 40, 40, 0.75) 0%,
+        rgba(244, 195, 0, 0.60) 35%,
+        rgba(37, 99, 235, 0.45) 65%,
+        rgba(37, 99, 235, 0.10) 100%
+    );
+}
+
+/* glow halus, nempel di header */
+.fi-ta.gft-active-programs-table .fi-ta-header-ctn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 5px;
+    z-index: 4;
+    pointer-events: none;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(165, 40, 40, 0.35),
+        rgba(244, 195, 0, 0.22),
+        rgba(37, 99, 235, 0.12),
+        rgba(37, 99, 235, 0.00)
+    );
+
+    filter: blur(10px);
+}
+/* ===============================
+   Upcoming Schedule – Title only
+   =============================== */
+
+/* title color */
+.fi-ta-header-heading {
+    color: #1E3A8A;       /* navy – samain sama yang lain */
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+}
+
+/* underline crimson */
+.fi-ta-header-heading::after {
+    content: "";
+    display: block;
+    margin-top: 8px;
+
+    width: 48px;
+    height: 3px;
+    border-radius: 999px;
+
+    background-color: #A52828; /* crimson */
+}
+/* ============================================================
+   DARK MODE – Dashboard widget titles (match Snapshot: blue-200)
+   ============================================================ */
+
+/* This hits widget + table widget titles */
+html.dark .fi-wi .fi-wi-header-heading,
+html.dark .fi-ta .fi-ta-header-heading,
+html.dark .fi-section .fi-section-header-heading {
+    color: var(--color-blue-200) !important; /* same as dark:!text-blue-200 */
+}
+
+/* kalau ada subtext/description di header widget */
+html.dark .fi-wi-header-description,
+html.dark .fi-ta-header-description,
+html.dark .fi-section-header-description {
+    color: rgba(255, 255, 255, 0.65) !important;
+}
+/* ============================================================
+   DARK MODE – TableWidget surface (match HealthOverview/Snapshot)
+   ============================================================ */
+
+html.dark .gft-active-programs-table .fi-ta-main,
+html.dark .gft-upcoming-schedule-table .fi-ta-main,
+html.dark .gft-active-programs-table .fi-ta-content,
+html.dark .gft-upcoming-schedule-table .fi-ta-content,
+html.dark .gft-active-programs-table .fi-ta-table-ctn,
+html.dark .gft-upcoming-schedule-table .fi-ta-table-ctn {
+  background:
+    radial-gradient(
+      600px 220px at 20% 0%,
+      rgba(0, 28, 142, 0.14) 0%,
+      rgba(0, 0, 0, 0) 42%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.04) 0%,
+      rgba(255,255,255,0.00) 18%
+    ),
+    var(--gft-card) !important;
+}
+
+
+/* biar border/shadow sama “card” lain */
+html.dark .fi-ta-ctn.gft-active-programs-table,
+html.dark .fi-ta-ctn.gft-upcoming-schedule-table,
+html.dark .fi-ta-ctn-with-header.gft-active-programs-table,
+html.dark .fi-ta-ctn-with-header.gft-upcoming-schedule-table {
+  border: 1px solid rgba(255,255,255,.08) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 16px 40px rgba(0,0,0,.35) !important;
+  overflow: hidden !important;
+}
+
+/* =========================
+   KPI Cards (Custom) — FINAL
+   ========================= */
+
+.gft-kpi-grid{
+  display:grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+}
+@media (min-width: 768px){
+  .gft-kpi-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1280px){
+  .gft-kpi-grid{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+.gft-kpi-card{
+  background:#fff;
+  border-radius:18px;
+  padding:22px 22px 18px;
+  border: 1px solid rgba(2,6,23,.06);
+  position:relative;
+  overflow:hidden;
+
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.08),
+    0 6px 16px rgba(15, 23, 42, 0.06),
+    0 1px 2px rgba(15, 23, 42, 0.04);
+
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.gft-kpi-card:hover{
+  transform: translateY(-1px);
+  box-shadow:
+    0 24px 55px rgba(15, 23, 42, 0.10),
+    0 10px 22px rgba(15, 23, 42, 0.07),
+    0 2px 4px rgba(15, 23, 42, 0.05);
+}
+
+/* glow base layer */
+.gft-kpi-card::before{
+  content:"";
+  position:absolute;
+  inset:-60px;
+  pointer-events:none;
+  opacity: .55;
+  filter: blur(36px);
+  z-index: 0;
+}
+
+/* hover glow layer (optional, subtle) */
+.gft-kpi-card::after{
+  content:"";
+  position:absolute;
+  inset:-55px;
+  pointer-events:none;
+  opacity: 0;
+  filter: blur(34px);
+  transition: opacity .25s ease;
+  z-index: 0;
+}
+.gft-kpi-card:hover::after{
+  opacity: .55;
+}
+
+/* content above glow */
+.gft-kpi-top,
+.gft-kpi-underline{
+  position: relative;
+  z-index: 1;
+}
+
+.gft-kpi-top{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  align-items:flex-start;
+}
+
+.gft-kpi-label{
+  font-size:12px;
+  color:#64748b;
+  font-weight:600;
+}
+
+.gft-kpi-value{
+  margin-top:6px;
+  font-size:32px;
+  font-weight:800;
+  letter-spacing:-.02em;
+  color:#1e3a8a; /* navy brand */
+}
+
+.gft-kpi-icon{
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(2,6,23,.06);
+}
+
+.gft-kpi-underline{
+  margin-top:14px;
+  width: 76px;
+  height: 5px;
+  border-radius:999px;
+  opacity: .95;
+}
+
+/* =========================
+   Per-card accents
+   ========================= */
+
+/* BLUE */
+.gft-kpi-blue::before{
+  background: radial-gradient(circle at 85% 30%,
+    rgba(59,130,246,.18),
+    rgba(59,130,246,.08) 35%,
+    transparent 65%);
+}
+.gft-kpi-blue::after{
+  background: radial-gradient(circle at 85% 30%,
+    rgba(59,130,246,.16),
+    transparent 58%);
+}
+.gft-kpi-blue .gft-kpi-icon{
+  background: rgba(59,130,246,.10);
+  color:#2563eb;
+}
+.gft-kpi-blue .gft-kpi-underline{
+  background: linear-gradient(90deg,#3b82f6,#93c5fd);
+}
+
+/* GOLD */
+.gft-kpi-gold::before{
+  background: radial-gradient(circle at 85% 30%,
+    rgba(234,179,8,.20),
+    rgba(234,179,8,.09) 35%,
+    transparent 65%);
+}
+.gft-kpi-gold::after{
+  background: radial-gradient(circle at 85% 30%,
+    rgba(234,179,8,.16),
+    transparent 58%);
+}
+.gft-kpi-gold .gft-kpi-icon{
+  background: rgba(234,179,8,.12);
+  color:#ca8a04;
+}
+.gft-kpi-gold .gft-kpi-underline{
+  background: linear-gradient(90deg,#fbbf24,#fcd34d);
+}
+
+/* GREEN (therapy / good status) */
+.gft-kpi-green::before{
+  background: radial-gradient(circle at 85% 30%,
+    rgba(34,197,94,.18),
+    rgba(34,197,94,.08) 35%,
+    transparent 65%);
+}
+.gft-kpi-green::after{
+  background: radial-gradient(circle at 85% 30%,
+    rgba(34,197,94,.15),
+    transparent 58%);
+}
+.gft-kpi-green .gft-kpi-icon{
+  background: rgba(34,197,94,.12);
+  color:#15803d;
+}
+.gft-kpi-green .gft-kpi-underline{
+  background: linear-gradient(90deg,#22c55e,#86efac);
+}
+
+/* CRIMSON */
+.gft-kpi-crimson::before{
+  background: radial-gradient(circle at 85% 30%,
+    rgba(165,40,40,.18),
+    rgba(165,40,40,.08) 35%,
+    transparent 65%);
+}
+.gft-kpi-crimson::after{
+  background: radial-gradient(circle at 85% 30%,
+    rgba(165,40,40,.14),
+    transparent 58%);
+}
+.gft-kpi-crimson .gft-kpi-icon{
+  background: rgba(165,40,40,.12);
+  color:#8e1f1f;
+}
+.gft-kpi-crimson .gft-kpi-underline{
+  background: linear-gradient(90deg,#a52828,#e57373);
+}
+
+/* SILVER */
+.gft-kpi-silver::before{
+  background: radial-gradient(circle at 85% 30%,
+    rgba(148,163,184,.20),
+    rgba(148,163,184,.10) 35%,
+    transparent 65%);
+}
+.gft-kpi-silver::after{
+  background: radial-gradient(circle at 85% 30%,
+    rgba(148,163,184,.16),
+    transparent 58%);
+}
+.gft-kpi-silver .gft-kpi-icon{
+  background: rgba(148,163,184,.18);
+  color:#475569;
+}
+.gft-kpi-silver .gft-kpi-underline{
+  background: linear-gradient(90deg,#94a3b8,#e2e8f0);
+}
+
+/* BRONZE */
+.gft-kpi-bronze::before{
+  background: radial-gradient(circle at 85% 30%,
+    rgba(180,83,9,.18),
+    rgba(180,83,9,.08) 35%,
+    transparent 65%);
+}
+.gft-kpi-bronze::after{
+  background: radial-gradient(circle at 85% 30%,
+    rgba(180,83,9,.14),
+    transparent 58%);
+}
+.gft-kpi-bronze .gft-kpi-icon{
+  background: rgba(180,83,9,.14);
+  color:#9a3412;
+}
+.gft-kpi-bronze .gft-kpi-underline{
+  background: linear-gradient(90deg,#b45309,#fdba74);
+}
+
+/* =========================
+   KPI Cards — Dark Mode
+   ========================= */
+
+html.dark .gft-kpi-card{
+  background: linear-gradient(
+    180deg,
+    rgba(30, 41, 59, .65),
+    rgba(15, 23, 42, .75)
+  );
+  border: 1px solid rgba(148, 163, 184, .12);
+  box-shadow:
+    0 10px 28px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.03);
+}
+
+html.dark .gft-kpi-label{
+  color: rgba(226, 232, 240, .70);
+}
+
+html.dark .gft-kpi-card .gft-kpi-value{
+  color: rgba(241, 245, 249, .95);
+}
+
+html.dark .gft-kpi-card .gft-kpi-icon{
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.18);
+  backdrop-filter: blur(6px);
+}
+
+/* =========================
+   TOPBAR — DARK THEME OVERRIDE
+   ========================= */
+
+/* bar utama */
+html.dark .fi-topbar{
+  background: linear-gradient(180deg, rgba(2,6,23,.92), rgba(2,6,23,.78)) !important;
+  border-bottom: 1px solid rgba(148,163,184,.12) !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,.35) !important;
+  backdrop-filter: blur(10px);
+}
+
+/* container di dalam topbar (biar rapi & ga ada tint default) */
+html.dark .fi-topbar-ctn{
+  background: transparent !important;
+}
+
+/* teks/icon di topbar biar ga “grey Filament” */
+html.dark .fi-topbar,
+html.dark .fi-topbar *{
+  color: rgba(241,245,249,.92);
+}
+
+/* =========================
+   Search box — dark style
+   ========================= */
+html.dark .fi-topbar .fi-input-wrp,
+html.dark .fi-topbar input[type="search"]{
+  background: rgba(255,255,255,.06) !important;
+  border: 1px solid rgba(148,163,184,.16) !important;
+  color: rgba(241,245,249,.92) !important;
+}
+
+html.dark .fi-topbar input[type="search"]::placeholder{
+  color: rgba(226,232,240,.55) !important;
+}
+
+/* focus ring biar “nyatu”, ga biru default */
+html.dark .fi-topbar .fi-input-wrp:focus-within{
+  border-color: rgba(226,232,240,.26) !important;
+  box-shadow: 0 0 0 3px rgba(148,163,184,.12) !important;
+}
+
+/* =========================
+   Avatar button / icon button feel
+   ========================= */
+html.dark .fi-topbar a,
+html.dark .fi-topbar button{
+  border-radius: 12px;
+}
+
+html.dark .fi-topbar a:hover,
+html.dark .fi-topbar button:hover{
+  background: rgba(255,255,255,.06) !important;
+}
+/* ===============================
+   Active Training Programs — fixed height + scroll
+   =============================== */
+
+/* BUKA overflow parent (soalnya kamu banyak overflow:hidden) */
+.gft-active-programs-card,
+.gft-active-programs-card .fi-section,
+.gft-active-programs-card .fi-ta-ctn,
+.gft-active-programs-card .fi-ta-ctn-with-header {
+  overflow: visible !important;
+}
+
+/* Ini yang beneran jadi “body” tabel di Filament v4 */
+.gft-active-programs-card .fi-ta-content-ctn {
+  max-height: 320px !important;   /* atur: 300–380 sesuai selera */
+  overflow-y: auto !important;
+}
+
+/* Optional: sticky header biar enak pas scroll */
+.gft-active-programs-card thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--gft-card);
+}
+/* ===============================
+   Active Training Programs — underline fix (Filament v4)
+   =============================== */
+
+.fi-ta.gft-active-programs-table .fi-ta-header{
+  position: relative;
+}
+
+/* underline merah */
+.fi-ta.gft-active-programs-table .fi-ta-header::after{
+  content: "";
+  position: absolute;
+  left: 24px;          /* sesuaikan sama padding header */
+  bottom: 8px;         /* jarak dari bawah */
+  width: 56px;
+  height: 3px;
+  border-radius: 999px;
+  background: #A52828;
+  z-index: 5;
+  pointer-events: none;
+}
+/* Kill rule lama biar gak nyasar */
+.fi-ta.gft-active-programs-table .fi-ta-header-ctn::after{
+  content: none !important;
+}
+
+/* Anchor yang benar */
+.fi-ta.gft-active-programs-table .fi-ta-header{
+  position: relative !important;
+  overflow: visible !important;
+}
+
+/* Underline nempel ke header */
+.fi-ta.gft-active-programs-table .fi-ta-header::after{
+  content: "";
+  position: absolute;
+  left: 24px;
+  bottom: 8px;
+  width: 48px;
+  height: 3px;
+  border-radius: 999px;
+  background: #A52828;
+  z-index: 50;
+  pointer-events: none;
+}
+/* ===============================
+   Active Training Programs — outer gradient line (top border)
+   =============================== */
+
+.fi-ta-ctn-with-header.gft-active-programs-table,
+.fi-ta-ctn.gft-active-programs-table{
+  position: relative !important;
+}
+
+/* garis gradasi di bagian paling atas card tabel */
+.fi-ta-ctn-with-header.gft-active-programs-table::before,
+.fi-ta-ctn.gft-active-programs-table::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #001C8E 0%, #FACC2E 55%, #A52828 100%);
+  z-index: 5;
+  pointer-events: none;
+}
+/* container PALING LUAR tabel */
+.fi-ta-ctn-with-header.gft-active-programs-table,
+.fi-ta-ctn.gft-active-programs-table {
+  position: relative !important;
+  z-index: 1; /* ← TARO DI SINI */
+}

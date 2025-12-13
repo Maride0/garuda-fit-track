@@ -19,17 +19,7 @@ class EditAthlete extends EditRecord
                 ->icon('heroicon-o-arrow-left')
                 ->url(AthleteResource::getUrl())
                 ->color('gray'),
-            // Nanti aktifkan lagi kalau HealthReportResource sudah ada
-            // Actions\Action::make('startScreening')
-            //     ->label('Start Health Screening')
-            //     ->color('warning')
-            //     ->icon('heroicon-o-heart')
-            //     ->url(fn () => route('filament.resources.health-reports.create', [
-            //         'athlete_id' => $this->record->athlete_id,
-            //     ]))
-            //     ->visible(fn () => $this->record->status === 'not_screened'),
-            Actions\DeleteAction::make(),
-        ];
+         ];
     }
     public function getTitle(): string
     {
@@ -37,7 +27,13 @@ class EditAthlete extends EditRecord
     }
     public function getBreadcrumb(): string
     {
-        return 'Detail Athlete';
+        return 'Edit Athlete';
+    }
+    protected function getRedirectUrl(): string
+    {
+        return static::$resource::getUrl('view', [
+            'record' => $this->record,
+        ]);
     }
 
 }

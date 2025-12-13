@@ -22,6 +22,7 @@ class SessionsRelationManager extends RelationManager
 {
     // HARUS sama dengan nama relasi di model TrainingProgram: sessions()
     protected static string $relationship = 'sessions';
+    protected static ?string $title = 'Jadwal Latihan';
 
     public function form(Schema $schema): Schema
     {

@@ -20,10 +20,12 @@
             </p>
 
             <div class="flex flex-wrap gap-3 text-xs">
-                <x-button href="/admin" variant="primary">
+                <x-button href="/admin/login" variant="primary">
                     Buka Panel Admin
                 </x-button>
-
+                <x-button href="/supervisor/login" variant="primary">
+                    Buka Panel Supervisor
+                </x-button>
                 <x-button href="#modules" variant="outline">
                     Lihat Modul Sistem
                 </x-button>

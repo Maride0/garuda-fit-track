@@ -2,9 +2,7 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Pages\Dashboard;
-use App\Filament\Widgets\ActiveTrainingPrograms;
-use App\Filament\Widgets\HealthOverviewChart;
+use App\Filament\Resources\Athletes\AthleteResource;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -19,58 +17,55 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\View\PanelsRenderHook;
-use App\Filament\Widgets\UpcomingSessions;
-use App\Filament\Widgets\DashboardKpiCards;
+use App\Filament\Pages\Dashboard;
+use App\Filament\Resources\Achievements\AchievementResource;
 
-class AdminPanelProvider extends PanelProvider
+class SupervisorPanelPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
-            ->id('admin')
-            ->path('admin')
+            // ✅ ID harus match sama User::canAccessPanel()
+            ->id('supervisor')
+
+            // ✅ URL panel
+            ->path('supervisor')
+
+            // ✅ enable login page untuk panel ini
             ->login()
-            ->authGuard('admin')
-            // Branding NOA
-            ->brandName('Garuda Fit Track') // ⬅️ ini buat teks di samping logo
+
+            // ✅ setelah login landing ke sini
+            ->authGuard('supervisor')
+
             ->brandLogo(asset('images/2.png'))
             ->brandLogoHeight('4rem')
 
-            // Warna utama Garuda crimson
-            ->colors([
-                'primary' => Color::hex('#A52828'),
-            ])
 
-            // Custom Filament theme kamu
+            // ✅ pake theme kamu biar konsisten
             ->viteTheme('resources/css/filament/gft-noa-theme.css')
             ->renderHook(
                 PanelsRenderHook::HEAD_END,
                 fn () => view('filament.hooks.brand-logo-swap'),
             )
 
-            // Resources & pages tetap auto-discover
-            ->discoverResources(
-                in: app_path('Filament/Resources'),
-                for: 'App\Filament\Resources',
-            )
-            ->discoverPages(
-                in: app_path('Filament/Pages'),
-                for: 'App\Filament\Pages',
-            )
+            // (opsional) warna primary sama kayak admin biar nyatu
+            ->colors([
+                'primary' => Color::hex('#A52828'),
+            ])
+
+            /**
+             * ✅ KUNCI: jangan discover resources/pages/widgets
+             * biar panel ini cuma punya yang kita daftarin manual
+             */
             ->pages([
-                Dashboard::class, // App\Filament\Pages\Dashboard
+                Dashboard::class,
             ])
-
-            // ⬇️ REGISTER widget-nya di panel (supaya Livewire kenal)
-            ->widgets([
-                DashboardKpiCards::class,
-                HealthOverviewChart::class,
-                ActiveTrainingPrograms::class,
-                UpcomingSessions::class,
+            ->resources([
+                AthleteResource::class,
+                AchievementResource::class,
             ])
+            ->widgets([])
 
-            // Middleware
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

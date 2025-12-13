@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Athlete;
+use App\Models\TrainingProgram;
+use App\Models\PerformanceMetric;
+use App\Models\TestRecord;
 
 class PerformanceEvaluation extends Model
 {
@@ -86,4 +90,22 @@ class PerformanceEvaluation extends Model
 
         return round(array_sum($scores) / count($scores), 2);
     }
+    protected static function booted(): void
+        {
+            static::deleting(function (self $evaluation) {
+                // 1) hapus yg udah rapi (punya source tracking)
+                TestRecord::where('source_type', 'program_evaluation')
+                    ->where('source_id', (string) $evaluation->id)
+                    ->delete();
+
+                // 2) fallback: hapus orphan yg match atribut (optional)
+                TestRecord::whereNull('source_type')
+                    ->whereNull('source_id')
+                    ->where('athlete_id', $evaluation->athlete_id)
+                    ->where('training_program_id', $evaluation->training_program_id)
+                    ->where('metric_id', $evaluation->metric_id)
+                    ->whereDate('test_date', $evaluation->evaluation_date)
+                    ->delete();
+            });
+        }
 }

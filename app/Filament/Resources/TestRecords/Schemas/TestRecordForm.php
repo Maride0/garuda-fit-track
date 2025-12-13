@@ -33,12 +33,12 @@ class TestRecordForm
                             ->required(),
                     ]),
 
-                Section::make('Test Record Details')
-                    ->columns(2)
-                    ->schema([
-                        DatePicker::make('test_date')
-                            ->label('Test Date')
-                            ->required(),
+                    Section::make('Test Record Details')
+                        ->columns(2)
+                        ->schema([
+                            DatePicker::make('test_date')
+                                ->label('Test Date')
+                                ->required(),
 
                         Select::make('phase')
                             ->label('Phase')
@@ -71,12 +71,12 @@ class TestRecordForm
                             ->placeholder('Not linked'),
                     ]),
 
-                Section::make('Additional')
-                    ->schema([
-                        TextInput::make('source')
-                            ->label('Source')
-                            ->placeholder('field_test, lab_test, match_data, etc.')
-                            ->default(null),
+                        Section::make('Additional')
+                            ->schema([
+                                TextInput::make('source')
+                                    ->label('Source')
+                                    ->placeholder('field_test, lab_test, match_data, etc.')
+                                    ->default(null),
 
                         Textarea::make('notes')
                             ->label('Notes')
