@@ -41,11 +41,11 @@ class PerformanceEvaluationsRelationManager extends RelationManager
                     ->searchable(),
 
                 TextColumn::make('evaluation_date')
-                    ->label('Date')
+                    ->label('Tanggal Evaluasi')
                     ->date(),
 
                 TextColumn::make('overall_rating')
-                    ->label('Rating')
+                    ->label('Nilai')
                     ->badge()
                     ->color(fn ($state) =>
                         $state >= 8 ? 'success'
@@ -53,27 +53,27 @@ class PerformanceEvaluationsRelationManager extends RelationManager
                     ),
 
                 TextColumn::make('discipline_score')
-                    ->label('Disc.')
+                    ->label('Disiplin')
                     ->alignCenter()
                     ->toggleable(),
 
                 TextColumn::make('effort_score')
-                    ->label('Effort')
+                    ->label('Usaha')
                     ->alignCenter()
                     ->toggleable(),
 
                 TextColumn::make('attitude_score')
-                    ->label('Att.')
+                    ->label('Sikap')
                     ->alignCenter()
                     ->toggleable(),
 
                 TextColumn::make('tactical_understanding_score')
-                    ->label('Tactical')
+                    ->label('Taktik')
                     ->alignCenter()
                     ->toggleable(),
 
                 TextColumn::make('coach_notes')
-                    ->label('Notes')
+                    ->label('Catatan Pelatih')
                     ->limit(40),
             ])
             ->headerActions([

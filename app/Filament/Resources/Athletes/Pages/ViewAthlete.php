@@ -10,6 +10,8 @@ use Filament\Actions\EditAction;
 
 
 
+use Filament\Forms\Components\Select;
+use App\Models\Athlete;
 
 class ViewAthlete extends ViewRecord
 {
@@ -18,15 +20,23 @@ class ViewAthlete extends ViewRecord
     {
         return [
             Action::make('backToIndex')
-                ->label('Kembali ke Athltes')
+                ->label('Kembali ke Atlet')
                 ->icon('heroicon-o-arrow-left')
                 ->url(AthleteResource::getUrl())
                 ->color('gray'),
+            
             Action::make('editAthlete')
-                    ->label('Edit Athlete')
+                    ->label('Edit Atlet')
                     ->icon('heroicon-o-pencil-square')
                     ->color('primary')
                     ->url(fn ($record) => AthleteResource::getUrl('edit', ['record' => $record])),
+
+            Action::make('exportPdf')
+                    ->label('Ekspor Laporan Atlet')
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->action(function ($record) {
+                        return redirect()->route('athletes.export.pdf', $record->athlete_id);
+                    }),
             DeleteAction::make(),
         ];
     }

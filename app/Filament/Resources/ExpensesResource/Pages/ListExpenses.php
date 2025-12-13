@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Storage;
 use Filament\Forms;
 use App\Models\Expense;
 use Illuminate\Contracts\View\View;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;    
 
 
 class ListExpenses extends ListRecords
@@ -31,7 +33,7 @@ class ListExpenses extends ListRecords
             ->label('Export PDF')
             ->icon('heroicon-o-document-arrow-down')
             ->form([
-                Forms\Components\Select::make('month')
+                Select::make('month')
                     ->label('Pilih Bulan')
                     ->required()
                     ->options([
@@ -48,19 +50,19 @@ class ListExpenses extends ListRecords
                         '11' => 'November',
                         '12' => 'Desember',
                     ]),
-                Forms\Components\TextInput::make('year')
+                TextInput::make('year')
                     ->label('Tahun')
                     ->numeric()
                     ->required()
                     ->default(date('Y')),
             ])
             ->action(function (array $data) {
-                $expenses = \App\Models\Expense::whereMonth('expense_date', $data['month'])
+                $expenses = Expense::whereMonth('expense_date', $data['month'])
                     ->whereYear('expense_date', $data['year'])
                     ->orderBy('expense_date')
                     ->get();
 
-                $pdf = Pdf::loadView('pdf.expenses-report', [
+                $pdf = Pdf::loadView('export.expenses-report', [
                     'expenses' => $expenses,
                     'month' => $data['month'],
                     'year' => $data['year'],
@@ -72,8 +74,7 @@ class ListExpenses extends ListRecords
                 );
             })
             ->modalHeading('Export Laporan Bulanan')
-            ->modalButton('Export')
-            ->color('danger'),
+            ->modalButton('Export'),
     ];
     }
 
