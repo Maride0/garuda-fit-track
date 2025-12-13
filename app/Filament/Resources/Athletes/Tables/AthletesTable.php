@@ -53,19 +53,19 @@ class AthletesTable
                     ->sortable(),
 
                 TextColumn::make('birthdate')
-                    ->label('Birthdate')
+                    ->label('Tanggal Lahir')
                     ->date('d M Y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('height')
-                    ->label('Height (cm)')
+                    ->label('Tinggi (cm)')
                     ->formatStateUsing(fn ($state) => $state ? "{$state} cm" : '-')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('weight')
-                    ->label('Weight (kg)')
+                    ->label('Berat (kg)')
                     ->formatStateUsing(fn ($state) => $state ? "{$state} kg" : '-')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -91,7 +91,7 @@ class AthletesTable
                     ->sortable(),
 
                 TextColumn::make('medals_summary')
-                    ->label('Medals')
+                    ->label('Medal')
                     ->sortable(false)
                     ->toggleable(),
 
@@ -117,7 +117,7 @@ class AthletesTable
                     ->sortable(),
                 
                 TextColumn::make('next_screening_due')
-                    ->label('Next Screening')
+                    ->label('Skrining Berikutnya')
                     // state yang dipakai kolom ini SELALU string
                     ->getStateUsing(function ($record) {
                         // belum ada jadwal next screening
@@ -146,11 +146,11 @@ class AthletesTable
                     })
                     ->tooltip(function ($state, $record) {
                         if (! $record->next_screening_due) {
-                            return 'Belum ada jadwal screening berikutnya (belum pernah screening).';
+                            return 'Belum ada jadwal Skrining berikutnya (belum pernah screening).';
                         }
 
                         if ($record->isScreeningOverdue()) {
-                            return 'Screening sudah lewat dari batas waktu yang disarankan.';
+                            return 'Skrining sudah lewat dari batas waktu yang disarankan.';
                         }
 
                         if ($record->isScreeningDue()) {
@@ -163,7 +163,7 @@ class AthletesTable
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('contact')
-                    ->label('Contact')
+                    ->label('Kontak')
                     ->formatStateUsing(fn ($state) => $state ?: '-')
                     ->url(fn ($state) => $state
                         ? "https://wa.me/" . preg_replace('/\D/', '', $state)

@@ -34,23 +34,23 @@ class AthletesRelationManager extends RelationManager
                     ->columns(2)
                     ->schema([
                         Select::make('metric_id')
-                            ->label('Metric')
+                            ->label('Metrik')
                             ->relationship('metric', 'name')
                             ->searchable()
                             ->required(),
 
                         Select::make('training_program_id')
-                            ->label('Training Program')
+                            ->label('Program Latihan')
                             ->relationship('trainingProgram', 'name')
                             ->searchable()
                             ->placeholder('Not linked'),
 
                         DatePicker::make('test_date')
-                            ->label('Test Date')
+                            ->label('Tanggal Tes')
                             ->required(),
 
                         Select::make('phase')
-                            ->label('Phase')
+                            ->label('Fase')
                             ->options([
                                 'baseline' => 'Baseline',
                                 'pre'      => 'Pre-Test',
@@ -58,10 +58,10 @@ class AthletesRelationManager extends RelationManager
                                 'post'     => 'Post-Test',
                                 'other'    => 'Other',
                             ])
-                            ->placeholder('Select phase'),
+                            ->placeholder('Pilih Fase'),
 
                         TextInput::make('value')
-                            ->label('Value')
+                            ->label('Nilai')
                             ->numeric()
                             ->required(),
 
@@ -74,13 +74,13 @@ class AthletesRelationManager extends RelationManager
                 Section::make('Additional')
                     ->schema([
                         TextInput::make('source')
-                            ->label('Source')
+                            ->label('Sumber')
                             ->placeholder('field_test, lab_test, match_data, etc.')
                             ->default(null),
 
                         Textarea::make('notes')
-                            ->label('Notes')
-                            ->placeholder('Any relevant context or observation…')
+                            ->label('Catatan')
+                            ->placeholder('Konteks atau observasi relevan…')
                             ->columnSpanFull(),
                     ]),
             ]);
@@ -89,27 +89,27 @@ class AthletesRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->heading('Test Records')
+            ->heading('Rekaman Tes')
             ->defaultSort('test_date', 'desc')
             ->columns([
                 TextColumn::make('metric.name')
-                    ->label('Metric')
+                    ->label('Metrik')
                     ->sortable()
                     ->searchable(),
 
                 TextColumn::make('trainingProgram.name')
-                    ->label('Program')
+                    ->label('Program Latihan')
                     ->placeholder('—')
                     ->sortable()
                     ->searchable(),
 
                 TextColumn::make('test_date')
-                    ->label('Test Date')
+                    ->label('Tanggal Tes')
                     ->date()
                     ->sortable(),
 
                 BadgeColumn::make('phase')
-                    ->label('Phase')
+                    ->label('Fase')
                     ->colors([
                         'gray'      => 'baseline',
                         'info'      => 'pre',
@@ -119,7 +119,7 @@ class AthletesRelationManager extends RelationManager
                     ]),
 
                 TextColumn::make('value')
-                    ->label('Value')
+                    ->label('Nilai')
                     ->formatStateUsing(function ($state, TestRecord $record) {
                         $unit = $record->unit ?: $record->metric?->default_unit;
                         return $unit ? "{$state} {$unit}" : (string) $state;
@@ -127,13 +127,13 @@ class AthletesRelationManager extends RelationManager
                     ->sortable(),
 
                 TextColumn::make('source')
-                    ->label('Source')
+                    ->label('Sumber')
                     ->placeholder('—')
                     ->searchable(),
             ])
             // ⬇️ VIEW-ONLY: nggak ada Create/Edit/Delete lagi
-            ->emptyStateHeading('No Test Records')
-            ->emptyStateDescription('Test Record data is recorded from the Training Programs module.')
+            ->emptyStateHeading('Tidak Ada Rekaman Tes')
+            ->emptyStateDescription('Rekaman Tes bersumber dari modul Program Latihan.')
             ->emptyStateIcon('heroicon-o-presentation-chart-line');
     }
 }

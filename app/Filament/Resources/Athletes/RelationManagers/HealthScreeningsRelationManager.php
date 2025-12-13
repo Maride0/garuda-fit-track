@@ -30,7 +30,7 @@ class HealthScreeningsRelationManager extends RelationManager
     {
         return $schema->components([
             TextEntry::make('screening_id')
-                ->label('No. Screening'),
+                ->label('No. Skrining'),
 
             TextEntry::make('screening_date')
                 ->label('Tanggal')

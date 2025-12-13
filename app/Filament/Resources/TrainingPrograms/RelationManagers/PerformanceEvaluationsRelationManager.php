@@ -9,6 +9,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\DissociateAction;
 use Filament\Actions\DissociateBulkAction;
+use Filament\Actions\Action;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -32,7 +33,7 @@ class PerformanceEvaluationsRelationManager extends RelationManager
 
     public static function getModelLabel(): string
     {
-        return 'Program Evaluation';
+        return 'Evaluasi Performa Atlet';
     }
 
     /** ============================================
@@ -44,7 +45,7 @@ class PerformanceEvaluationsRelationManager extends RelationManager
             ->schema([
 
                 Select::make('athlete_id')
-                    ->label('Athlete')
+                    ->label('Atlet')
                     ->required()
                     ->searchable()
                     ->options(function (RelationManager $livewire) {
@@ -57,14 +58,14 @@ class PerformanceEvaluationsRelationManager extends RelationManager
                     }),
 
                 DatePicker::make('evaluation_date')
-                    ->label('Evaluation Date')
+                    ->label('Tanggal Evaluasi')
                     ->default(today())
                     ->required(),
 
                 Section::make('Sub-Ratings')
                     ->schema([
                         TextInput::make('discipline_score')
-                            ->label('Discipline (0–100)')
+                            ->label('Disiplin (0–100)')
                             ->numeric()
                             ->minValue(0)
                             ->maxValue(100)
@@ -76,7 +77,7 @@ class PerformanceEvaluationsRelationManager extends RelationManager
                             ),
 
                         TextInput::make('attendance_score')
-                            ->label('Attendance (0–100)')
+                            ->label('Kehadiran (0–100)')
                             ->numeric()
                             ->minValue(0)
                             ->maxValue(100)
@@ -99,7 +100,7 @@ class PerformanceEvaluationsRelationManager extends RelationManager
                             ),
 
                         TextInput::make('attitude_score')
-                            ->label('Attitude (0–100)')
+                            ->label('Sikap (0–100)')
                             ->numeric()
                             ->minValue(0)
                             ->maxValue(100)
@@ -110,7 +111,7 @@ class PerformanceEvaluationsRelationManager extends RelationManager
                             ),
 
                         TextInput::make('tactical_understanding_score')
-                            ->label('Tactical Understanding (0–100)')
+                            ->label('Pemahaman Taktik(0–100)')
                             ->numeric()
                             ->minValue(0)
                             ->maxValue(100)
@@ -120,7 +121,7 @@ class PerformanceEvaluationsRelationManager extends RelationManager
                                 $this->recalculateOverall($get, $set)
                             ),
                         TextInput::make('overall_rating')
-                            ->label('Overall Rating (0–100)')
+                            ->label('Nilai Akhir (0–100)')
                             ->numeric()
                             ->disabled()       // user gak bisa edit
                             ->dehydrated(true)
@@ -133,7 +134,7 @@ class PerformanceEvaluationsRelationManager extends RelationManager
                     ->schema([
 
                         Select::make('metric_id')
-                            ->label('Metric (Optional)')
+                            ->label('Metrik (Optional)')
                             ->native(false)
                             ->searchable()
                             ->options(function (RelationManager $livewire) {
@@ -160,12 +161,12 @@ class PerformanceEvaluationsRelationManager extends RelationManager
                             ->nullable(),
 
                         TextInput::make('value_numeric')
-                            ->label('Metric Numeric Value')
+                            ->label('Nilai Numerik Metrik')
                             ->numeric()
                             ->nullable(),
 
                         TextInput::make('value_label')
-                            ->label('Metric Text Value')
+                            ->label('Nilai Teks Metrik')
                             ->nullable(),
 
                     ])
@@ -173,7 +174,7 @@ class PerformanceEvaluationsRelationManager extends RelationManager
                     ->columnSpanFull(),
 
                 Textarea::make('coach_notes')
-                    ->label('Coach Notes')
+                    ->label('Catatan Pelatih')
                     ->nullable()
                     ->columnSpanFull(),
             ]);
@@ -188,12 +189,12 @@ class PerformanceEvaluationsRelationManager extends RelationManager
             ->columns([
 
                 TextColumn::make('athlete.name')
-                    ->label('Athlete')
+                    ->label('Atlet')
                     ->sortable()
                     ->searchable(),
 
                 TextColumn::make('overall_rating')
-                    ->label('Rating')
+                    ->label('Nilai Akhir')
                     ->badge()
                     ->color(fn ($state) =>
                         $state >= 80 ? 'success'
@@ -202,19 +203,19 @@ class PerformanceEvaluationsRelationManager extends RelationManager
                     ->sortable(),
 
                 TextColumn::make('evaluation_date')
-                    ->label('Date')
+                    ->label('Tanggal')
                     ->date(),
 
                 TextColumn::make('metric.name')
-                    ->label('Metric')
-                    ->placeholder('General Evaluation')
+                    ->label('Metrik')
+                    ->placeholder('Evaluasi Umum')
                     ->color('gray'),
 
                 TextColumn::make('value_numeric')
-                    ->label('Value'),
+                    ->label('Nilai Numerik'),
 
                 TextColumn::make('coach_notes')
-                    ->label('Notes')
+                    ->label('Catatan Pelatih')
                     ->limit(40),
             ])
 
@@ -222,6 +223,39 @@ class PerformanceEvaluationsRelationManager extends RelationManager
                 CreateAction::make()
                     ->after(function ($record) {
                         $this->syncTestRecord($record);
+                    }),
+                Action::make('export')
+                    ->label('Ekspor PDF')
+                    ->color('gray')
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->form(function ($livewire) {
+
+                        $program = $livewire->getOwnerRecord();
+
+                        return [
+                            DatePicker::make('from')
+                                ->label('Dari Tanggal')
+                                ->displayFormat('d/m/Y')
+                                ->default($program->start_date)   // ← DEFAULT DARI MODEL
+                                ->required(),
+
+                            DatePicker::make('to')
+                                ->label('Sampai Tanggal')
+                                ->displayFormat('d/m/Y')
+                                ->default($program->end_date)     // ← DEFAULT DARI MODEL
+                                ->required(),
+                        ];
+                    })
+                    ->action(function (array $data, $livewire) {
+
+                        // ID Program induk
+                        $programId = $livewire->getOwnerRecord()->program_id;
+
+                        return redirect()->route('program-evaluations.export', [
+                            'program' => $programId,
+                            'from'    => $data['from'], // Format tetap yyyy-mm-dd
+                            'to'      => $data['to'],
+                        ]);
                     }),
             ])
 

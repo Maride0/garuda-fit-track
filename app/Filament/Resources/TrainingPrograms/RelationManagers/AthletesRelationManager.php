@@ -41,7 +41,7 @@ class AthletesRelationManager extends RelationManager
                 TextColumn::make('sport')->label('Cabang Olahraga')->searchable(),
                 TextColumn::make('status')->label('Status Atlet')->badge(),
                 TextColumn::make('pivot.status')->label('Status di Program')->badge(),
-                TextColumn::make('pivot.join_date')->label('Join Date')->date('d M Y'),
+                TextColumn::make('pivot.join_date')->label('Tanggal Bergabung')->date('d M Y'),
             ])
             ->defaultSort('name')
             ->headerActions([
@@ -62,7 +62,7 @@ class AthletesRelationManager extends RelationManager
                     ->schema(fn (AttachAction $action): array => [
                         $action->getRecordSelect(),
                         DatePicker::make('join_date')
-                            ->label('Join Date')
+                            ->label('Tanggal Bergabung')
                             ->default(now())
                             ->required(),
                     ]),
