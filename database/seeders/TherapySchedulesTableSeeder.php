@@ -84,15 +84,15 @@ Evaluasi range of motion ankle minggu ke-2.',
                 'therapy_type' => 'Knee stabilization therapy + quadriceps & hamstring strengthening',
                 'therapist_name' => 'dr. Kevin Rahmat, Sp.KFR',
                 'start_date' => '2025-12-04',
-                'end_date' => '2025-12-26',
+                'end_date' => '2025-12-13',
                 'frequency' => 3,
-                'status' => 'planned',
-                'progress' => 0,
+                'status' => 'completed',
+                'progress' => 100,
                 'notes' => 'Hindari sparring, checking, dan teep power selama 7 hari pertama terapi.
 Boleh lakukan shadowboxing & teknik non-impact.
 Evaluasi tracking patella minggu ke-2 untuk mencegah overuse injury berulang.',
                 'created_at' => '2025-12-09 04:30:09',
-                'updated_at' => '2025-12-09 04:30:09',
+                'updated_at' => '2025-12-13 08:40:30',
             ),
             4 => 
             array (
@@ -124,13 +124,13 @@ Koreksi pola lutut saat lunge karena terlihat sedikit inward tracking.',
                 'start_date' => '2025-12-06',
                 'end_date' => '2025-12-27',
                 'frequency' => 3,
-                'status' => 'planned',
-                'progress' => 0,
+                'status' => 'completed',
+                'progress' => 100,
                 'notes' => 'Hindari latihan yang melibatkan sprint dan cutting keras selama 1 minggu.
 Boleh latihan shooting statis & passing drill.
 Lakukan proprioception test di minggu ke-2 untuk lihat stabilitas ankle.',
                 'created_at' => '2025-12-09 04:34:18',
-                'updated_at' => '2025-12-09 04:34:18',
+                'updated_at' => '2025-12-13 08:39:28',
             ),
             6 => 
             array (

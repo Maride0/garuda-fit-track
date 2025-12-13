@@ -7,34 +7,23 @@ use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // Matikan FK biar seeding nggak error
         Schema::disableForeignKeyConstraints();
 
         $this->call([
-            // --- Master Data & Athlete Base ---
             AthletesTableSeeder::class,
-            AthleteFillAllSportsSeeder::class,
+            TrainingProgramsTableSeeder::class,
+            PerformanceMetricsTableSeeder::class,
 
-            // --- Performance & Achievements ---
+            AthleteTrainingProgramTableSeeder::class,
             AchievementsTableSeeder::class,
-            AthleteAchievementsSeeder::class,
-            PerformanceMetricSeeder::class,
-
-            // --- Training ---
-            TrainingProgramSeeder::class,
-            TrainingSessionSeeder::class,
-
-            // --- Finance ---
-            ExpenseSeeder::class,
-
-            // --- Health & Therapy (HARUS terakhir) ---
             HealthScreeningsTableSeeder::class,
             TherapySchedulesTableSeeder::class,
+            TrainingSessionsTableSeeder::class,
+            PerformanceEvaluationsTableSeeder::class,
+            TestRecordsTableSeeder::class,
+            ExpensesTableSeeder::class,
         ]);
 
         Schema::enableForeignKeyConstraints();
