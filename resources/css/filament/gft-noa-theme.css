@@ -247,6 +247,21 @@ body.fi-body-has-topbar .fi-main{
 .fi-wi-active-training-programs {
     min-height: 360px;   /* adjust sesuai tinggi chart kamu */
 }
+/* ===============================
+   REMOVE DEFAULT TABLE HEADER LINE
+   (Active Training Programs only)
+   =============================== */
+
+.fi-ta.gft-active-programs-table .fi-ta-header {
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+/* kalau Filament inject garis via pseudo-element */
+.fi-ta.gft-active-programs-table .fi-ta-header::after {
+  content: none !important;
+}
+
 
 /* =========================
    DARK MODE CUSTOMIZATION
@@ -669,9 +684,9 @@ html.dark .gft-hscroll {
 .fi-ta.gft-active-programs-table .fi-ta-header-ctn::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 2px;
+    left: 3px;
+    right: 3px;
 
     height: 3px;
     z-index: 5; /* di atas header */
@@ -995,7 +1010,7 @@ html.dark .fi-ta-ctn-with-header.gft-upcoming-schedule-table {
 }
 .gft-kpi-silver .gft-kpi-icon{
   background: rgba(148,163,184,.18);
-  color:#475569;
+  color:lab(28.79% -0.19 -0.75 / 0.825);
 }
 .gft-kpi-silver .gft-kpi-underline{
   background: linear-gradient(90deg,#94a3b8,#e2e8f0);
@@ -1015,7 +1030,7 @@ html.dark .fi-ta-ctn-with-header.gft-upcoming-schedule-table {
 }
 .gft-kpi-bronze .gft-kpi-icon{
   background: rgba(180,83,9,.14);
-  color:#9a3412;
+  color:hsl(15, 82%, 42%);
 }
 .gft-kpi-bronze .gft-kpi-underline{
   background: linear-gradient(90deg,#b45309,#fdba74);
@@ -1049,6 +1064,65 @@ html.dark .gft-kpi-card .gft-kpi-icon{
   background: rgba(255,255,255,.08);
   border: 1px solid rgba(255,255,255,.18);
   backdrop-filter: blur(6px);
+}
+html.dark .gft-kpi-silver .gft-kpi-icon{
+  color:hsla(215, 16%, 85%, 0.825);
+}
+html.dark .gft-kpi-blue .gft-kpi-icon{
+  color:#739bf2;
+}
+html.dark .gft-kpi-crimson .gft-kpi-icon{
+  color:hwb(0 46% 14%);
+}
+/* ===============================
+   Health Overview – Horizontal Scroll
+   =============================== */
+/* Paksa widget Health Overview span penuh di grid Filament */
+.gft-health-overview--full{
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+}
+
+.gft-health-scroll{
+  overflow-x: auto;
+  overflow-y: visible;
+  padding-bottom: 8px; /* ruang buat scrollbar */
+  scrollbar-gutter: stable;
+}
+
+.gft-health-track{
+  display: flex;
+  gap: 1rem;
+  min-width: max-content;
+}
+
+/* Lebar card konsisten kayak dashboard snapshot */
+.gft-health-track .gft-kpi-card{
+  width: 260px;
+  flex-shrink: 0;
+}
+
+/* Smooth scrolling */
+.gft-health-scroll{
+  scroll-behavior: smooth;
+}
+
+/* Optional: snap biar cakep */
+.gft-health-track{
+  scroll-snap-type: x mandatory;
+}
+.gft-health-track .gft-kpi-card{
+  scroll-snap-align: start;
+}
+/* ===============================
+   Remove section underline
+   Athlete Health Overview ONLY
+   =============================== */
+
+.gft-health-overview::before,
+.gft-health-overview::after{
+  display: none !important;
+  content: none !important;
 }
 
 /* =========================
@@ -1204,3 +1278,379 @@ html.dark .fi-topbar button:hover{
   position: relative !important;
   z-index: 1; /* ← TARO DI SINI */
 }
+/* ============================================================
+   BRAND LOGO — prevent light flash on redirects (login errors)
+   ============================================================ */
+img.fi-logo { opacity: 0; }
+html[data-gft-logo-ready="1"] img.fi-logo { opacity: 1; }
+/* ===== Center header kolom terakhir (Aksi) ===== */
+.gft-athletes-table thead th:last-child{
+  text-align: center !important;
+}
+
+/* ===== Center isi kolom terakhir (Aksi) ===== */
+.gft-athletes-table tbody td:last-child{
+  text-align: center !important;
+}
+
+/* ===== Pastikan container actions-nya beneran ke tengah ===== */
+.gft-athletes-table tbody td:last-child .fi-ta-actions{
+  justify-content: center !important;
+}
+/* ===== GFT Gold CTA (match New Prestasi) ===== */
+.gft-btn-gold {
+    background: #F6C544;
+    color: #7A4A00;
+    font-weight: 600;
+    font-size: 0.875rem;
+
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    /* toned-down depth */
+    box-shadow:
+        inset 0 -1px 0 rgba(0,0,0,0.06),
+        0 1px 2px rgba(0,0,0,0.08);
+
+    transition: background-color .15s ease, color .15s ease;
+}
+
+.gft-btn-gold:hover {
+    background: #F2B933;
+    color: #6A3F00;
+}
+
+.gft-btn-gold svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2;
+}
+/* =================================================
+   Athletes table header: tools left, CTA right
+   ================================================= */
+
+/* balikin jarak antara cards dan table header */
+.fi-ta.gft-athletes-table{
+  margin-top: 1rem; /* adjust kalau mau 0.75rem */
+}
+
+/* jangan sentuh padding header toolbar bawaan Filament */
+.fi-ta.gft-athletes-table .fi-ta-header{
+  padding: 0.75rem 1rem !important; /* biar ga mepet */
+}
+
+/* ini container yang ngatur posisi CTA (New Atlet) */
+.fi-ta.gft-athletes-table .fi-ta-header-ctn{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:12px !important;
+}
+
+/* kiri: toolbar (search/filter/columns) */
+.fi-ta.gft-athletes-table .fi-ta-header-toolbar{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:10px !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+/* kanan: header actions (CTA) */
+.fi-ta.gft-athletes-table :is(.fi-ta-header-actions, .fi-ta-header-actions-ctn){
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  flex: 0 0 auto !important;
+  margin-left:auto !important;
+}
+
+/* mobile wrap */
+@media (max-width: 768px){
+  .fi-ta.gft-athletes-table .fi-ta-header-ctn{
+    flex-wrap:wrap !important;
+  }
+  .fi-ta.gft-athletes-table :is(.fi-ta-header-actions, .fi-ta-header-actions-ctn){
+    width:100% !important;
+  }
+}
+/* ===============================
+   DARK MODE — Global Table Style
+   (applies to ALL Filament tables)
+   =============================== */
+
+html.dark .fi-ta {
+  /* biar table berasa "card" */
+  border-radius: 16px;
+}
+
+/* container / card table */
+html.dark .fi-ta-ctn,
+html.dark .fi-ta-content,
+html.dark .fi-ta-table-container {
+  background: rgba(255, 255, 255, 0.03) !important; /* soft glass */
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.35),
+    0 6px 16px rgba(0,0,0,0.25);
+}
+
+/* header bar (area search/filter/columns) */
+html.dark .fi-ta-header {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+/* table cells + text */
+html.dark .fi-ta-table thead th {
+  color: rgba(255,255,255,0.78) !important;
+}
+html.dark .fi-ta-table tbody td {
+  color: rgba(255,255,255,0.72) !important;
+}
+
+/* row separators */
+html.dark .fi-ta-table tbody tr {
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+/* hover */
+html.dark .fi-ta-table tbody tr:hover {
+  background: rgba(255,255,255,0.04) !important;
+}
+
+/* inputs inside table toolbars (search) */
+html.dark .fi-ta-header input,
+html.dark .fi-ta-header .fi-input-wrp {
+  background: rgba(255,255,255,0.04) !important;
+  border-color: rgba(255,255,255,0.10) !important;
+}
+/* =================================================
+   Default avatar (initials) follow Dashboard "blue chip"
+   ================================================= */
+
+/* target: avatar fallback bubble di table */
+.fi-ta .fi-ta-cell-avatar div.bg-gray-100 {
+  background: rgb(239 246 255) !important;          /* blue-50 */
+  border: 1px solid rgb(191 219 254) !important;    /* blue-200 */
+}
+
+.fi-ta .fi-ta-cell-avatar .text-gray-700 {
+  color: rgb(29 78 216) !important;                 /* blue-700 */
+}
+
+/* dark mode version */
+html.dark .fi-ta .fi-ta-cell-avatar div.bg-gray-100 {
+  background: rgba(30, 58, 138, 0.40) !important;   /* blue-900/40-ish */
+  border-color: rgba(29, 78, 216, 0.40) !important; /* blue-700/40 */
+}
+
+html.dark .fi-ta .fi-ta-cell-avatar .text-gray-700 {
+  color: rgb(191 219 254) !important;               /* blue-200 */
+}
+
+/* ring ikut border */
+.fi-ta .fi-ta-cell-avatar .ring-gray-200 {
+  --tw-ring-color: rgb(191 219 254) !important;     /* blue-200 */
+}
+html.dark .fi-ta .fi-ta-cell-avatar .ring-gray-200 {
+  --tw-ring-color: rgba(29, 78, 216, 0.40) !important; /* blue-700/40 */
+}
+/* =====================================================
+   GFT × NOA — TABLE STYLE (FIGMA-LIKE)
+   Berlaku untuk SEMUA table Filament
+   ===================================================== */
+
+/* ---------- TABLE WRAPPER ---------- */
+.fi-ta {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #F9FAF7; /* off-white Figma */
+  border: 1px solid rgba(2, 6, 23, 0.06);
+}
+
+/* DARK MODE wrapper */
+html.dark .fi-ta {
+  background: #020617; /* slate-950 */
+  border-color: rgba(255,255,255,0.06);
+}
+
+/* ---------- HEADER ROW ---------- */
+.fi-ta thead {
+  background: #EAF2FF; /* soft blue */
+}
+
+html.dark .fi-ta thead {
+  background: #020617;
+}
+
+/* ---------- HEADER CELL ---------- */
+.fi-ta-header-cell {
+  color: #1E3A8A; /* navy */
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 14px 16px;
+  position: relative;
+  background: transparent;
+}
+
+/* DARK MODE header text */
+html.dark .fi-ta-header-cell {
+  color: #E5E7EB;
+}
+
+html.dark .fi-ta-header-cell::after {
+  background: #C73737;
+}
+
+/* ---------- BODY ROW ---------- */
+.fi-ta-row {
+  background: #FFFFFF;
+  border-bottom: 1px solid rgba(2, 6, 23, 0.04);
+  transition: background .15s ease;
+}
+
+html.dark .fi-ta-row {
+  background: transparent;
+  border-bottom-color: rgba(255,255,255,0.05);
+}
+
+/* hover */
+.fi-ta-row:hover {
+  background: #F1F6FF; /* soft hover */
+}
+
+html.dark .fi-ta-row:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+/* ---------- BODY CELL ---------- */
+.fi-ta-cell {
+  color: #334155; /* slate-700 */
+  font-size: 0.875rem;
+  padding: 14px 16px;
+}
+
+html.dark .fi-ta-cell {
+  color: #CBD5E1; /* slate-300 */
+}
+
+/* ---------- EMPTY STATE ---------- */
+.fi-ta-empty-state {
+  background: transparent;
+  color: #64748B;
+}
+
+html.dark .fi-ta-empty-state {
+  color: #94A3B8;
+}
+
+/* ===============================
+   TABLE AVATAR – CONSISTENT SIZE
+   =============================== */
+
+/* wrapper avatar (foto & initial) */
+.fi-ta-cell-avatar a > div,
+.fi-ta-cell-avatar img {
+    width: 40px !important;
+    height: 40px !important;
+}
+
+/* default initial avatar */
+.fi-ta-cell-avatar a > div {
+    border-radius: 9999px;
+    display: grid;
+    place-items: center;
+    font-size: 0.75rem; /* text-sm */
+    font-weight: 600;
+}
+
+/* optional: biar ring lebih subtle (sesuai Figma) */
+.fi-ta-cell-avatar img,
+.fi-ta-cell-avatar a > div {
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+}
+/* =========================
+   Topbar – logo breathing space
+   ========================= */
+
+.fi-topbar {
+  padding-block: 0.75rem !important; /* atas & bawah */
+}
+/* ==================================================
+   TABLE HEADER TEXT — match avatar (global)
+   ================================================== */
+
+/* label header (yang tulisannya) */
+.fi-ta .fi-ta-header-cell .fi-ta-header-cell-label,
+.fi-ta .fi-ta-header-cell button,
+.fi-ta .fi-ta-header-cell span {
+  color: #1d4ed8 !important; /* blue-700 */
+  font-weight: 600 !important;
+}
+
+/* dark mode */
+html.dark .fi-ta .fi-ta-header-cell .fi-ta-header-cell-label,
+html.dark .fi-ta .fi-ta-header-cell button,
+html.dark .fi-ta .fi-ta-header-cell span {
+  color: #bfdbfe !important; /* blue-200 */
+}
+/* ==================================================
+   TABLE HEADER TEXT — FORCE OVERRIDE (global)
+   target: semua table filament
+   ================================================== */
+
+/* Light mode */
+.fi-ta thead th.fi-ta-header-cell{
+  color: #1d4ed8 !important; /* blue-700 (match avatar default text) */
+  font-weight: 600 !important;
+}
+
+/* paksa semua isi header ngikutin warna th */
+.fi-ta thead th.fi-ta-header-cell *{
+  color: inherit !important;
+}
+
+/* Dark mode */
+html.dark .fi-ta thead th.fi-ta-header-cell{
+  color: #bfdbfe !important; /* blue-200 */
+}
+
+/* icon sort / chevron juga ikut */
+html.dark .fi-ta thead th.fi-ta-header-cell *{
+  color: inherit !important;
+}
+/* =========================================
+   GLOBAL PRIMARY PALETTE (affects ALL buttons)
+   Dark: default = GOLD, hover = YELLOW
+   Light: default = YELLOW, hover = GOLD
+   ========================================= */
+
+/* LIGHT MODE */
+html:not(.dark) {
+  /* primary background scale used by fi-bg-color-xxx */
+  --fi-color-primary-400: #FACC2E; /* default button bg */
+  --fi-color-primary-300: #FCB130; /* hover bg */
+
+  /* text on primary buttons */
+  --fi-color-on-primary: #7A4A00;
+}
+
+/* DARK MODE */
+html.dark {
+  --fi-color-primary-400: #FCB130; /* default button bg */
+  --fi-color-primary-300: #FACC2E; /* hover bg */
+  --fi-color-on-primary: #0B1220;  /* biar kebaca di gold */
+}
+
+/* Make sure primary buttons use the on-primary text color */
+.fi-btn.fi-color-primary,
+a.fi-btn.fi-color-primary {
+  color: var(--fi-color-on-primary) !important;
+}
+

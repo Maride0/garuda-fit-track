@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Athletes\Pages;
 use App\Filament\Resources\Athletes\AthleteResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use App\Filament\Resources\Athletes\Widgets\AthleteHealthOverviewCards;
 
 class ListAthletes extends ListRecords
 {
@@ -12,8 +13,14 @@ class ListAthletes extends ListRecords
 
     protected function getHeaderActions(): array
     {
+        return [];
+    }
+
+    protected function getHeaderWidgets(): array
+    {
         return [
-            CreateAction::make(),
+            AthleteHealthOverviewCards::class,
         ];
     }
+    
 }

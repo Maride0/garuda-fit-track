@@ -20,35 +20,26 @@ use Filament\View\PanelsRenderHook;
 use App\Filament\Pages\Dashboard;
 use App\Filament\Resources\Achievements\AchievementResource;
 
-class SupervisorPanelPanelProvider extends PanelProvider
+class SupervisorPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            // ✅ ID harus match sama User::canAccessPanel()
             ->id('supervisor')
-
-            // ✅ URL panel
             ->path('supervisor')
-
-            // ✅ enable login page untuk panel ini
             ->login()
-
-            // ✅ setelah login landing ke sini
+            ->darkMode(true)
             ->authGuard('supervisor')
 
-            ->brandLogo(asset('images/2.png'))
+            ->brandName('Garuda Fit Track')
+            ->brandLogo(asset('images/3.png'))
             ->brandLogoHeight('4rem')
 
-
-            // ✅ pake theme kamu biar konsisten
             ->viteTheme('resources/css/filament/gft-noa-theme.css')
             ->renderHook(
                 PanelsRenderHook::HEAD_END,
                 fn () => view('filament.hooks.brand-logo-swap'),
             )
-
-            // (opsional) warna primary sama kayak admin biar nyatu
             ->colors([
                 'primary' => Color::hex('#A52828'),
             ])

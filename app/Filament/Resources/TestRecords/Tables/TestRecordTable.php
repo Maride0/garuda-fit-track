@@ -17,39 +17,39 @@ class TestRecordsTable
             ->columns([
 
                 TextColumn::make('athlete.name')
-                    ->label('Athlete')
+                    ->label('Atlet')
                     ->sortable()
                     ->searchable(),
 
                 TextColumn::make('metric.name')
-                    ->label('Metric')
+                    ->label('Parameter Tes')
                     ->sortable()
                     ->searchable(),
 
                 TextColumn::make('trainingProgram.name')
-                    ->label('Program')
+                    ->label('Program Latihan')
                     ->placeholder('—')
                     ->sortable()
                     ->searchable(),
 
                 TextColumn::make('test_date')
-                    ->label('Test Date')
+                    ->label('Tanggal Tes')
                     ->date()
                     ->sortable(),
 
                 BadgeColumn::make('phase')
-                    ->label('Phase')
+                    ->label('Fase Pengujian')
                     ->colors([
-                        'gray'   => 'baseline',
-                        'info'   => 'pre',
-                        'warning'=> 'mid',
-                        'success'=> 'post',
+                        'gray'      => 'baseline',
+                        'info'      => 'pre',
+                        'warning'   => 'mid',
+                        'success'   => 'post',
                         'secondary' => 'other',
                     ])
                     ->sortable(),
 
                 TextColumn::make('value')
-                    ->label('Value')
+                    ->label('Hasil Tes')
                     ->formatStateUsing(function ($state, $record) {
                         return $record->unit
                             ? "{$state} {$record->unit}"
@@ -58,34 +58,36 @@ class TestRecordsTable
                     ->sortable(),
 
                 TextColumn::make('source')
-                    ->label('Source')
+                    ->label('Sumber Data')
                     ->placeholder('—')
                     ->searchable(),
 
                 TextColumn::make('created_at')
-                    ->label('Created')
+                    ->label('Dibuat Pada')
                     ->date()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('updated_at')
-                    ->label('Updated')
+                    ->label('Terakhir Diperbarui')
                     ->date()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
 
             ->filters([
-                // nanti kita bisa tambah: filter metric, athlete, phase
+                // nanti bisa ditambah: Atlet, Parameter, Fase
             ])
 
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+                    ->label('Ubah'),
             ])
 
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->label('Hapus'),
                 ]),
             ]);
     }

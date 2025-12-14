@@ -27,7 +27,7 @@ class EditAthlete extends EditRecord
     }
     public function getBreadcrumb(): string
     {
-        return 'Edit Athlete';
+        return 'Edit Atlete';
     }
     protected function getRedirectUrl(): string
     {

@@ -18,8 +18,12 @@
 
         {{-- Logo kiri --}}
         <div class="flex items-center gap-2">
-            <div class="h-7 w-7 rounded-xl bg-emerald-500/90 flex items-center justify-center text-[11px] font-bold">
-                GFT
+            <div class="flex items-center gap-2">
+                <img
+                    src="{{ asset('images/3.png') }}"
+                    alt="Garuda Fit Track"
+                    class="h-10 max-w-[170px] object-contain"
+                />
             </div>
             <div class="flex flex-col leading-tight">
                 <span class="text-[13px] font-semibold text-slate-50">Garuda Fit Track</span>
@@ -132,5 +136,4 @@
 
 </body>
 </html>
-
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\AthleteExportController;
 use App\Http\Controllers\AchievementExportController;
 use App\Http\Controllers\ProgramEvaluationExportController;
 use App\Http\Controllers\HealthScreeningExportController;
+use App\Http\Controllers\LandingController; // <<< INI WAJIB
 
 Route::get('/athletes/{athlete_id}/export-pdf', [AthleteExportController::class, 'export'])
     ->name('athletes.export.pdf');
@@ -18,14 +19,8 @@ Route::get('/program-evaluations/{program}/export', [ProgramEvaluationExportCont
 Route::get('/health/export/pdf', [HealthScreeningExportController::class, 'export'])
     ->name('health.export.pdf');
 
-Route::get('/', function () {
-    return view('welcome-gft');
-});
-Route::get('/about', function () {
-    return view('about');
-});
-Route::get('/contact', function () {
-    return view('contact');
-});
+// ✅ Beranda cuma SATU
+Route::get('/', LandingController::class)->name('landing');
 
-
+Route::view('/about', 'about');
+Route::view('/contact', 'contact');

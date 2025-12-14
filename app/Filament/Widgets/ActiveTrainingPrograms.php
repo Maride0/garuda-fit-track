@@ -37,8 +37,9 @@ class ActiveTrainingPrograms extends TableWidget
                 TextColumn::make('coach_name')->label('Pelatih'),
                 TextColumn::make('start_date')->date()->sortable(),
             ])
-            ->defaultPaginationPageOption(50) // ini opsional
-            // ->paginated(false)
+            ->paginationPageOptions([])   // ✅ hide "Per page"
+            ->defaultPaginationPageOption(3) // (optional) default 5
+            ->paginated([3])
             ->filters([
                 //
             ])

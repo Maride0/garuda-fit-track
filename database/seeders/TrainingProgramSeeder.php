@@ -3,168 +3,107 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Athlete;
 use App\Models\TrainingProgram;
+use Carbon\Carbon;
 
 class TrainingProgramSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        $data = [
-            [
-                'program_id'        => 'TPR0001',
-                'name'              => 'Sprint Conditioning Phase 1',
-                'type'              => 'weekly',
-                'intensity'         => 'high',
-                'planned_sessions'  => 5,
-                'sport_category'    => 'olympic',
-                'sport'             => 'Atletik',
-                'team_name'         => 'Track Elite A',
-                'coach_name'        => 'Coach Andika',
-                'start_date'        => '2025-01-05',
-                'end_date'          => '2025-02-02',
-                'goal'              => 'Meningkatkan akselerasi dan top speed untuk musim kompetisi.',
-                'status'            => 'active',
-            ],
-            [
-                'program_id'        => 'TPR0002',
-                'name'              => 'Daily Endurance Swim Block',
-                'type'              => 'daily',
-                'intensity'         => 'medium',
-                'planned_sessions'  => 6,
-                'sport_category'    => 'olympic',
-                'sport'             => 'Renang',
-                'team_name'         => 'Shark Squad',
-                'coach_name'        => 'Coach Liana',
-                'start_date'        => '2025-01-10',
-                'end_date'          => '2025-01-24',
-                'goal'              => 'Meningkatkan VO2max dan daya tahan renang 400m.',
-                'status'            => 'active',
-            ],
-            [
-                'program_id'        => 'TPR0003',
-                'name'              => 'Archery Pre-Tournament Prep',
-                'type'              => 'pre_competition',
-                'intensity'         => 'high',
-                'planned_sessions'  => 12,
-                'sport_category'    => 'olympic',
-                'sport'             => 'Panahan',
-                'team_name'         => 'Eagle Archers',
-                'coach_name'        => 'Coach Surya',
-                'start_date'        => '2025-02-01',
-                'end_date'          => '2025-02-20',
-                'goal'              => 'Memaksimalkan akurasi tembakan menjelang turnamen utama.',
-                'status'            => 'draft',
-            ],
-            [
-                'program_id'        => 'TPR0004',
-                'name'              => 'Shoulder Recovery Block',
-                'type'              => 'recovery',
-                'intensity'         => 'low',
-                'planned_sessions'  => 8,
-                'sport_category'    => 'olympic',
-                'sport'             => 'Bulutangkis',
-                'team_name'         => 'Smash Heroes',
-                'coach_name'        => 'Physio Rani',
-                'start_date'        => '2025-01-15',
-                'end_date'          => '2025-02-05',
-                'goal'              => 'Rehabilitasi bahu kanan pasca overuse.',
-                'status'            => 'active',
-            ],
-            [
-                'program_id'        => 'TPR0005',
-                'name'              => 'Aim Precision Routine',
-                'type'              => 'weekly',
-                'intensity'         => 'medium',
-                'planned_sessions'  => 10,
-                'sport_category'    => 'non_olympic',
-                'sport'             => 'Esport',
-                'team_name'         => 'Valkyrie Esports',
-                'coach_name'        => 'Coach Ryu',
-                'start_date'        => '2025-01-08',
-                'end_date'          => '2025-02-08',
-                'goal'              => 'Meningkatkan reaction time dan akurasi aim.',
-                'status'            => 'active',
-            ],
-            [
-                'program_id'        => 'TPR0006',
-                'name'              => 'Muay Thai Power Striking Program',
-                'type'              => 'daily',
-                'intensity'         => 'high',
-                'planned_sessions'  => 14,
-                'sport_category'    => 'non_olympic',
-                'sport'             => 'Muay Thai',
-                'team_name'         => 'Tiger Camp',
-                'coach_name'        => 'Kru Somchai',
-                'start_date'        => '2025-01-20',
-                'end_date'          => '2025-02-03',
-                'goal'              => 'Meningkatkan power tendangan dan kombinasi pukulan cepat.',
-                'status'            => 'draft',
-            ],
-            [
-                'program_id'        => 'TPR0007',
-                'name'              => 'Synchronized Swim Formation Routine',
-                'type'              => 'weekly',
-                'intensity'         => 'medium',
-                'planned_sessions'  => 6,
-                'sport_category'    => 'olympic',
-                'sport'             => 'Renang Indah',
-                'team_name'         => 'Aqua Harmony',
-                'coach_name'        => 'Coach Felicia',
-                'start_date'        => '2025-02-05',
-                'end_date'          => '2025-03-05',
-                'goal'              => 'Menyempurnakan transisi formasi dan sinkronisasi tim.',
-                'status'            => 'active',
-            ],
-            [
-                'program_id'        => 'TPR0008',
-                'name'              => 'Taekwondo Sparring Peak Phase',
-                'type'              => 'pre_competition',
-                'intensity'         => 'high',
-                'planned_sessions'  => 16,
-                'sport_category'    => 'olympic',
-                'sport'             => 'Taekwondo',
-                'team_name'         => 'Dragon TKD',
-                'coach_name'        => 'Master Hwang',
-                'start_date'        => '2025-01-28',
-                'end_date'          => '2025-02-18',
-                'goal'              => 'Meningkatkan agility, timing, dan akurasi scoring.',
-                'status'            => 'active',
-            ],
-            [
-                'program_id'        => 'TPR0009',
-                'name'              => 'Wushu Flexibility Recovery',
-                'type'              => 'recovery',
-                'intensity'         => 'low',
-                'planned_sessions'  => 5,
-                'sport_category'    => 'non_olympic',
-                'sport'             => 'Wushu',
-                'team_name'         => 'Phoenix Wushu',
-                'coach_name'        => 'Coach Ning',
-                'start_date'        => '2025-01-02',
-                'end_date'          => '2025-01-15',
-                'goal'              => 'Mengurangi tightness pada hamstring & pinggul.',
-                'status'            => 'completed',
-            ],
-            [
-                'program_id'        => 'TPR0010',
-                'name'              => 'Basketball Tactical Rotation Drill',
-                'type'              => 'weekly',
-                'intensity'         => 'medium',
-                'planned_sessions'  => 8,
-                'sport_category'    => 'olympic',
-                'sport'             => 'Bola Basket',
-                'team_name'         => 'Hoop Warriors',
-                'coach_name'        => 'Coach Randy',
-                'start_date'        => '2025-01-12',
-                'end_date'          => '2025-02-02',
-                'goal'              => 'Meningkatkan rotasi defense dan ball movement.',
-                'status'            => 'active',
-            ],
+        // =========================
+        // Ambil CABOR YANG ADA AJA
+        // =========================
+        $sports = Athlete::query()
+            ->whereNotNull('sport')
+            ->where('sport', '!=', '')
+            ->distinct()
+            ->pluck('sport');
+
+        if ($sports->isEmpty()) {
+            return;
+        }
+
+        // Mapping kategori olahraga (cukup yg relevan)
+        $olympicSports = [
+            'Tenis Meja',
+            'Berkuda',
+            'Anggar',
+            'Bola Basket',
+            'Panahan',
+            'Sepak Bola',
         ];
 
-        TrainingProgram::insert($data);
+        // base tanggal biar konsisten
+        $baseStart = Carbon::now()->startOfMonth()->subMonth();
+
+        foreach ($sports as $index => $sport) {
+            $sportCategory = in_array($sport, $olympicSports, true)
+                ? 'olympic'
+                : 'non_olympic';
+
+            // =========================
+            // Program Mingguan
+            // =========================
+            $startWeekly = $baseStart->copy()->addWeeks($index);
+            $endWeekly   = $startWeekly->copy()->addWeeks(6);
+
+            TrainingProgram::updateOrCreate(
+                [
+                    'sport'      => $sport,
+                    'name'       => "Program Mingguan {$sport}",
+                    'start_date' => $startWeekly->toDateString(),
+                ],
+                [
+                    'sport_category'    => $sportCategory,
+                    'type'             => 'weekly',
+                    'intensity'        => 'medium',
+                    'planned_sessions' => 12,
+                    'team_name'        => $this->teamName($sport),
+                    'coach_name'       => "Pelatih {$sport}",
+                    'end_date'         => $endWeekly->toDateString(),
+                    'goal'             => "Meningkatkan teknik dasar dan konsistensi latihan {$sport}.",
+                    'status'           => 'active',
+                ]
+            );
+
+            // =========================
+            // Program Pra-Kompetisi
+            // =========================
+            $startPre = $endWeekly->copy()->addDays(3);
+            $endPre   = $startPre->copy()->addWeeks(4);
+
+            TrainingProgram::updateOrCreate(
+                [
+                    'sport'      => $sport,
+                    'name'       => "Program Pra-Kompetisi {$sport}",
+                    'start_date' => $startPre->toDateString(),
+                ],
+                [
+                    'sport_category'    => $sportCategory,
+                    'type'             => 'pre_competition',
+                    'intensity'        => 'high',
+                    'planned_sessions' => 16,
+                    'team_name'        => $this->teamName($sport),
+                    'coach_name'       => "Pelatih {$sport}",
+                    'end_date'         => $endPre->toDateString(),
+                    'goal'             => "Mempersiapkan atlet {$sport} menuju performa puncak kompetisi.",
+                    'status'           => 'draft',
+                ]
+            );
+        }
+    }
+
+    private function teamName(string $sport): ?string
+    {
+        $teamSports = [
+            'Bola Basket',
+            'Sepak Bola',
+            'Esport',
+        ];
+
+        return in_array($sport, $teamSports, true)
+            ? "Tim {$sport}"
+            : null;
     }
 }

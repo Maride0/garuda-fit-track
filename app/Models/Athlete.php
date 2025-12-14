@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Carbon\Carbon;
 use App\Models\TrainingProgram;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Athlete extends Model
 {
@@ -76,6 +77,15 @@ class Athlete extends Model
         }
 
         return $parts ? implode(', ', $parts) : '-';
+    }
+    public function getMedalsCompactAttribute(): string
+    {
+        return sprintf(
+            '🥇 %d  🥈 %d  🥉 %d',
+            $this->gold ?? 0,
+            $this->silver ?? 0,
+            $this->bronze ?? 0
+        );
     }
 
     // Relasi ke HealthScreening dan TherapySchedule
@@ -183,14 +193,14 @@ class Athlete extends Model
         $overdueDate = $this->next_screening_due->copy()->addMonth();
 
         return now()->greaterThan($overdueDate);
-    }
-        protected function age(): Attribute
+        }
+    protected function age(): Attribute
     {
         return Attribute::get(
             fn () => $this->birthdate
                 ? Carbon::parse($this->birthdate)->age
-                : null
-        );
+                    : null
+            );
     }
      public function trainingPrograms(): BelongsToMany
     {
@@ -224,6 +234,30 @@ class Athlete extends Model
 
         return null;
     }
+    protected function initials(): Attribute
+    {
+        return Attribute::get(function () {
+            $name = trim((string) $this->name);
 
+            if ($name === '') {
+                return 'NA';
+            }
+
+            $parts = collect(preg_split('/\s+/', $name))
+                ->filter()
+                ->values();
+
+            // 1 kata → 2 huruf pertama
+            if ($parts->count() === 1) {
+                return Str::upper(Str::substr($parts[0], 0, 2));
+            }
+
+            // ≥ 2 kata → huruf pertama kata 1 + kata 2
+            return Str::upper(
+                Str::substr($parts[0], 0, 1) .
+                Str::substr($parts[1], 0, 1)
+            );
+        });
+    }
 
 }

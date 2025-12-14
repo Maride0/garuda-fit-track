@@ -33,35 +33,67 @@
 
         </div>
 
-        {{-- Kanan: kartu kecil dummy overview --}}
+        {{-- Kanan: kartu overview (REAL) --}}
+        @php
+            // Fallback aman kalau controller belum ngirim variabel
+            $snapshot = $snapshot ?? [
+                'not_screened'     => 0,
+                'fit'              => 0,
+                'under_monitoring' => 0,
+                'active_therapy'   => 0,
+                'restricted'       => 0,
+            ];
+
+            $totalAthletes = $totalAthletes ?? array_sum($snapshot);
+        @endphp
+
         <div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-4 text-xs space-y-3">
-            <p class="text-slate-300 font-medium">
-                Snapshot Status Atlet
+            <div class="flex items-start justify-between gap-3">
+                <p class="text-slate-300 font-medium">
+                    Snapshot Status Atlet
+                </p>
+
+                <span class="shrink-0 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-2 py-0.5 text-[10px] text-emerald-300">
+                    LIVE
+                </span>
+            </div>
+
+            <p class="text-[11px] text-slate-400">
+                Total atlet terdaftar: <span class="text-slate-200 font-medium">{{ $totalAthletes }}</span>
             </p>
 
             <div class="grid grid-cols-2 gap-3">
                 <div class="rounded-xl bg-slate-950/60 border border-slate-800 p-3">
                     <p class="text-[11px] text-slate-400">Atlet Fit</p>
-                    <p class="mt-1 text-xl font-semibold text-emerald-400">24</p>
+                    <p class="mt-1 text-xl font-semibold text-emerald-400">
+                        {{ (int) ($snapshot['fit'] ?? 0) }}
+                    </p>
                 </div>
+
                 <div class="rounded-xl bg-slate-950/60 border border-slate-800 p-3">
                     <p class="text-[11px] text-slate-400">Sedang Terapi</p>
-                    <p class="mt-1 text-xl font-semibold text-amber-300">7</p>
+                    <p class="mt-1 text-xl font-semibold text-amber-300">
+                        {{ (int) ($snapshot['active_therapy'] ?? 0) }}
+                    </p>
                 </div>
+
                 <div class="rounded-xl bg-slate-950/60 border border-slate-800 p-3">
                     <p class="text-[11px] text-slate-400">Under Monitoring</p>
-                    <p class="mt-1 text-xl font-semibold text-sky-300">5</p>
+                    <p class="mt-1 text-xl font-semibold text-sky-300">
+                        {{ (int) ($snapshot['under_monitoring'] ?? 0) }}
+                    </p>
                 </div>
+
                 <div class="rounded-xl bg-slate-950/60 border border-slate-800 p-3">
                     <p class="text-[11px] text-slate-400">Restricted</p>
-                    <p class="mt-1 text-xl font-semibold text-rose-300">3</p>
+                    <p class="mt-1 text-xl font-semibold text-rose-300">
+                        {{ (int) ($snapshot['restricted'] ?? 0) }}
+                    </p>
                 </div>
             </div>
-
             <p class="text-[11px] text-slate-400">
-                Data di atas masih dummy, tapi ngerepresentasikan integrasi modul atlet, screening, dan terapi di panel admin kamu.
+                Ringkasan ini otomatis ngambil dari status atlet di database (hasil integrasi modul atlet, screening, dan terapi).
             </p>
-        </div>
     </div>
 </section>
 {{-- SECTION: Kenapa Garuda Fit Track? --}}
@@ -71,28 +103,32 @@
             Kenapa Garuda Fit Track?
         </h2>
         <p class="text-sm text-slate-400 max-w-xl">
-            Sistem ini dibangun untuk ngejawab kebutuhan nyata pengelolaan atlet di lapangan:
-            bukan cuma data profil, tapi juga kesehatan dan performa.
+            Garuda Fit Track dikembangkan sebagai sistem pendukung pengelolaan atlet
+            yang berfokus pada pencatatan dan pengorganisasian data secara terstruktur.
         </p>
     </div>
 
     <div class="mt-6 grid gap-4 md:grid-cols-3 text-sm">
-        <x-section-card title="Satu sumber data">
-    Data atlet, hasil screening, jadwal terapi, program latihan, dan prestasi 
-    ada di satu sistem. Mengurangi file tercecer di Excel & chat.
-</x-section-card>
+        <x-section-card title="Satu sumber data terpusat">
+            Sistem mengelola data atlet, prestasi, program latihan,
+            parameter kinerja, catatan tes performa, serta data kesehatan
+            dalam satu platform yang terintegrasi.
+        </x-section-card>
 
-<x-section-card title="Nyambung ke status medis">
-    Status fit / restricted / under monitoring / active therapy 
-    terhubung langsung ke riwayat screening dan terapi.
-</x-section-card>
+        <x-section-card title="Struktur modul yang jelas">
+            Fitur dalam sistem dibagi ke dalam modul yang terpisah,
+            seperti manajemen atlet, pengembangan atlet, kesehatan,
+            dan keuangan, sehingga alur penggunaan lebih mudah dipahami.
+        </x-section-card>
 
-<x-section-card title="Siap dikembangkan">
-    Dibangun dengan Laravel 12 + Filament sehingga mudah dikembangkan 
-    ke portal atlet, pelatih, atau modul lain.
-</x-section-card>
+        <x-section-card title="Mendukung proses pembinaan atlet">
+            Dengan pencatatan data yang rapi dan konsisten,
+            sistem membantu pihak terkait dalam memantau
+            aktivitas pembinaan atlet secara administratif.
+        </x-section-card>
     </div>
 </section>
+
 
 {{-- SECTION: Modul Sistem (4 Grup) --}}
 <section id="modules" class="mt-12 pb-4">
@@ -101,30 +137,36 @@
             Modul Utama Garuda Fit Track
         </h2>
         <p class="text-sm text-slate-400 max-w-xl">
-            Sistem dibagi menjadi 4 modul besar agar mudah digunakan dan dipahami.
+            Sistem dibagi menjadi empat modul utama untuk mendukung pengelolaan atlet secara menyeluruh,
+            mulai dari data dasar, pengembangan performa, kesehatan, hingga keuangan.
         </p>
     </div>
 
     <div class="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4 text-sm">
 
-        <x-section-card title="Athlete Management">
-            Mengelola data atlet, prestasi, dan program latihan dalam satu modul terintegrasi.
+        <x-section-card title="Manajemen Atlet">
+            Mengelola data atlet dan pencapaian prestasi sebagai dasar utama
+            dalam pemantauan dan pengambilan keputusan.
         </x-section-card>
 
-        <x-section-card title="Health Management">
-            Meliputi pemeriksaan kesehatan (screening) dan jadwal terapi yang terhubung langsung ke status atlet.
+        <x-section-card title="Pengembangan Atlet">
+            Mengelola program latihan, parameter kinerja atlet,
+            serta pencatatan hasil tes performa untuk memantau perkembangan atlet.
         </x-section-card>
 
-        <x-section-card title="Expense Management">
-            Mencatat pengeluaran tim seperti transportasi, peralatan, perawatan medis, dan operasional lainnya.
+        <x-section-card title="Manajemen Kesehatan">
+            Mencakup pemeriksaan kesehatan (health screening) dan jadwal terapi
+            yang terhubung langsung dengan status kondisi atlet.
         </x-section-card>
 
-        <x-section-card title="System & Supporting">
-            Modul pendukung seperti manajemen user, pengaturan sistem, dan integrasi file atau log aktivitas.
+        <x-section-card title="Finance">
+            Mencatat dan memantau pengeluaran terkait kebutuhan atlet,
+            seperti peralatan, perawatan medis, dan operasional pendukung lainnya.
         </x-section-card>
 
     </div>
 </section>
+
 
 
 

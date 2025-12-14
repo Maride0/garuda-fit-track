@@ -22,6 +22,7 @@ use Filament\View\PanelsRenderHook;
 use App\Filament\Widgets\UpcomingSessions;
 use App\Filament\Widgets\DashboardKpiCards;
 
+
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -31,18 +32,12 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->darkMode(true)
             ->authGuard('admin')
-            // Branding NOA
-            ->brandName('Garuda Fit Track') // ⬅️ ini buat teks di samping logo
-            ->brandLogo(asset('images/2.png'))
+            ->brandName('Garuda Fit Track')
+            ->brandLogo(asset('images/3.png')) // ✅ ganti ke DARK
             ->brandLogoHeight('4rem')
 
-            // Warna utama Garuda crimson
-            ->colors([
-                'primary' => Color::hex('#A52828'),
-            ])
-
-            // Custom Filament theme kamu
             ->viteTheme('resources/css/filament/gft-noa-theme.css')
             ->renderHook(
                 PanelsRenderHook::HEAD_END,

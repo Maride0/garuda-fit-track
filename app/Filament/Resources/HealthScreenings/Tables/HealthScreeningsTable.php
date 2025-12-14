@@ -20,7 +20,7 @@ class HealthScreeningsTable
             ->defaultSort('created_at', 'desc')
             ->columns([
                 TextColumn::make('screening_id')
-                    ->label('No. Screening')
+                    ->label('Nomor Skrining')
                     ->searchable()
                     ->sortable(),
                 // Nama Atlet (pakai relasi athlete)

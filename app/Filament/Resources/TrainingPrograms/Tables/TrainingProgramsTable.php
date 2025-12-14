@@ -7,6 +7,8 @@ use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Actions\EditAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
 
 class TrainingProgramsTable
 {
@@ -16,6 +18,7 @@ class TrainingProgramsTable
             ->columns([
                 TextColumn::make('program_id')
                     ->label('ID')
+                    ->alignCenter()
                     ->sortable()
                     ->searchable(),
 
@@ -97,11 +100,11 @@ class TrainingProgramsTable
             ])
             ->recordActionsColumnLabel('Aksi') // ⬅️ ini yang bikin header kolom "Aksi"
 
-            ->bulkActions([
-                // kalau mau DeleteBulkAction tinggal aktifin
-                // Tables\Actions\BulkActionGroup::make([
-                //     Tables\Actions\DeleteBulkAction::make(),
-                // ]),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    
+                    DeleteBulkAction::make(),
+                ]),
             ]);
     }
 }

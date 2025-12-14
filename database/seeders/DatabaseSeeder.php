@@ -12,18 +12,26 @@ class DatabaseSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
 
         $this->call([
+            // 1) Master utama
+            UsersTableSeeder::class,
             AthletesTableSeeder::class,
-            TrainingProgramsTableSeeder::class,
-            PerformanceMetricsTableSeeder::class,
+            PerformanceMetricSeeder::class,
 
-            AthleteTrainingProgramTableSeeder::class,
-            AchievementsTableSeeder::class,
+            // 2) Program + assignment atlet ke program (sesuai cabor)
+            TrainingProgramSeeder::class,
+            AssignAthletesToTrainingProgramsSeeder::class,
+
+            // 3) Jadwal program (1 bulan ke depan mulai minggu depan)
+            TrainingSessionSeeder::class,
+
+            // 4) Modul lain
+            AthleteAchievementsSeeder::class,
             HealthScreeningsTableSeeder::class,
             TherapySchedulesTableSeeder::class,
-            TrainingSessionsTableSeeder::class,
-            PerformanceEvaluationsTableSeeder::class,
-            TestRecordsTableSeeder::class,
-            ExpensesTableSeeder::class,
+            ExpenseSeeder::class,
+
+            // 5) Data yang ngikut program/metric
+            TestRecordSeeder::class,
         ]);
 
         Schema::enableForeignKeyConstraints();

@@ -1,23 +1,20 @@
 @php
-    $name = $record->name ?? '-';
-    $initial = mb_strtoupper(mb_substr($name, 0, 1));
-    $avatarUrl = $record->avatar_url; // return null kalau ga ada foto (sesuai accessor kamu yg baru)
+    $url = $record->avatar_url ?? null;
+    $initials = $record->initials ?? 'NA';
 @endphp
-<div style="width:36px;height:36px;border-radius:9999px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#f3f4f6;">
-<div
-    class="w-9 h-9 rounded-full overflow-hidden shrink-0 ring-1 ring-gray-200 bg-gray-100
-           flex items-center justify-center"
->
-    @if ($avatarUrl)
-        <img
-            src="{{ $avatarUrl }}"
-            alt="{{ $name }}"
-            class="w-full h-full object-cover"
-            loading="lazy"
-        />
+
+<div class="flex items-center justify-center w-10">
+    @if ($url)
+        <img src="{{ $url }}"
+             class="h-10 w-10 rounded-full object-cover
+                    ring-1 ring-white/10"
+             alt="{{ $record->name }}" />
     @else
-        <span class="text-sm font-semibold text-gray-700 leading-none">
-            {{ $initial }}
-        </span>
+        <div class="h-10 w-10 rounded-full grid place-items-center
+                    text-sm font-semibold tracking-wide
+                    bg-blue-50 text-blue-700 border border-blue-200
+                    dark:bg-blue-900/40 dark:text-blue-200 dark:border-blue-700/40">
+            {{ $initials }}
+        </div>
     @endif
 </div>

@@ -30,7 +30,7 @@ class HealthScreeningsRelationManager extends RelationManager
     {
         return $schema->components([
             TextEntry::make('screening_id')
-                ->label('No. Skrining'),
+                ->label('No.'),
 
             TextEntry::make('screening_date')
                 ->label('Tanggal')
@@ -72,7 +72,7 @@ class HealthScreeningsRelationManager extends RelationManager
             ->defaultSort('created_at', 'desc')
             ->columns([
                 TextColumn::make('screening_id')
-                    ->label('No. Screening')
+                    ->label('Nomor Skrining')
                     ->searchable()
                     ->sortable(),
 
