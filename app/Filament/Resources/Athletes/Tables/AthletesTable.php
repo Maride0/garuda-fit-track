@@ -47,11 +47,12 @@ class AthletesTable
                 
                 TextColumn::make('name')
                     ->label('Atlet')
-                    // ->alignCenter()
                     ->html()
+                    ->extraAttributes(['class' => 'gft-athlete-col'])
                     ->formatStateUsing(fn ($state, $record) =>
                         view('filament.tables.columns.athlete-name', compact('record'))->render()
                     ),
+
 
                 TextColumn::make('gender')
                     ->label('Jenis Kelamin')

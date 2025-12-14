@@ -11,29 +11,59 @@ class DatabaseSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
 
+        // =========================
+        // 1) MASTER / BASE
+        // =========================
         $this->call([
-            // 1) Master utama
             UsersTableSeeder::class,
             AthletesTableSeeder::class,
+
+            // master parameter/metric dulu sebelum test record
             PerformanceMetricSeeder::class,
 
-            // 2) Program + assignment atlet ke program (sesuai cabor)
+            // master program dulu sebelum pivot & sessions
             TrainingProgramSeeder::class,
-            AssignAthletesToTrainingProgramsSeeder::class,
+        ]);
 
-            // 3) Jadwal program (1 bulan ke depan mulai minggu depan)
+        // =========================
+        // 2) RELASI ATLET <-> PROGRAM (PIVOT)
+        // =========================
+        $this->call([
+            AssignAthletesToTrainingProgramsSeeder::class,
+        ]);
+
+        // nyalain FK lagi biar error kebaca jelas di seeder bawah
+        Schema::enableForeignKeyConstraints();
+
+        // =========================
+        // 3) TURUNAN DARI PROGRAM / ATLET
+        // =========================
+        $this->call([
+            // jadwal latihan (bergantung pada program)
             TrainingSessionSeeder::class,
 
-            // 4) Modul lain
+            // prestasi (bergantung pada atlet)
             AthleteAchievementsSeeder::class,
+
+            // kesehatan & terapi (bergantung pada atlet)
             HealthScreeningsTableSeeder::class,
             TherapySchedulesTableSeeder::class,
-            ExpenseSeeder::class,
 
-            // 5) Data yang ngikut program/metric
+            // pengeluaran (bergantung pada atlet / sistem kamu)
+            ExpenseSeeder::class,
+        ]);
+
+        // =========================
+        // 4) TURUNAN DARI PROGRAM + METRIC (+ PIVOT)
+        // =========================
+        $this->call([
             TestRecordSeeder::class,
         ]);
 
-        Schema::enableForeignKeyConstraints();
+        // OPTIONAL / LEGACY (jangan dipanggil barengan kalau isinya duplikat)
+        // $this->call([
+        //     AchievementsTableSeeder::class,
+        //     TrainingSessionsTableSeeder::class,
+        // ]);
     }
 }

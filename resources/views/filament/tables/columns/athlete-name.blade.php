@@ -8,7 +8,8 @@
     {{-- avatar --}}
     @if ($url)
         <img src="{{ $url }}"
-             class="h-9 w-9 rounded-full object-cover ring-1 ring-white/10" />
+             class="h-9 w-9 rounded-full object-cover ring-1 ring-white/10"
+             alt="{{ $name }}" />
     @else
         <div class="h-9 w-9 rounded-full grid place-items-center
                     text-sm font-semibold
@@ -19,7 +20,7 @@
     @endif
 
     {{-- name --}}
-    <span class="font-medium text-white dark:text-white">
-        {{ $record->name }}
+    <span class="block font-medium text-slate-900 dark:text-white leading-tight">
+        {{ $name }}
     </span>
 </div>

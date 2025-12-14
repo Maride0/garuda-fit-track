@@ -35,7 +35,9 @@ class TherapySchedulesTable
 
                 TextColumn::make('therapy_type')
                     ->label('Jenis Terapi')
-                    ->searchable(),
+                    ->searchable()
+                    ->wrap()
+                    ->extraAttributes(['class' => 'max-w-none']),
 
                 TextColumn::make('therapist_name')
                     ->label('Nama Terapis')

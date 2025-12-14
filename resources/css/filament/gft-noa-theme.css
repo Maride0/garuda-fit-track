@@ -1653,4 +1653,12 @@ html.dark {
 a.fi-btn.fi-color-primary {
   color: var(--fi-color-on-primary) !important;
 }
+/* === Athlete cell text fix === */
+html:not(.dark) .gft-athlete-cell {
+    color: #0f172a; /* slate-900 */
+}
+
+html.dark .gft-athlete-cell {
+    color: #ffffff;
+}
 

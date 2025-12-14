@@ -11,10 +11,10 @@ use Illuminate\Database\Eloquent\Builder;
 
 class UpcomingSessions extends TableWidget
 {
-    protected static ?string $heading = 'Upcoming Schedule';
+    protected static ?string $heading = 'Jadwal Latihan Mendatang';
 
     protected int|string|array $columnSpan = 'full';
-    
+
     protected function getExtraAttributes(): array
     {
         return [
@@ -31,16 +31,15 @@ class UpcomingSessions extends TableWidget
             ->query(fn (): Builder =>
                 TrainingSession::query()
                     ->upcoming()
-                    ->with('program.athletes') // <— ini penting
+                    ->with('program.athletes')
                     ->orderBy('date')
                     ->orderBy('start_time')
             )
-            ->paginated(false)
-            ->defaultPaginationPageOption(6)
+            ->paginated()
             ->columns([
-                // Schedule / Activity
+                // Jadwal / Kegiatan
                 TextColumn::make('activities_notes')
-                    ->label('Schedule')
+                    ->label('Jadwal / Kegiatan')
                     ->state(function (TrainingSession $record): string {
                         $notes = trim((string) $record->activities_notes);
 
@@ -61,41 +60,41 @@ class UpcomingSessions extends TableWidget
                         return "{$start} – {$end}{$location}";
                     })
                     ->wrap()
-                    ->limit(42)
+                    ->limit()
                     ->tooltip(fn (TrainingSession $record) => $record->activities_notes ?: null),
 
                 // Program
                 TextColumn::make('program.name')
-                    ->label('Program')
+                    ->label('Program Latihan')
                     ->wrap(),
 
-                // Date
+                // Tanggal
                 TextColumn::make('date')
-                    ->label('Date')
+                    ->label('Tanggal')
                     ->date('d M Y')
                     ->sortable(),
 
-                // Duration (pakai accessor kamu)
+                // Durasi
                 TextColumn::make('duration_label')
-                    ->label('Duration'),
+                    ->label('Durasi'),
 
+                // Atlet
                 TextColumn::make('athletes')
-                    ->label('Athletes')
+                    ->label('Jumlah Atlet')
                     ->state(function (TrainingSession $record) {
                         $count = $record->program?->athletes?->count() ?? 0;
                         return $count . ' atlet';
                     }),
-
 
                 // Status
                 TextColumn::make('status')
                     ->label('Status')
                     ->badge()
                     ->formatStateUsing(fn (string $state): string => match ($state) {
-                        'scheduled' => 'Scheduled',
-                        'on_going'  => 'On Going',
-                        'completed' => 'Completed',
-                        'cancelled' => 'Cancelled',
+                        'scheduled' => 'Terjadwal',
+                        'on_going'  => 'Sedang Berlangsung',
+                        'completed' => 'Selesai',
+                        'cancelled' => 'Dibatalkan',
                         default     => ucfirst($state),
                     })
                     ->colors([
@@ -105,19 +104,11 @@ class UpcomingSessions extends TableWidget
                         'danger'  => 'cancelled',
                     ]),
             ])
-            ->filters([
-                //
-            ])
-            ->headerActions([
-                //
-            ])
-            ->recordActions([
-                //
-            ])
+            ->filters([])
+            ->headerActions([])
+            ->recordActions([])
             ->toolbarActions([
-                BulkActionGroup::make([
-                    //
-                ]),
+                BulkActionGroup::make([]),
             ]);
     }
 }

@@ -25,7 +25,9 @@ class TrainingProgramsTable
                 TextColumn::make('name')
                     ->label('Nama Program')
                     ->searchable()
-                    ->wrap(),
+                    ->wrap()
+                    ->extraAttributes(['class' => 'max-w-none'])
+                    ->grow(),
 
                 BadgeColumn::make('type')
                     ->label('Tipe')
