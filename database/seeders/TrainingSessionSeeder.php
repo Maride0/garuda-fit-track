@@ -11,6 +11,9 @@ class TrainingSessionSeeder extends Seeder
 {
     public function run(): void
     {
+        // === Sesuaikan kalau FK kamu beda nama ===
+        $programForeignKey = 'program_id';
+
         // Mulai dari minggu depan (Senin)
         $start = Carbon::now()->addWeek()->startOfWeek(Carbon::MONDAY);
 
@@ -33,28 +36,35 @@ class TrainingSessionSeeder extends Seeder
         }
 
         foreach ($programs as $idx => $program) {
-            // Variasi jam biar gak semua sama persis
-            // (07:00 / 15:30 / 18:00 muter)
+            // Ambil primary key program yang benar (id/program_id/training_program_id, dll)
+            $programPk = $program->getKey();
+
+            // Guard biar gak ada FK null
+            if (! $programPk) {
+                continue;
+            }
+
+            // Variasi jam biar gak semua sama persis (07:00 / 15:30 / 18:00 muter)
             [$startTime, $duration] = $this->pickTimeAndDuration($program, $idx);
 
             $location = $this->pickLocation($program->sport);
-            $notes = $this->buildNotes($program->sport, $program->intensity);
+            $notes    = $this->buildNotes($program->sport, $program->intensity);
 
-            // generate tanggal dalam range start..end untuk dayOfWeek tertentu
             foreach ($daysOfWeek as $dow) {
+                // cari tanggal pertama untuk DOW tsb setelah start
                 $cursor = $start->copy()->next($dow);
 
                 while ($cursor->lte($end)) {
                     $date = $cursor->toDateString();
 
                     $start_time = Carbon::parse($startTime)->format('H:i');
-                    $end_time = Carbon::parse($startTime)->addMinutes($duration)->format('H:i');
+                    $end_time   = Carbon::parse($startTime)->addMinutes($duration)->format('H:i');
 
                     TrainingSession::updateOrCreate(
                         [
-                            'training_program_id' => $program->training_program_id ?? $program->id, // jaga2 kalau pk id custom
-                            'date'       => $date,
-                            'start_time' => $start_time,
+                            $programForeignKey => $programPk,
+                            'date'             => $date,
+                            'start_time'       => $start_time,
                         ],
                         [
                             'end_time'         => $end_time,
@@ -74,10 +84,8 @@ class TrainingSessionSeeder extends Seeder
 
     private function pickTimeAndDuration($program, int $idx): array
     {
-        // slot waktu muter biar variatif
         $timeSlots = ['07:00', '15:30', '18:00'];
 
-        // durasi by intensity (kalau null fallback)
         $intensity = $program->intensity ?? 'medium';
         $duration = match ($intensity) {
             'low'    => 60,

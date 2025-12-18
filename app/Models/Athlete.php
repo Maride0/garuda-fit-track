@@ -222,18 +222,23 @@ class Athlete extends Model
     {
         return $this->hasMany(PerformanceEvaluation::class, 'athlete_id', 'athlete_id');
     }
+
     public function getAvatarUrlAttribute(): ?string
     {
         if (! $this->avatar) {
             return null;
         }
 
-        if (Storage::disk('public')->exists($this->avatar)) {
+        // LOKAL / DEVELOPMENT
+        if (app()->environment('local')) {
             return Storage::disk('public')->url($this->avatar);
         }
 
-        return null;
+        // PRODUCTION / HOSTING
+        $filename = basename($this->avatar);
+        return 'https://garudafittrack.poyekterapan1.com/avatars/' . $filename;
     }
+
     protected function initials(): Attribute
     {
         return Attribute::get(function () {

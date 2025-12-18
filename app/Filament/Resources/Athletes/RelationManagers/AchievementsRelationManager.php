@@ -196,7 +196,7 @@ class AchievementsRelationManager extends RelationManager
             ])
             ->headerActions([
                 CreateAction::make()
-                    ->label('Tambah Prestasi')
+                    ->label('Tambah Prestasi'),
             ])
             ->actions([
                 EditAction::make(),
