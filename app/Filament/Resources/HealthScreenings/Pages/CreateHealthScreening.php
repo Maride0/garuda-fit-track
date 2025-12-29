@@ -6,8 +6,9 @@ use App\Filament\Resources\HealthScreenings\HealthScreeningResource;
 use Filament\Resources\Pages\CreateRecord;
 use App\Models\TherapySchedule;
 use App\Models\HealthScreening;
+use App\Filament\Resources\BaseCreateRecord;
 
-class CreateHealthScreening extends CreateRecord
+class CreateHealthScreening extends BaseCreateRecord
 {
     protected static string $resource = HealthScreeningResource::class;
 
@@ -144,5 +145,20 @@ class CreateHealthScreening extends CreateRecord
         $athlete->update([
             'status' => 'active_therapy',
         ]);
+    }
+
+        public static function getNavigationLabel(): string
+    {
+        return 'Skrining Kesehatan';
+    }
+
+    public function getTitle(): string
+    {
+        return 'Tambah Skrining';
+    }
+
+    public function getBreadcrumb(): string
+    {
+        return 'Tambah';
     }
 }

@@ -5,8 +5,9 @@ namespace App\Filament\Resources\Athletes\Pages;
 use App\Filament\Resources\Athletes\AthleteResource;
 use App\Models\Athlete;
 use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\BaseCreateRecord;
 
-class CreateAthlete extends CreateRecord
+class CreateAthlete extends BaseCreateRecord
 {
     protected static string $resource = AthleteResource::class;
 
@@ -43,5 +44,20 @@ class CreateAthlete extends CreateRecord
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
+    }
+
+        public static function getNavigationLabel(): string
+    {
+        return 'Atlet';
+    }
+
+    public function getTitle(): string
+    {
+        return 'Tambah Atlet';
+    }
+
+    public function getBreadcrumb(): string
+    {
+        return 'Tambah';
     }
 }

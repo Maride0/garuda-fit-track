@@ -223,10 +223,15 @@ class SessionsRelationManager extends RelationManager
             ])
             ->defaultSort('date', 'asc')
             ->headerActions([
-                CreateAction::make()->label('Tambah Sesi Latihan'),
+                CreateAction::make()->label('Tambah Sesi Latihan')
+                ->modalHeading('Tambah Sesi Latihan')
+                ->modalSubmitActionLabel('Simpan')
+                ->modalCancelActionLabel('Batal'),
             ])
             ->recordActions([
-                EditAction::make()->label('Ubah'),
+                EditAction::make()->label('Ubah')
+                ->modalSubmitActionLabel('Simpan Perubahan')
+                ->modalCancelActionLabel('Batal'),
                 DeleteAction::make()->label('Hapus'),
             ])
             ->toolbarActions([

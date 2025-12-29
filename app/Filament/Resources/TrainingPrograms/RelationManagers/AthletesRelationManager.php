@@ -47,8 +47,12 @@ class AthletesRelationManager extends RelationManager
             ->headerActions([
                 AttachAction::make()
                     ->label('Tambah Atlet ke Program')
+                    ->modalHeading('Tambah Atlet')
 
-                    // ⬇️ Ini FILTER MAGIC NYA
+                    // ⬇️ UBAH LABEL TOMBOL DEFAULT
+                    ->modalSubmitActionLabel('Tambah Atlet')
+                    ->modalCancelActionLabel('Batal')
+
                     ->recordSelectOptionsQuery(function (Builder $query, $livewire) {
                         $program = $livewire->getOwnerRecord();
 
@@ -59,14 +63,16 @@ class AthletesRelationManager extends RelationManager
 
                     ->preloadRecordSelect()
                     ->recordSelectSearchColumns(['athlete_id', 'name'])
+
                     ->schema(fn (AttachAction $action): array => [
                         $action->getRecordSelect(),
                         DatePicker::make('join_date')
                             ->label('Tanggal Bergabung')
                             ->default(now())
                             ->required(),
-                    ]),
-            ])
+                    ])
+        ])
+
             ->recordActions([
                 DetachAction::make()->label('Keluarkan dari Program'),
             ])

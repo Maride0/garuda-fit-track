@@ -21,7 +21,7 @@ class PerformanceEvaluationsRelationManager extends RelationManager
 {
     protected static string $relationship = 'performanceEvaluations';
 
-    protected static ?string $title = 'Program Evaluations';
+    protected static ?string $title = 'Evaluasi Program';
 
     public function form(Schema $schema): Schema
     {

@@ -221,9 +221,14 @@ class PerformanceEvaluationsRelationManager extends RelationManager
 
             ->headerActions([
                 CreateAction::make()
+                    ->label('Tambah Evaluasi')
+                    ->modalHeading('Tambah Evaluasi')
+                    ->modalSubmitActionLabel('Simpan')
+                    ->modalCancelActionLabel('Batal')
                     ->after(function ($record) {
                         $this->syncTestRecord($record);
                     }),
+
                 Action::make('export')
                     ->label('Ekspor PDF')
                     ->color('gray')
@@ -261,11 +266,15 @@ class PerformanceEvaluationsRelationManager extends RelationManager
 
             ->actions([
                 EditAction::make()
+                    ->label('Ubah')
+                    ->modalSubmitActionLabel('Simpan Perubahan')
+                    ->modalCancelActionLabel('Batal')
                     ->after(function ($record) {
                         $this->syncTestRecord($record);
                     }),
 
                 DeleteAction::make()
+                    ->label('Hapus')
                     ->after(function ($record) {
                         // optional: kalau kamu mau delete test record saat evaluasi dihapus
                         TestRecord::where('source_type', 'program_evaluation')
