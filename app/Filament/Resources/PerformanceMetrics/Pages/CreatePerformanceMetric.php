@@ -5,9 +5,10 @@ namespace App\Filament\Resources\PerformanceMetrics\Pages;
 use App\Filament\Resources\PerformanceMetrics\PerformanceMetricResource;
 use App\Models\PerformanceMetric;
 use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\BaseCreateRecord;
 
 
-class CreatePerformanceMetric extends CreateRecord
+class CreatePerformanceMetric extends BaseCreateRecord
 {
     protected static string $resource = PerformanceMetricResource::class;
 
@@ -31,6 +32,11 @@ class CreatePerformanceMetric extends CreateRecord
 
     public function getTitle(): string
     {
-        return 'Create Performance Metric';
+        return 'Tambah Performa Metrik';
+    }
+
+    public function getBreadcrumb(): string
+    {
+        return 'Tambah';
     }
 }
