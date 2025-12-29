@@ -12,20 +12,20 @@
 
 /* Token warna biar rapi */
 :root {
-    --gft-crimson:        #A52828;
-    --gft-crimson-light:  #C73737;
-    --gft-crimson-dark:   #8E1F1F;
-    --gft-gold:           #E2B100;
-    --gft-yellow:         #FACC2E;
-    --gft-navy:           #001C8E;
-    --gft-bg:             #FAFAF5;
-    --gft-card:           #FAFAF5;
-    --gft-muted:          #6B7280;
+  --gft-crimson: #A52828;
+  --gft-crimson-light: #C73737;
+  --gft-crimson-dark: #8E1F1F;
+  --gft-gold: #E2B100;
+  --gft-yellow: #FACC2E;
+  --gft-navy: #001C8E;
+  --gft-bg: #FAFAF5;
+  --gft-card: #FAFAF5;
+  --gft-muted: #6B7280;
 }
 
 /* Pakainya: */
 body {
-    background: var(--gft-bg);
+  background: var(--gft-bg);
 }
 
 /* Ukuran font dasar */
@@ -46,12 +46,13 @@ body {
 }
 
 /* ---------- Topbar: logo position + spacing ---------- */
-.fi-topbar-start .fi-logo{
-  margin-inline-start: 0 !important; /* remove Filament default offset */
+.fi-topbar-start .fi-logo {
+  margin-inline-start: 0 !important;
+  /* remove Filament default offset */
 }
 
 /* kalau mau ada napas kiri, bikin khusus DARK biar light ga kegeser */
-html.dark .fi-topbar{
+html.dark .fi-topbar {
   padding-left: 1rem;
 }
 
@@ -60,24 +61,26 @@ html.dark .fi-topbar{
    Sidebar: FULL HEIGHT to the TOP
    but content offset so it won't be cut
    ========================================= */
-body.fi-body-has-topbar .fi-sidebar{
+body.fi-body-has-topbar .fi-sidebar {
   top: 0 !important;
   height: 100dvh !important;
 }
 
 /* dorong isi sidebar turun setinggi topbar */
-body.fi-body-has-topbar .fi-sidebar-nav{
+body.fi-body-has-topbar .fi-sidebar-nav {
   /* padding-top: var(--topbar-height) !important;
   max-height: 100dvh !important; */
   padding-top: calc(var(--topbar-height) + 10px) !important;
 
 }
+
 /* optional: rapihin header nav/group biar ga mepet */
-body.fi-body-has-topbar .fi-sidebar-nav-groups{
+body.fi-body-has-topbar .fi-sidebar-nav-groups {
   padding-top: 20px;
 }
+
 /* kalau ada header container internal yang bikin jarak aneh */
-body.fi-body-has-topbar .fi-sidebar-ctn{
+body.fi-body-has-topbar .fi-sidebar-ctn {
   max-height: 100dvh !important;
 }
 
@@ -85,33 +88,33 @@ body.fi-body-has-topbar .fi-sidebar-ctn{
 /* ============================================================
    Sidebar – GFT × NOA (Desktop styling)
    ============================================================ */
-@media (min-width: 1024px){
+@media (min-width: 1024px) {
 
   /* Sidebar surface */
-  .fi-sidebar{
+  .fi-sidebar {
     background: linear-gradient(#B53333, #7F1D1D) !important;
   }
 
   /* Group label: SISTEM, MANAJEMEN ATLET, dst */
-  .fi-sidebar-group-label{
+  .fi-sidebar-group-label {
     font-size: .72rem;
     text-transform: uppercase;
     letter-spacing: .08em;
-    color: rgba(255,255,255,.55) !important;
+    color: rgba(255, 255, 255, .55) !important;
   }
 
   /* Wrapper nav */
-  .fi-sidebar-nav{
+  .fi-sidebar-nav {
     padding-inline: .9rem;
   }
 
   /* Item spacing */
-  .fi-sidebar-nav-item{
+  .fi-sidebar-nav-item {
     margin-block: .12rem;
   }
 
   /* Button pill */
-  .fi-sidebar-nav-item-button{
+  .fi-sidebar-nav-item-button {
     border-radius: 999px !important;
     padding-inline: 1rem !important;
     color: #F9FAFB !important;
@@ -119,7 +122,7 @@ body.fi-body-has-topbar .fi-sidebar-ctn{
 
   /* Icon + label */
   .fi-sidebar-nav-item-icon,
-  .fi-sidebar-item-label{
+  .fi-sidebar-item-label {
     color: #F5F5F5 !important;
     font-size: .92rem;
     font-weight: 500;
@@ -127,24 +130,24 @@ body.fi-body-has-topbar .fi-sidebar-ctn{
   }
 
   /* Active item */
-  .fi-sidebar-nav .fi-active > a,
-  .fi-sidebar-nav .fi-active > .fi-sidebar-item-button,
-  .fi-sidebar-item-active > a,
-  .fi-sidebar-item-active > .fi-sidebar-item-button{
-    background: rgba(255,255,255,.12);
+  .fi-sidebar-nav .fi-active>a,
+  .fi-sidebar-nav .fi-active>.fi-sidebar-item-button,
+  .fi-sidebar-item-active>a,
+  .fi-sidebar-item-active>.fi-sidebar-item-button {
+    background: rgba(255, 255, 255, .12);
     border-left: 3px solid #FACC2E;
     box-shadow: #11182733 0px 5px 16px;
     font-weight: 600;
   }
 
   /* Hover */
-  .fi-sidebar-item:hover > a,
-  .fi-sidebar-item:hover > .fi-sidebar-item-button{
-    background: rgba(255,255,255,.10);
+  .fi-sidebar-item:hover>a,
+  .fi-sidebar-item:hover>.fi-sidebar-item-button {
+    background: rgba(255, 255, 255, .10);
   }
 
   /* SVG safety */
-  .fi-sidebar-nav svg{
+  .fi-sidebar-nav svg {
     color: #F5F5F5 !important;
   }
 }
@@ -152,21 +155,22 @@ body.fi-body-has-topbar .fi-sidebar-ctn{
 /* =========================
    Main layout & header
    ========================= */
-body.fi-body-has-topbar .fi-main{
+body.fi-body-has-topbar .fi-main {
   padding-top: var(--topbar-height) !important;
 }
+
 /* Background area konten */
 /* Main area lebih rapat */
 .fi-main {
-    padding: 0.5rem 1rem !important;
-    background: var(--gft-bg) !important;
+  padding: 0.5rem 1rem !important;
+  background: var(--gft-bg) !important;
 }
 
 /* Konten jangan di-center */
 .fi-main-content {
-    max-width: 100% !important;
-    margin-inline: 0 !important;
-    padding: 0 !important;
+  max-width: 100% !important;
+  margin-inline: 0 !important;
+  padding: 0 !important;
 }
 
 /* Heading utama ("Dashboard") */
@@ -189,14 +193,12 @@ body.fi-body-has-topbar .fi-main{
   height: 4px;
   border-radius: 999px;
 
-  background: linear-gradient(
-  90deg,
-  #8E1F1F 0%,
-  #C62828 20%,
-  #FBC02D 50%,
-  #FFE082 70%,
-  rgba(255,255,255,0) 100%
-);
+  background: linear-gradient(90deg,
+      #8E1F1F 0%,
+      #C62828 20%,
+      #FBC02D 50%,
+      #FFE082 70%,
+      rgba(255, 255, 255, 0) 100%);
 }
 
 
@@ -205,23 +207,23 @@ body.fi-body-has-topbar .fi-main{
    ========================= */
 
 .fi-wi-stats-overview-stat {
-    background: var(--gft-card) !important;
-    border-radius: 18px !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-    border: 1px solid rgba(0, 0, 0, 0.04);
+  background: var(--gft-card) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 /* Label kecil (Total Athletes, Active Programs, dst.) */
 .fi-wi-stats-overview-stat-label {
-    color: var(--gft-muted) !important;
-    font-weight: 500 !important;
+  color: var(--gft-muted) !important;
+  font-weight: 500 !important;
 }
 
 /* Angka utama di card */
 .fi-wi-stats-overview-stat-value {
-    font-size: 26px !important;
-    font-weight: 700 !important;
-    color: #111827 !important;
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
 }
 
 /* =========================
@@ -229,24 +231,26 @@ body.fi-body-has-topbar .fi-main{
    Active Training Programs, dll.)
    ========================= */
 
-.fi-widgets > .fi-widget {
-    background: var(--gft-card) !important;
-    border-radius: 18px !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-    border: 1px solid rgba(0, 0, 0, 0.04);
+.fi-widgets>.fi-widget {
+  background: var(--gft-card) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 /* Heading di header widget */
-.fi-widgets > .fi-widget .fi-section-header-heading {
-    color: var(--gft-navy) !important;
-    font-weight: 700 !important;
+.fi-widgets>.fi-widget .fi-section-header-heading {
+  color: var(--gft-navy) !important;
+  font-weight: 700 !important;
 }
 
 /* Samain tinggi dua kartu di dashboard */
 .fi-wi-health-overview-summary,
 .fi-wi-active-training-programs {
-    min-height: 360px;   /* adjust sesuai tinggi chart kamu */
+  min-height: 360px;
+  /* adjust sesuai tinggi chart kamu */
 }
+
 /* ===============================
    REMOVE DEFAULT TABLE HEADER LINE
    (Active Training Programs only)
@@ -269,27 +273,29 @@ body.fi-body-has-topbar .fi-main{
 
 /* 2. DARK MODE – full custom kamu */
 html.dark body {
-    background: #020617; /* semacam bg-slate-950 */
+  background: #020617;
+  /* semacam bg-slate-950 */
 }
 
 /* Sidebar dark */
 html.dark .fi-sidebar {
-    background: linear-gradient(#111827, #020617) !important;
-    color: #E5E7EB !important;
+  background: linear-gradient(#111827, #020617) !important;
+  color: #E5E7EB !important;
 }
 
 html.dark .fi-sidebar-nav a {
-    color: #E5E7EB !important;
+  color: #E5E7EB !important;
 }
 
-html.dark .fi-sidebar-nav .fi-sidebar-item-active > a {
-    background: rgba(248, 250, 252, 0.15) !important;
+html.dark .fi-sidebar-nav .fi-sidebar-item-active>a {
+  background: rgba(248, 250, 252, 0.15) !important;
 }
 
 /* Area utama */
 html.dark .fi-main {
-    background: #020617;
+  background: #020617;
 }
+
 /* === FULL-WIDTH FIX (kill Filament container) === */
 main.fi-width-7xl {
   max-width: none !important;
@@ -303,20 +309,26 @@ main.fi-width-7xl {
   width: 100% !important;
   margin-inline: 0 !important;
 }
+
 /* === DARK MODE TOKENS === */
 html.dark {
-  --gft-bg:   #020617;      /* slate-950 */
-  --gft-card: #0b1220;      /* dark surface */
-  --gft-muted:#94A3B8;      /* slate-400 */
-  --gft-navy: #E5E7EB;      /* biar heading nggak navy gelap */
+  --gft-bg: #020617;
+  /* slate-950 */
+  --gft-card: #0b1220;
+  /* dark surface */
+  --gft-muted: #94A3B8;
+  /* slate-400 */
+  --gft-navy: #E5E7EB;
+  /* biar heading nggak navy gelap */
 }
 
 /* optional: biar card border/shadow cocok dark */
-html.dark .fi-widgets > .fi-widget,
+html.dark .fi-widgets>.fi-widget,
 html.dark .fi-wi-stats-overview-stat {
-  border: 1px solid rgba(255,255,255,0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
   box-shadow: none !important;
 }
+
 /* =========================
    DARK MODE – SECTION / WIDGET WRAPPER FIX
    ========================= */
@@ -324,7 +336,7 @@ html.dark .fi-wi-stats-overview-stat {
 /* yang bikin wrapper putih biasanya ini */
 html.dark .fi-section {
   background: var(--gft-card) !important;
-  border: 1px solid rgba(255,255,255,0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 /* kalau ada inner layer yang masih putih */
@@ -338,13 +350,14 @@ html.dark .fi-section-header-heading,
 html.dark .fi-section-header-description {
   color: #E5E7EB !important;
 }
+
 /* =========================
    GFT TABLE – DARK MODE
    ========================= */
 html.dark .gft-table {
   --gft-card: #0b1220;
   --gft-card-2: #0f172a;
-  --gft-border: rgba(255,255,255,.08);
+  --gft-border: rgba(255, 255, 255, .08);
   --gft-text: #E5E7EB;
   --gft-muted: #94A3B8;
 }
@@ -377,12 +390,12 @@ html.dark .gft-table th {
 
 html.dark .gft-table td {
   color: var(--gft-text) !important;
-  border-bottom: 1px solid rgba(255,255,255,.06) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, .06) !important;
 }
 
 /* row hover biar “GFT feel” */
 html.dark .gft-table tbody tr:hover td {
-  background: rgba(255,255,255,.03) !important;
+  background: rgba(255, 255, 255, .03) !important;
 }
 
 /* =========================
@@ -407,14 +420,12 @@ html.dark .gft-table tbody tr:hover td {
   width: 6px;
   height: 100%;
 
-  background: linear-gradient(
-    180deg,
-    var(--gft-crimson) 0%,
-    var(--gft-crimson-light) 25%,
-    var(--gft-gold) 55%,
-    var(--gft-yellow) 75%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(180deg,
+      var(--gft-crimson) 0%,
+      var(--gft-crimson-light) 25%,
+      var(--gft-gold) 55%,
+      var(--gft-yellow) 75%,
+      rgba(255, 255, 255, 0) 100%);
 
   border-top-left-radius: 18px;
   border-bottom-left-radius: 18px;
@@ -429,6 +440,7 @@ html.dark .gft-card {
 html.dark .gft-card::before {
   opacity: 0.75;
 }
+
 /* kasih position & overflow ke section container */
 .gft-section-card {
   position: relative;
@@ -443,19 +455,18 @@ html.dark .gft-card::before {
   left: 0;
   width: 6px;
   height: 100%;
-  background: linear-gradient(
-    180deg,
-    var(--gft-crimson) 0%,
-    var(--gft-crimson-light) 25%,
-    var(--gft-gold) 55%,
-    var(--gft-yellow) 75%,
-    rgba(255,255,255,0) 100%
-  );
+  background: linear-gradient(180deg,
+      var(--gft-crimson) 0%,
+      var(--gft-crimson-light) 25%,
+      var(--gft-gold) 55%,
+      var(--gft-yellow) 75%,
+      rgba(255, 255, 255, 0) 100%);
   border-top-left-radius: 18px;
   border-bottom-left-radius: 18px;
   opacity: 0.95;
   pointer-events: none;
 }
+
 .gft-section-card .fi-section {
   position: relative;
   overflow: hidden;
@@ -464,64 +475,62 @@ html.dark .gft-card::before {
 .gft-section-card .fi-section::before {
   content: "";
   position: absolute;
-  inset: 0 auto 0 0; /* top right bottom left */
+  inset: 0 auto 0 0;
+  /* top right bottom left */
   width: 6px;
-  background: linear-gradient(
-    180deg,
-    var(--gft-crimson) 0%,
-    var(--gft-crimson-light) 25%,
-    var(--gft-gold) 55%,
-    var(--gft-yellow) 75%,
-    rgba(255,255,255,0) 100%
-  );
+  background: linear-gradient(180deg,
+      var(--gft-crimson) 0%,
+      var(--gft-crimson-light) 25%,
+      var(--gft-gold) 55%,
+      var(--gft-yellow) 75%,
+      rgba(255, 255, 255, 0) 100%);
   border-top-left-radius: 18px;
   border-bottom-left-radius: 18px;
   opacity: 0.95;
   pointer-events: none;
 }
+
 /* ===== Horizontal scrollbar ala Figma (LIGHT) ===== */
 .gft-hscroll {
   scrollbar-gutter: stable;
   padding-bottom: 10px;
 }
+
 .gft-hscroll::-webkit-scrollbar-corner {
   background: transparent;
 }
+
 /* Chrome / Safari / Edge */
 .gft-hscroll::-webkit-scrollbar {
   height: 10px;
 }
 
 .gft-hscroll::-webkit-scrollbar-track {
-  background: linear-gradient(
-    90deg,
-    rgba(0, 28, 142, 0.10) 0%,
-    rgba(0, 28, 142, 0.18) 60%,
-    rgba(0, 28, 142, 0.10) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(0, 28, 142, 0.10) 0%,
+      rgba(0, 28, 142, 0.18) 60%,
+      rgba(0, 28, 142, 0.10) 100%);
   border-radius: 999px;
 }
 
 .gft-hscroll::-webkit-scrollbar-thumb {
   border-radius: 999px;
-  background: linear-gradient(
-    90deg,
-    rgba(0, 28, 142, 0.45) 0%,
-    rgba(0, 28, 142, 0.85) 55%,
-    rgba(0, 28, 142, 1) 100%
-  );
-  border: 2px solid transparent;      /* penting */
-  background-clip: padding-box;       /* penting */
+  background: linear-gradient(90deg,
+      rgba(0, 28, 142, 0.45) 0%,
+      rgba(0, 28, 142, 0.85) 55%,
+      rgba(0, 28, 142, 1) 100%);
+  border: 2px solid transparent;
+  /* penting */
+  background-clip: padding-box;
+  /* penting */
 }
 
 
 .gft-hscroll::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(
-    90deg,
-    rgba(0, 28, 142, 0.65) 0%,
-    rgba(0, 28, 142, 0.95) 60%,
-    rgba(0, 28, 142, 1) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(0, 28, 142, 0.65) 0%,
+      rgba(0, 28, 142, 0.95) 60%,
+      rgba(0, 28, 142, 1) 100%);
 }
 
 /* Firefox (LIGHT) */
@@ -529,123 +538,121 @@ html.dark .gft-card::before {
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 28, 142, 0.85) rgba(0, 28, 142, 0.15);
 }
+
 /* ===== Dark Mode ===== */
 html.dark .gft-hscroll::-webkit-scrollbar-track {
-  background: linear-gradient(
-    90deg,
-    rgba(96, 165, 250, 0.10) 0%,
-    rgba(96, 165, 250, 0.18) 60%,
-    rgba(96, 165, 250, 0.10) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(96, 165, 250, 0.10) 0%,
+      rgba(96, 165, 250, 0.18) 60%,
+      rgba(96, 165, 250, 0.10) 100%);
 }
 
 html.dark .gft-hscroll::-webkit-scrollbar-thumb {
   border: 2px solid transparent;
   background-clip: padding-box;
-  box-shadow: 0 0 0 2px rgba(24,24,27,0.9) inset;
+  box-shadow: 0 0 0 2px rgba(24, 24, 27, 0.9) inset;
 }
 
 
 html.dark .gft-hscroll::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(
-    90deg,
-    rgba(96, 165, 250, 0.65) 0%,
-    rgba(96, 165, 250, 0.90) 60%,
-    rgba(96, 165, 250, 1) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(96, 165, 250, 0.65) 0%,
+      rgba(96, 165, 250, 0.90) 60%,
+      rgba(96, 165, 250, 1) 100%);
 }
 
 /* Firefox Dark */
 html.dark .gft-hscroll {
   scrollbar-color: rgba(96, 165, 250, 0.85) rgba(96, 165, 250, 0.15);
 }
+
 /* ===============================
    Health Overview – Top Gradient
    Figma-like (soft, thin, subtle)
    =============================== */
 /* wrapper widget */
 .gft-health-overview,
-.fi-wi-chart > section.fi-section {
-    position: relative;
-    overflow: hidden;
+.fi-wi-chart>section.fi-section {
+  position: relative;
+  overflow: hidden;
 }
 
 /* main accent line (tipis) */
 .gft-health-overview::before,
-.fi-wi-chart > section.fi-section::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;              /* ✅ full */
-    width: auto;           /* ✅ full */
-    height: 3px;
-    z-index: 2;
+.fi-wi-chart>section.fi-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* ✅ full */
+  width: auto;
+  /* ✅ full */
+  height: 3px;
+  z-index: 2;
 
-    background: linear-gradient(
-        90deg,
-        rgba(165, 40, 40, 0.55),
-        rgba(244, 195, 0, 0.45),
-        rgba(37, 99, 235, 0.45),
-        rgba(37, 99, 235, 0.00)
-    );
+  background: linear-gradient(90deg,
+      rgba(165, 40, 40, 0.55),
+      rgba(244, 195, 0, 0.45),
+      rgba(37, 99, 235, 0.45),
+      rgba(37, 99, 235, 0.00));
 
-    border-bottom-right-radius: 0; /* ✅ no tail */
+  border-bottom-right-radius: 0;
+  /* ✅ no tail */
 }
 
 /* soft glow / feather (full width) */
 .gft-health-overview::after,
-.fi-wi-chart > section.fi-section::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;              /* ✅ full */
-    width: auto;           /* ✅ full */
-    height: 10px;
-    z-index: 1;
+.fi-wi-chart>section.fi-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* ✅ full */
+  width: auto;
+  /* ✅ full */
+  height: 10px;
+  z-index: 1;
 
-    background: linear-gradient(
-        90deg,
-        rgba(165, 40, 40, 0.25),
-        rgba(244, 195, 0, 0.20),
-        rgba(37, 99, 235, 0.18),
-        rgba(37, 99, 235, 0.00)
-    );
+  background: linear-gradient(90deg,
+      rgba(165, 40, 40, 0.25),
+      rgba(244, 195, 0, 0.20),
+      rgba(37, 99, 235, 0.18),
+      rgba(37, 99, 235, 0.00));
 
-    filter: blur(20px);
+  filter: blur(20px);
 }
+
 /* ===============================
    Health Overview – Underline FIX
    =============================== */
 /* Health Overview – Underline (robust) */
-.fi-wi-chart > section.fi-section > header.fi-section-header :is(h1,h2,h3).fi-section-header-heading,
-.fi-wi-chart > section.fi-section > header.fi-section-header :is(h1,h2,h3) {
-    display: inline-block;
-    position: relative;
+.fi-wi-chart>section.fi-section>header.fi-section-header :is(h1, h2, h3).fi-section-header-heading,
+.fi-wi-chart>section.fi-section>header.fi-section-header :is(h1, h2, h3) {
+  display: inline-block;
+  position: relative;
 }
 
-.fi-wi-chart > section.fi-section > header.fi-section-header :is(h1,h2,h3).fi-section-header-heading::after,
-.fi-wi-chart > section.fi-section > header.fi-section-header :is(h1,h2,h3)::after {
-    content: "";
-    display: block;
-    margin-top: 8px;
-    width: 48px;
-    height: 3px;
-    background: #A52828;
-    border-radius: 999px;
+.fi-wi-chart>section.fi-section>header.fi-section-header :is(h1, h2, h3).fi-section-header-heading::after,
+.fi-wi-chart>section.fi-section>header.fi-section-header :is(h1, h2, h3)::after {
+  content: "";
+  display: block;
+  margin-top: 8px;
+  width: 48px;
+  height: 3px;
+  background: #A52828;
+  border-radius: 999px;
 }
 
 /* ===============================
    Health Overview – Title styling
    =============================== */
 
-.fi-wi-chart
-> section.fi-section
-> header.fi-section-header
-:is(h1,h2,h3) {
-    color: #1E3A8A;        /* sama kaya Athlete Performance Snapshot */
-    font-weight: 600;
+.fi-wi-chart>section.fi-section>header.fi-section-header:is(h1, h2, h3) {
+  color: #1E3A8A;
+  /* sama kaya Athlete Performance Snapshot */
+  font-weight: 600;
 }
 
 /* ===============================
@@ -654,21 +661,21 @@ html.dark .gft-hscroll {
 
 /* title color */
 .fi-ta.gft-active-programs-table .fi-ta-header-heading {
-    color: #1E3A8A !important;
-    font-weight: 700;
-    display: inline-block;
-    position: relative;
+  color: #1E3A8A !important;
+  font-weight: 700;
+  display: inline-block;
+  position: relative;
 }
 
 /* underline */
 .fi-ta.gft-active-programs-table .fi-ta-header-heading::after {
-    content: "";
-    display: block;
-    margin-top: 8px;
-    width: 48px;
-    height: 3px;
-    border-radius: 999px;
-    background: #A52828;
+  content: "";
+  display: block;
+  margin-top: 8px;
+  width: 48px;
+  height: 3px;
+  border-radius: 999px;
+  background: #A52828;
 }
 
 /* ===============================
@@ -676,77 +683,78 @@ html.dark .gft-hscroll {
    =============================== */
 
 .fi-ta.gft-active-programs-table .fi-ta-header-ctn {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 /* main line (di atas header, ga ketiban) */
 .fi-ta.gft-active-programs-table .fi-ta-header-ctn::before {
-    content: "";
-    position: absolute;
-    top: 2px;
-    left: 3px;
-    right: 3px;
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  right: 3px;
 
-    height: 3px;
-    z-index: 5; /* di atas header */
-    pointer-events: none;
+  height: 3px;
+  z-index: 5;
+  /* di atas header */
+  pointer-events: none;
 
-    background: linear-gradient(
-        90deg,
-        rgba(165, 40, 40, 0.75) 0%,
-        rgba(244, 195, 0, 0.60) 35%,
-        rgba(37, 99, 235, 0.45) 65%,
-        rgba(37, 99, 235, 0.10) 100%
-    );
+  background: linear-gradient(90deg,
+      rgba(165, 40, 40, 0.75) 0%,
+      rgba(244, 195, 0, 0.60) 35%,
+      rgba(37, 99, 235, 0.45) 65%,
+      rgba(37, 99, 235, 0.10) 100%);
 }
 
 /* glow halus, nempel di header */
 .fi-ta.gft-active-programs-table .fi-ta-header-ctn::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 
-    height: 5px;
-    z-index: 4;
-    pointer-events: none;
+  height: 5px;
+  z-index: 4;
+  pointer-events: none;
 
-    background: linear-gradient(
-        to bottom,
-        rgba(165, 40, 40, 0.35),
-        rgba(244, 195, 0, 0.22),
-        rgba(37, 99, 235, 0.12),
-        rgba(37, 99, 235, 0.00)
-    );
+  background: linear-gradient(to bottom,
+      rgba(165, 40, 40, 0.35),
+      rgba(244, 195, 0, 0.22),
+      rgba(37, 99, 235, 0.12),
+      rgba(37, 99, 235, 0.00));
 
-    filter: blur(10px);
+  filter: blur(10px);
 }
+
 /* ===============================
    Upcoming Schedule – Title only
    =============================== */
 
 /* title color */
 .fi-ta-header-heading {
-    color: #1E3A8A;       /* navy – samain sama yang lain */
-    font-weight: 700;
-    position: relative;
-    display: inline-block;
+  color: #1E3A8A;
+  /* navy – samain sama yang lain */
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
 }
 
 /* underline crimson */
 .fi-ta-header-heading::after {
-    content: "";
-    display: block;
-    margin-top: 8px;
+  content: "";
+  display: block;
+  margin-top: 8px;
 
-    width: 48px;
-    height: 3px;
-    border-radius: 999px;
+  width: 48px;
+  height: 3px;
+  border-radius: 999px;
 
-    background-color: #A52828; /* crimson */
+  background-color: #A52828;
+  /* crimson */
 }
+
 /* ============================================================
    DARK MODE – Dashboard widget titles (match Snapshot: blue-200)
    ============================================================ */
@@ -755,15 +763,17 @@ html.dark .gft-hscroll {
 html.dark .fi-wi .fi-wi-header-heading,
 html.dark .fi-ta .fi-ta-header-heading,
 html.dark .fi-section .fi-section-header-heading {
-    color: var(--color-blue-200) !important; /* same as dark:!text-blue-200 */
+  color: var(--color-blue-200) !important;
+  /* same as dark:!text-blue-200 */
 }
 
 /* kalau ada subtext/description di header widget */
 html.dark .fi-wi-header-description,
 html.dark .fi-ta-header-description,
 html.dark .fi-section-header-description {
-    color: rgba(255, 255, 255, 0.65) !important;
+  color: rgba(255, 255, 255, 0.65) !important;
 }
+
 /* ============================================================
    DARK MODE – TableWidget surface (match HealthOverview/Snapshot)
    ============================================================ */
@@ -775,16 +785,12 @@ html.dark .gft-upcoming-schedule-table .fi-ta-content,
 html.dark .gft-active-programs-table .fi-ta-table-ctn,
 html.dark .gft-upcoming-schedule-table .fi-ta-table-ctn {
   background:
-    radial-gradient(
-      600px 220px at 20% 0%,
+    radial-gradient(600px 220px at 20% 0%,
       rgba(0, 28, 142, 0.14) 0%,
-      rgba(0, 0, 0, 0) 42%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.04) 0%,
-      rgba(255,255,255,0.00) 18%
-    ),
+      rgba(0, 0, 0, 0) 42%),
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      rgba(255, 255, 255, 0.00) 18%),
     var(--gft-card) !important;
 }
 
@@ -794,9 +800,9 @@ html.dark .fi-ta-ctn.gft-active-programs-table,
 html.dark .fi-ta-ctn.gft-upcoming-schedule-table,
 html.dark .fi-ta-ctn-with-header.gft-active-programs-table,
 html.dark .fi-ta-ctn-with-header.gft-upcoming-schedule-table {
-  border: 1px solid rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255, 255, 255, .08) !important;
   border-radius: 18px !important;
-  box-shadow: 0 16px 40px rgba(0,0,0,.35) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, .35) !important;
   overflow: hidden !important;
 }
 
@@ -804,25 +810,31 @@ html.dark .fi-ta-ctn-with-header.gft-upcoming-schedule-table {
    KPI Cards (Custom) — FINAL
    ========================= */
 
-.gft-kpi-grid{
-  display:grid;
+.gft-kpi-grid {
+  display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
   gap: 1rem;
 }
-@media (min-width: 768px){
-  .gft-kpi-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (min-width: 1280px){
-  .gft-kpi-grid{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+@media (min-width: 768px) {
+  .gft-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
-.gft-kpi-card{
-  background:#fff;
-  border-radius:18px;
-  padding:22px 22px 18px;
-  border: 1px solid rgba(2,6,23,.06);
-  position:relative;
-  overflow:hidden;
+@media (min-width: 1280px) {
+  .gft-kpi-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.gft-kpi-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 22px 22px 18px;
+  border: 1px solid rgba(2, 6, 23, .06);
+  position: relative;
+  overflow: hidden;
 
   box-shadow:
     0 18px 40px rgba(15, 23, 42, 0.08),
@@ -832,7 +844,7 @@ html.dark .fi-ta-ctn-with-header.gft-upcoming-schedule-table {
   transition: transform .18s ease, box-shadow .18s ease;
 }
 
-.gft-kpi-card:hover{
+.gft-kpi-card:hover {
   transform: translateY(-1px);
   box-shadow:
     0 24px 55px rgba(15, 23, 42, 0.10),
@@ -841,74 +853,76 @@ html.dark .fi-ta-ctn-with-header.gft-upcoming-schedule-table {
 }
 
 /* glow base layer */
-.gft-kpi-card::before{
-  content:"";
-  position:absolute;
-  inset:-60px;
-  pointer-events:none;
+.gft-kpi-card::before {
+  content: "";
+  position: absolute;
+  inset: -60px;
+  pointer-events: none;
   opacity: .55;
   filter: blur(36px);
   z-index: 0;
 }
 
 /* hover glow layer (optional, subtle) */
-.gft-kpi-card::after{
-  content:"";
-  position:absolute;
-  inset:-55px;
-  pointer-events:none;
+.gft-kpi-card::after {
+  content: "";
+  position: absolute;
+  inset: -55px;
+  pointer-events: none;
   opacity: 0;
   filter: blur(34px);
   transition: opacity .25s ease;
   z-index: 0;
 }
-.gft-kpi-card:hover::after{
+
+.gft-kpi-card:hover::after {
   opacity: .55;
 }
 
 /* content above glow */
 .gft-kpi-top,
-.gft-kpi-underline{
+.gft-kpi-underline {
   position: relative;
   z-index: 1;
 }
 
-.gft-kpi-top{
-  display:flex;
-  justify-content:space-between;
-  gap:14px;
-  align-items:flex-start;
+.gft-kpi-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
 }
 
-.gft-kpi-label{
-  font-size:12px;
-  color:#64748b;
-  font-weight:600;
+.gft-kpi-label {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 600;
 }
 
-.gft-kpi-value{
-  margin-top:6px;
-  font-size:32px;
-  font-weight:800;
-  letter-spacing:-.02em;
-  color:#1e3a8a; /* navy brand */
+.gft-kpi-value {
+  margin-top: 6px;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  color: #1e3a8a;
+  /* navy brand */
 }
 
-.gft-kpi-icon{
+.gft-kpi-icon {
   width: 46px;
   height: 46px;
   border-radius: 999px;
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  border: 1px solid rgba(2,6,23,.06);
+  border: 1px solid rgba(2, 6, 23, .06);
 }
 
-.gft-kpi-underline{
-  margin-top:14px;
+.gft-kpi-underline {
+  margin-top: 14px;
   width: 76px;
   height: 5px;
-  border-radius:999px;
+  border-radius: 999px;
   opacity: .95;
 }
 
@@ -917,210 +931,233 @@ html.dark .fi-ta-ctn-with-header.gft-upcoming-schedule-table {
    ========================= */
 
 /* BLUE */
-.gft-kpi-blue::before{
+.gft-kpi-blue::before {
   background: radial-gradient(circle at 85% 30%,
-    rgba(59,130,246,.18),
-    rgba(59,130,246,.08) 35%,
-    transparent 65%);
+      rgba(59, 130, 246, .18),
+      rgba(59, 130, 246, .08) 35%,
+      transparent 65%);
 }
-.gft-kpi-blue::after{
+
+.gft-kpi-blue::after {
   background: radial-gradient(circle at 85% 30%,
-    rgba(59,130,246,.16),
-    transparent 58%);
+      rgba(59, 130, 246, .16),
+      transparent 58%);
 }
-.gft-kpi-blue .gft-kpi-icon{
-  background: rgba(59,130,246,.10);
-  color:#2563eb;
+
+.gft-kpi-blue .gft-kpi-icon {
+  background: rgba(59, 130, 246, .10);
+  color: #2563eb;
 }
-.gft-kpi-blue .gft-kpi-underline{
-  background: linear-gradient(90deg,#3b82f6,#93c5fd);
+
+.gft-kpi-blue .gft-kpi-underline {
+  background: linear-gradient(90deg, #3b82f6, #93c5fd);
 }
 
 /* GOLD */
-.gft-kpi-gold::before{
+.gft-kpi-gold::before {
   background: radial-gradient(circle at 85% 30%,
-    rgba(234,179,8,.20),
-    rgba(234,179,8,.09) 35%,
-    transparent 65%);
+      rgba(234, 179, 8, .20),
+      rgba(234, 179, 8, .09) 35%,
+      transparent 65%);
 }
-.gft-kpi-gold::after{
+
+.gft-kpi-gold::after {
   background: radial-gradient(circle at 85% 30%,
-    rgba(234,179,8,.16),
-    transparent 58%);
+      rgba(234, 179, 8, .16),
+      transparent 58%);
 }
-.gft-kpi-gold .gft-kpi-icon{
-  background: rgba(234,179,8,.12);
-  color:#ca8a04;
+
+.gft-kpi-gold .gft-kpi-icon {
+  background: rgba(234, 179, 8, .12);
+  color: #ca8a04;
 }
-.gft-kpi-gold .gft-kpi-underline{
-  background: linear-gradient(90deg,#fbbf24,#fcd34d);
+
+.gft-kpi-gold .gft-kpi-underline {
+  background: linear-gradient(90deg, #fbbf24, #fcd34d);
 }
 
 /* GREEN (therapy / good status) */
-.gft-kpi-green::before{
+.gft-kpi-green::before {
   background: radial-gradient(circle at 85% 30%,
-    rgba(34,197,94,.18),
-    rgba(34,197,94,.08) 35%,
-    transparent 65%);
+      rgba(34, 197, 94, .18),
+      rgba(34, 197, 94, .08) 35%,
+      transparent 65%);
 }
-.gft-kpi-green::after{
+
+.gft-kpi-green::after {
   background: radial-gradient(circle at 85% 30%,
-    rgba(34,197,94,.15),
-    transparent 58%);
+      rgba(34, 197, 94, .15),
+      transparent 58%);
 }
-.gft-kpi-green .gft-kpi-icon{
-  background: rgba(34,197,94,.12);
-  color:#15803d;
+
+.gft-kpi-green .gft-kpi-icon {
+  background: rgba(34, 197, 94, .12);
+  color: #15803d;
 }
-.gft-kpi-green .gft-kpi-underline{
-  background: linear-gradient(90deg,#22c55e,#86efac);
+
+.gft-kpi-green .gft-kpi-underline {
+  background: linear-gradient(90deg, #22c55e, #86efac);
 }
 
 /* CRIMSON */
-.gft-kpi-crimson::before{
+.gft-kpi-crimson::before {
   background: radial-gradient(circle at 85% 30%,
-    rgba(165,40,40,.18),
-    rgba(165,40,40,.08) 35%,
-    transparent 65%);
+      rgba(165, 40, 40, .18),
+      rgba(165, 40, 40, .08) 35%,
+      transparent 65%);
 }
-.gft-kpi-crimson::after{
+
+.gft-kpi-crimson::after {
   background: radial-gradient(circle at 85% 30%,
-    rgba(165,40,40,.14),
-    transparent 58%);
+      rgba(165, 40, 40, .14),
+      transparent 58%);
 }
-.gft-kpi-crimson .gft-kpi-icon{
-  background: rgba(165,40,40,.12);
-  color:#8e1f1f;
+
+.gft-kpi-crimson .gft-kpi-icon {
+  background: rgba(165, 40, 40, .12);
+  color: #8e1f1f;
 }
-.gft-kpi-crimson .gft-kpi-underline{
-  background: linear-gradient(90deg,#a52828,#e57373);
+
+.gft-kpi-crimson .gft-kpi-underline {
+  background: linear-gradient(90deg, #a52828, #e57373);
 }
 
 /* SILVER */
-.gft-kpi-silver::before{
+.gft-kpi-silver::before {
   background: radial-gradient(circle at 85% 30%,
-    rgba(148,163,184,.20),
-    rgba(148,163,184,.10) 35%,
-    transparent 65%);
+      rgba(148, 163, 184, .20),
+      rgba(148, 163, 184, .10) 35%,
+      transparent 65%);
 }
-.gft-kpi-silver::after{
+
+.gft-kpi-silver::after {
   background: radial-gradient(circle at 85% 30%,
-    rgba(148,163,184,.16),
-    transparent 58%);
+      rgba(148, 163, 184, .16),
+      transparent 58%);
 }
-.gft-kpi-silver .gft-kpi-icon{
-  background: rgba(148,163,184,.18);
-  color:lab(28.79% -0.19 -0.75 / 0.825);
+
+.gft-kpi-silver .gft-kpi-icon {
+  background: rgba(148, 163, 184, .18);
+  color: lab(28.79% -0.19 -0.75 / 0.825);
 }
-.gft-kpi-silver .gft-kpi-underline{
-  background: linear-gradient(90deg,#94a3b8,#e2e8f0);
+
+.gft-kpi-silver .gft-kpi-underline {
+  background: linear-gradient(90deg, #94a3b8, #e2e8f0);
 }
 
 /* BRONZE */
-.gft-kpi-bronze::before{
+.gft-kpi-bronze::before {
   background: radial-gradient(circle at 85% 30%,
-    rgba(180,83,9,.18),
-    rgba(180,83,9,.08) 35%,
-    transparent 65%);
+      rgba(180, 83, 9, .18),
+      rgba(180, 83, 9, .08) 35%,
+      transparent 65%);
 }
-.gft-kpi-bronze::after{
+
+.gft-kpi-bronze::after {
   background: radial-gradient(circle at 85% 30%,
-    rgba(180,83,9,.14),
-    transparent 58%);
+      rgba(180, 83, 9, .14),
+      transparent 58%);
 }
-.gft-kpi-bronze .gft-kpi-icon{
-  background: rgba(180,83,9,.14);
-  color:hsl(15, 82%, 42%);
+
+.gft-kpi-bronze .gft-kpi-icon {
+  background: rgba(180, 83, 9, .14);
+  color: hsl(15, 82%, 42%);
 }
-.gft-kpi-bronze .gft-kpi-underline{
-  background: linear-gradient(90deg,#b45309,#fdba74);
+
+.gft-kpi-bronze .gft-kpi-underline {
+  background: linear-gradient(90deg, #b45309, #fdba74);
 }
 
 /* =========================
    KPI Cards — Dark Mode
    ========================= */
 
-html.dark .gft-kpi-card{
-  background: linear-gradient(
-    180deg,
-    rgba(30, 41, 59, .65),
-    rgba(15, 23, 42, .75)
-  );
+html.dark .gft-kpi-card {
+  background: linear-gradient(180deg,
+      rgba(30, 41, 59, .65),
+      rgba(15, 23, 42, .75));
   border: 1px solid rgba(148, 163, 184, .12);
   box-shadow:
-    0 10px 28px rgba(0,0,0,.35),
-    inset 0 1px 0 rgba(255,255,255,.03);
+    0 10px 28px rgba(0, 0, 0, .35),
+    inset 0 1px 0 rgba(255, 255, 255, .03);
 }
 
-html.dark .gft-kpi-label{
+html.dark .gft-kpi-label {
   color: rgba(226, 232, 240, .70);
 }
 
-html.dark .gft-kpi-card .gft-kpi-value{
+html.dark .gft-kpi-card .gft-kpi-value {
   color: rgba(241, 245, 249, .95);
 }
 
-html.dark .gft-kpi-card .gft-kpi-icon{
-  background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.18);
+html.dark .gft-kpi-card .gft-kpi-icon {
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .18);
   backdrop-filter: blur(6px);
 }
-html.dark .gft-kpi-silver .gft-kpi-icon{
-  color:hsla(215, 16%, 85%, 0.825);
+
+html.dark .gft-kpi-silver .gft-kpi-icon {
+  color: hsla(215, 16%, 85%, 0.825);
 }
-html.dark .gft-kpi-blue .gft-kpi-icon{
-  color:#739bf2;
+
+html.dark .gft-kpi-blue .gft-kpi-icon {
+  color: #739bf2;
 }
-html.dark .gft-kpi-crimson .gft-kpi-icon{
-  color:hwb(0 46% 14%);
+
+html.dark .gft-kpi-crimson .gft-kpi-icon {
+  color: hwb(0 46% 14%);
 }
+
 /* ===============================
    Health Overview – Horizontal Scroll
    =============================== */
 /* Paksa widget Health Overview span penuh di grid Filament */
-.gft-health-overview--full{
+.gft-health-overview--full {
   grid-column: 1 / -1 !important;
   width: 100% !important;
 }
 
-.gft-health-scroll{
+.gft-health-scroll {
   overflow-x: auto;
   overflow-y: visible;
-  padding-bottom: 8px; /* ruang buat scrollbar */
+  padding-bottom: 8px;
+  /* ruang buat scrollbar */
   scrollbar-gutter: stable;
 }
 
-.gft-health-track{
+.gft-health-track {
   display: flex;
   gap: 1rem;
   min-width: max-content;
 }
 
 /* Lebar card konsisten kayak dashboard snapshot */
-.gft-health-track .gft-kpi-card{
+.gft-health-track .gft-kpi-card {
   width: 260px;
   flex-shrink: 0;
 }
 
 /* Smooth scrolling */
-.gft-health-scroll{
+.gft-health-scroll {
   scroll-behavior: smooth;
 }
 
 /* Optional: snap biar cakep */
-.gft-health-track{
+.gft-health-track {
   scroll-snap-type: x mandatory;
 }
-.gft-health-track .gft-kpi-card{
+
+.gft-health-track .gft-kpi-card {
   scroll-snap-align: start;
 }
+
 /* ===============================
    Remove section underline
    Athlete Health Overview ONLY
    =============================== */
 
 .gft-health-overview::before,
-.gft-health-overview::after{
+.gft-health-overview::after {
   display: none !important;
   content: none !important;
 }
@@ -1130,56 +1167,57 @@ html.dark .gft-kpi-crimson .gft-kpi-icon{
    ========================= */
 
 /* bar utama */
-html.dark .fi-topbar{
-  background: linear-gradient(180deg, rgba(2,6,23,.92), rgba(2,6,23,.78)) !important;
-  border-bottom: 1px solid rgba(148,163,184,.12) !important;
-  box-shadow: 0 10px 28px rgba(0,0,0,.35) !important;
+html.dark .fi-topbar {
+  background: linear-gradient(180deg, rgba(2, 6, 23, .92), rgba(2, 6, 23, .78)) !important;
+  border-bottom: 1px solid rgba(148, 163, 184, .12) !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .35) !important;
   backdrop-filter: blur(10px);
 }
 
 /* container di dalam topbar (biar rapi & ga ada tint default) */
-html.dark .fi-topbar-ctn{
+html.dark .fi-topbar-ctn {
   background: transparent !important;
 }
 
 /* teks/icon di topbar biar ga “grey Filament” */
 html.dark .fi-topbar,
-html.dark .fi-topbar *{
-  color: rgba(241,245,249,.92);
+html.dark .fi-topbar * {
+  color: rgba(241, 245, 249, .92);
 }
 
 /* =========================
    Search box — dark style
    ========================= */
 html.dark .fi-topbar .fi-input-wrp,
-html.dark .fi-topbar input[type="search"]{
-  background: rgba(255,255,255,.06) !important;
-  border: 1px solid rgba(148,163,184,.16) !important;
-  color: rgba(241,245,249,.92) !important;
+html.dark .fi-topbar input[type="search"] {
+  background: rgba(255, 255, 255, .06) !important;
+  border: 1px solid rgba(148, 163, 184, .16) !important;
+  color: rgba(241, 245, 249, .92) !important;
 }
 
-html.dark .fi-topbar input[type="search"]::placeholder{
-  color: rgba(226,232,240,.55) !important;
+html.dark .fi-topbar input[type="search"]::placeholder {
+  color: rgba(226, 232, 240, .55) !important;
 }
 
 /* focus ring biar “nyatu”, ga biru default */
-html.dark .fi-topbar .fi-input-wrp:focus-within{
-  border-color: rgba(226,232,240,.26) !important;
-  box-shadow: 0 0 0 3px rgba(148,163,184,.12) !important;
+html.dark .fi-topbar .fi-input-wrp:focus-within {
+  border-color: rgba(226, 232, 240, .26) !important;
+  box-shadow: 0 0 0 3px rgba(148, 163, 184, .12) !important;
 }
 
 /* =========================
    Avatar button / icon button feel
    ========================= */
 html.dark .fi-topbar a,
-html.dark .fi-topbar button{
+html.dark .fi-topbar button {
   border-radius: 12px;
 }
 
 html.dark .fi-topbar a:hover,
-html.dark .fi-topbar button:hover{
-  background: rgba(255,255,255,.06) !important;
+html.dark .fi-topbar button:hover {
+  background: rgba(255, 255, 255, .06) !important;
 }
+
 /* ===============================
    Active Training Programs — fixed height + scroll
    =============================== */
@@ -1194,7 +1232,8 @@ html.dark .fi-topbar button:hover{
 
 /* Ini yang beneran jadi “body” tabel di Filament v4 */
 .gft-active-programs-card .fi-ta-content-ctn {
-  max-height: 320px !important;   /* atur: 300–380 sesuai selera */
+  max-height: 320px !important;
+  /* atur: 300–380 sesuai selera */
   overflow-y: auto !important;
 }
 
@@ -1205,20 +1244,23 @@ html.dark .fi-topbar button:hover{
   z-index: 10;
   background: var(--gft-card);
 }
+
 /* ===============================
    Active Training Programs — underline fix (Filament v4)
    =============================== */
 
-.fi-ta.gft-active-programs-table .fi-ta-header{
+.fi-ta.gft-active-programs-table .fi-ta-header {
   position: relative;
 }
 
 /* underline merah */
-.fi-ta.gft-active-programs-table .fi-ta-header::after{
+.fi-ta.gft-active-programs-table .fi-ta-header::after {
   content: "";
   position: absolute;
-  left: 24px;          /* sesuaikan sama padding header */
-  bottom: 8px;         /* jarak dari bawah */
+  left: 24px;
+  /* sesuaikan sama padding header */
+  bottom: 8px;
+  /* jarak dari bawah */
   width: 56px;
   height: 3px;
   border-radius: 999px;
@@ -1226,19 +1268,20 @@ html.dark .fi-topbar button:hover{
   z-index: 5;
   pointer-events: none;
 }
+
 /* Kill rule lama biar gak nyasar */
-.fi-ta.gft-active-programs-table .fi-ta-header-ctn::after{
+.fi-ta.gft-active-programs-table .fi-ta-header-ctn::after {
   content: none !important;
 }
 
 /* Anchor yang benar */
-.fi-ta.gft-active-programs-table .fi-ta-header{
+.fi-ta.gft-active-programs-table .fi-ta-header {
   position: relative !important;
   overflow: visible !important;
 }
 
 /* Underline nempel ke header */
-.fi-ta.gft-active-programs-table .fi-ta-header::after{
+.fi-ta.gft-active-programs-table .fi-ta-header::after {
   content: "";
   position: absolute;
   left: 24px;
@@ -1250,18 +1293,19 @@ html.dark .fi-topbar button:hover{
   z-index: 50;
   pointer-events: none;
 }
+
 /* ===============================
    Active Training Programs — outer gradient line (top border)
    =============================== */
 
 .fi-ta-ctn-with-header.gft-active-programs-table,
-.fi-ta-ctn.gft-active-programs-table{
+.fi-ta-ctn.gft-active-programs-table {
   position: relative !important;
 }
 
 /* garis gradasi di bagian paling atas card tabel */
 .fi-ta-ctn-with-header.gft-active-programs-table::before,
-.fi-ta-ctn.gft-active-programs-table::before{
+.fi-ta-ctn.gft-active-programs-table::before {
   content: "";
   position: absolute;
   left: 0;
@@ -1272,113 +1316,128 @@ html.dark .fi-topbar button:hover{
   z-index: 5;
   pointer-events: none;
 }
+
 /* container PALING LUAR tabel */
 .fi-ta-ctn-with-header.gft-active-programs-table,
 .fi-ta-ctn.gft-active-programs-table {
   position: relative !important;
-  z-index: 1; /* ← TARO DI SINI */
+  z-index: 1;
+  /* ← TARO DI SINI */
 }
+
 /* ============================================================
    BRAND LOGO — prevent light flash on redirects (login errors)
    ============================================================ */
-img.fi-logo { opacity: 0; }
-html[data-gft-logo-ready="1"] img.fi-logo { opacity: 1; }
+img.fi-logo {
+  opacity: 0;
+}
+
+html[data-gft-logo-ready="1"] img.fi-logo {
+  opacity: 1;
+}
+
 /* ===== Center header kolom terakhir (Aksi) ===== */
-.gft-athletes-table thead th:last-child{
+.gft-athletes-table thead th:last-child {
   text-align: center !important;
 }
 
 /* ===== Center isi kolom terakhir (Aksi) ===== */
-.gft-athletes-table tbody td:last-child{
+.gft-athletes-table tbody td:last-child {
   text-align: center !important;
 }
 
 /* ===== Pastikan container actions-nya beneran ke tengah ===== */
-.gft-athletes-table tbody td:last-child .fi-ta-actions{
+.gft-athletes-table tbody td:last-child .fi-ta-actions {
   justify-content: center !important;
 }
+
 /* ===== GFT Gold CTA (match New Prestasi) ===== */
 .gft-btn-gold {
-    background: #F6C544;
-    color: #7A4A00;
-    font-weight: 600;
-    font-size: 0.875rem;
+  background: #F6C544;
+  color: #7A4A00;
+  font-weight: 600;
+  font-size: 0.875rem;
 
-    padding: 0.5rem 0.75rem;
-    border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
 
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 
-    /* toned-down depth */
-    box-shadow:
-        inset 0 -1px 0 rgba(0,0,0,0.06),
-        0 1px 2px rgba(0,0,0,0.08);
+  /* toned-down depth */
+  box-shadow:
+    inset 0 -1px 0 rgba(0, 0, 0, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.08);
 
-    transition: background-color .15s ease, color .15s ease;
+  transition: background-color .15s ease, color .15s ease;
 }
 
 .gft-btn-gold:hover {
-    background: #F2B933;
-    color: #6A3F00;
+  background: #F2B933;
+  color: #6A3F00;
 }
 
 .gft-btn-gold svg {
-    width: 16px;
-    height: 16px;
-    stroke-width: 2;
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
 }
+
 /* =================================================
    Athletes table header: tools left, CTA right
    ================================================= */
 
 /* balikin jarak antara cards dan table header */
-.fi-ta.gft-athletes-table{
-  margin-top: 1rem; /* adjust kalau mau 0.75rem */
+.fi-ta.gft-athletes-table {
+  margin-top: 1rem;
+  /* adjust kalau mau 0.75rem */
 }
 
 /* jangan sentuh padding header toolbar bawaan Filament */
-.fi-ta.gft-athletes-table .fi-ta-header{
-  padding: 0.75rem 1rem !important; /* biar ga mepet */
+.fi-ta.gft-athletes-table .fi-ta-header {
+  padding: 0.75rem 1rem !important;
+  /* biar ga mepet */
 }
 
 /* ini container yang ngatur posisi CTA (New Atlet) */
-.fi-ta.gft-athletes-table .fi-ta-header-ctn{
-  display:flex !important;
-  align-items:center !important;
-  justify-content:space-between !important;
-  gap:12px !important;
+.fi-ta.gft-athletes-table .fi-ta-header-ctn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
 }
 
 /* kiri: toolbar (search/filter/columns) */
-.fi-ta.gft-athletes-table .fi-ta-header-toolbar{
-  display:flex !important;
-  align-items:center !important;
-  justify-content:flex-start !important;
-  gap:10px !important;
+.fi-ta.gft-athletes-table .fi-ta-header-toolbar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 10px !important;
   flex: 1 1 auto !important;
   min-width: 0 !important;
 }
 
 /* kanan: header actions (CTA) */
-.fi-ta.gft-athletes-table :is(.fi-ta-header-actions, .fi-ta-header-actions-ctn){
-  display:flex !important;
-  align-items:center !important;
-  justify-content:flex-end !important;
+.fi-ta.gft-athletes-table :is(.fi-ta-header-actions, .fi-ta-header-actions-ctn) {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
   flex: 0 0 auto !important;
-  margin-left:auto !important;
+  margin-left: auto !important;
 }
 
 /* mobile wrap */
-@media (max-width: 768px){
-  .fi-ta.gft-athletes-table .fi-ta-header-ctn{
-    flex-wrap:wrap !important;
+@media (max-width: 768px) {
+  .fi-ta.gft-athletes-table .fi-ta-header-ctn {
+    flex-wrap: wrap !important;
   }
-  .fi-ta.gft-athletes-table :is(.fi-ta-header-actions, .fi-ta-header-actions-ctn){
-    width:100% !important;
+
+  .fi-ta.gft-athletes-table :is(.fi-ta-header-actions, .fi-ta-header-actions-ctn) {
+    width: 100% !important;
   }
 }
+
 /* ===============================
    DARK MODE — Global Table Style
    (applies to ALL Filament tables)
@@ -1393,74 +1452,87 @@ html.dark .fi-ta {
 html.dark .fi-ta-ctn,
 html.dark .fi-ta-content,
 html.dark .fi-ta-table-container {
-  background: rgba(255, 255, 255, 0.03) !important; /* soft glass */
+  background: rgba(255, 255, 255, 0.03) !important;
+  /* soft glass */
   border: 1px solid rgba(255, 255, 255, 0.06) !important;
   box-shadow:
-    0 18px 40px rgba(0,0,0,0.35),
-    0 6px 16px rgba(0,0,0,0.25);
+    0 18px 40px rgba(0, 0, 0, 0.35),
+    0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
 /* header bar (area search/filter/columns) */
 html.dark .fi-ta-header {
   background: rgba(255, 255, 255, 0.02) !important;
-  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
 }
 
 /* table cells + text */
 html.dark .fi-ta-table thead th {
-  color: rgba(255,255,255,0.78) !important;
+  color: rgba(255, 255, 255, 0.78) !important;
 }
+
 html.dark .fi-ta-table tbody td {
-  color: rgba(255,255,255,0.72) !important;
+  color: rgba(255, 255, 255, 0.72) !important;
 }
 
 /* row separators */
 html.dark .fi-ta-table tbody tr {
-  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
 }
 
 /* hover */
 html.dark .fi-ta-table tbody tr:hover {
-  background: rgba(255,255,255,0.04) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
 }
 
 /* inputs inside table toolbars (search) */
 html.dark .fi-ta-header input,
 html.dark .fi-ta-header .fi-input-wrp {
-  background: rgba(255,255,255,0.04) !important;
-  border-color: rgba(255,255,255,0.10) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.10) !important;
 }
+
 /* =================================================
    Default avatar (initials) follow Dashboard "blue chip"
    ================================================= */
 
 /* target: avatar fallback bubble di table */
 .fi-ta .fi-ta-cell-avatar div.bg-gray-100 {
-  background: rgb(239 246 255) !important;          /* blue-50 */
-  border: 1px solid rgb(191 219 254) !important;    /* blue-200 */
+  background: rgb(239 246 255) !important;
+  /* blue-50 */
+  border: 1px solid rgb(191 219 254) !important;
+  /* blue-200 */
 }
 
 .fi-ta .fi-ta-cell-avatar .text-gray-700 {
-  color: rgb(29 78 216) !important;                 /* blue-700 */
+  color: rgb(29 78 216) !important;
+  /* blue-700 */
 }
 
 /* dark mode version */
 html.dark .fi-ta .fi-ta-cell-avatar div.bg-gray-100 {
-  background: rgba(30, 58, 138, 0.40) !important;   /* blue-900/40-ish */
-  border-color: rgba(29, 78, 216, 0.40) !important; /* blue-700/40 */
+  background: rgba(30, 58, 138, 0.40) !important;
+  /* blue-900/40-ish */
+  border-color: rgba(29, 78, 216, 0.40) !important;
+  /* blue-700/40 */
 }
 
 html.dark .fi-ta .fi-ta-cell-avatar .text-gray-700 {
-  color: rgb(191 219 254) !important;               /* blue-200 */
+  color: rgb(191 219 254) !important;
+  /* blue-200 */
 }
 
 /* ring ikut border */
 .fi-ta .fi-ta-cell-avatar .ring-gray-200 {
-  --tw-ring-color: rgb(191 219 254) !important;     /* blue-200 */
+  --tw-ring-color: rgb(191 219 254) !important;
+  /* blue-200 */
 }
+
 html.dark .fi-ta .fi-ta-cell-avatar .ring-gray-200 {
-  --tw-ring-color: rgba(29, 78, 216, 0.40) !important; /* blue-700/40 */
+  --tw-ring-color: rgba(29, 78, 216, 0.40) !important;
+  /* blue-700/40 */
 }
+
 /* =====================================================
    GFT × NOA — TABLE STYLE (FIGMA-LIKE)
    Berlaku untuk SEMUA table Filament
@@ -1470,19 +1542,22 @@ html.dark .fi-ta .fi-ta-cell-avatar .ring-gray-200 {
 .fi-ta {
   border-radius: 12px;
   overflow: hidden;
-  background: #F9FAF7; /* off-white Figma */
+  background: #F9FAF7;
+  /* off-white Figma */
   border: 1px solid rgba(2, 6, 23, 0.06);
 }
 
 /* DARK MODE wrapper */
 html.dark .fi-ta {
-  background: #020617; /* slate-950 */
-  border-color: rgba(255,255,255,0.06);
+  background: #020617;
+  /* slate-950 */
+  border-color: rgba(255, 255, 255, 0.06);
 }
 
 /* ---------- HEADER ROW ---------- */
 .fi-ta thead {
-  background: #EAF2FF; /* soft blue */
+  background: #EAF2FF;
+  /* soft blue */
 }
 
 html.dark .fi-ta thead {
@@ -1491,7 +1566,8 @@ html.dark .fi-ta thead {
 
 /* ---------- HEADER CELL ---------- */
 .fi-ta-header-cell {
-  color: #1E3A8A; /* navy */
+  color: #1E3A8A;
+  /* navy */
   font-weight: 600;
   font-size: 0.875rem;
   padding: 14px 16px;
@@ -1517,27 +1593,30 @@ html.dark .fi-ta-header-cell::after {
 
 html.dark .fi-ta-row {
   background: transparent;
-  border-bottom-color: rgba(255,255,255,0.05);
+  border-bottom-color: rgba(255, 255, 255, 0.05);
 }
 
 /* hover */
 .fi-ta-row:hover {
-  background: #F1F6FF; /* soft hover */
+  background: #F1F6FF;
+  /* soft hover */
 }
 
 html.dark .fi-ta-row:hover {
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 /* ---------- BODY CELL ---------- */
 .fi-ta-cell {
-  color: #334155; /* slate-700 */
+  color: #334155;
+  /* slate-700 */
   font-size: 0.875rem;
   padding: 14px 16px;
 }
 
 html.dark .fi-ta-cell {
-  color: #CBD5E1; /* slate-300 */
+  color: #CBD5E1;
+  /* slate-300 */
 }
 
 /* ---------- EMPTY STATE ---------- */
@@ -1555,33 +1634,37 @@ html.dark .fi-ta-empty-state {
    =============================== */
 
 /* wrapper avatar (foto & initial) */
-.fi-ta-cell-avatar a > div,
+.fi-ta-cell-avatar a>div,
 .fi-ta-cell-avatar img {
-    width: 40px !important;
-    height: 40px !important;
+  width: 40px !important;
+  height: 40px !important;
 }
 
 /* default initial avatar */
-.fi-ta-cell-avatar a > div {
-    border-radius: 9999px;
-    display: grid;
-    place-items: center;
-    font-size: 0.75rem; /* text-sm */
-    font-weight: 600;
+.fi-ta-cell-avatar a>div {
+  border-radius: 9999px;
+  display: grid;
+  place-items: center;
+  font-size: 0.75rem;
+  /* text-sm */
+  font-weight: 600;
 }
 
 /* optional: biar ring lebih subtle (sesuai Figma) */
 .fi-ta-cell-avatar img,
-.fi-ta-cell-avatar a > div {
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+.fi-ta-cell-avatar a>div {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
+
 /* =========================
    Topbar – logo breathing space
    ========================= */
 
 .fi-topbar {
-  padding-block: 0.75rem !important; /* atas & bawah */
+  padding-block: 0.75rem !important;
+  /* atas & bawah */
 }
+
 /* ==================================================
    TABLE HEADER TEXT — match avatar (global)
    ================================================== */
@@ -1590,7 +1673,8 @@ html.dark .fi-ta-empty-state {
 .fi-ta .fi-ta-header-cell .fi-ta-header-cell-label,
 .fi-ta .fi-ta-header-cell button,
 .fi-ta .fi-ta-header-cell span {
-  color: #1d4ed8 !important; /* blue-700 */
+  color: #1d4ed8 !important;
+  /* blue-700 */
   font-weight: 600 !important;
 }
 
@@ -1598,33 +1682,38 @@ html.dark .fi-ta-empty-state {
 html.dark .fi-ta .fi-ta-header-cell .fi-ta-header-cell-label,
 html.dark .fi-ta .fi-ta-header-cell button,
 html.dark .fi-ta .fi-ta-header-cell span {
-  color: #bfdbfe !important; /* blue-200 */
+  color: #bfdbfe !important;
+  /* blue-200 */
 }
+
 /* ==================================================
    TABLE HEADER TEXT — FORCE OVERRIDE (global)
    target: semua table filament
    ================================================== */
 
 /* Light mode */
-.fi-ta thead th.fi-ta-header-cell{
-  color: #1d4ed8 !important; /* blue-700 (match avatar default text) */
+.fi-ta thead th.fi-ta-header-cell {
+  color: #1d4ed8 !important;
+  /* blue-700 (match avatar default text) */
   font-weight: 600 !important;
 }
 
 /* paksa semua isi header ngikutin warna th */
-.fi-ta thead th.fi-ta-header-cell *{
+.fi-ta thead th.fi-ta-header-cell * {
   color: inherit !important;
 }
 
 /* Dark mode */
-html.dark .fi-ta thead th.fi-ta-header-cell{
-  color: #bfdbfe !important; /* blue-200 */
+html.dark .fi-ta thead th.fi-ta-header-cell {
+  color: #bfdbfe !important;
+  /* blue-200 */
 }
 
 /* icon sort / chevron juga ikut */
-html.dark .fi-ta thead th.fi-ta-header-cell *{
+html.dark .fi-ta thead th.fi-ta-header-cell * {
   color: inherit !important;
 }
+
 /* =========================================
    GLOBAL PRIMARY PALETTE (affects ALL buttons)
    Dark: default = GOLD, hover = YELLOW
@@ -1634,8 +1723,10 @@ html.dark .fi-ta thead th.fi-ta-header-cell *{
 /* LIGHT MODE */
 html:not(.dark) {
   /* primary background scale used by fi-bg-color-xxx */
-  --fi-color-primary-400: #FACC2E; /* default button bg */
-  --fi-color-primary-300: #FCB130; /* hover bg */
+  --fi-color-primary-400: #FACC2E;
+  /* default button bg */
+  --fi-color-primary-300: #FCB130;
+  /* hover bg */
 
   /* text on primary buttons */
   --fi-color-on-primary: #7A4A00;
@@ -1643,9 +1734,12 @@ html:not(.dark) {
 
 /* DARK MODE */
 html.dark {
-  --fi-color-primary-400: #FCB130; /* default button bg */
-  --fi-color-primary-300: #FACC2E; /* hover bg */
-  --fi-color-on-primary: #0B1220;  /* biar kebaca di gold */
+  --fi-color-primary-400: #FCB130;
+  /* default button bg */
+  --fi-color-primary-300: #FACC2E;
+  /* hover bg */
+  --fi-color-on-primary: #0B1220;
+  /* biar kebaca di gold */
 }
 
 /* Make sure primary buttons use the on-primary text color */
@@ -1653,12 +1747,52 @@ html.dark {
 a.fi-btn.fi-color-primary {
   color: var(--fi-color-on-primary) !important;
 }
+
 /* === Athlete cell text fix === */
 html:not(.dark) .gft-athlete-cell {
-    color: #0f172a; /* slate-900 */
+  color: #0f172a;
+  /* slate-900 */
 }
 
 html.dark .gft-athlete-cell {
-    color: #ffffff;
+  color: #ffffff;
 }
 
+/* =========================================
+   GLOBAL BUTTON STYLING (Override all .fi-btn)
+   Apply .gft-btn-gold style to ALL Filament buttons
+   ========================================= */
+
+.fi-btn {
+  background-color: #F6C544 !important;
+  color: #7A4A00 !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 8px !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+
+  /* toned-down depth */
+  box-shadow:
+    inset 0 -1px 0 rgba(0, 0, 0, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.08) !important;
+
+  transition: background-color .15s ease, color .15s ease !important;
+  border: none !important;
+}
+
+.fi-btn:hover {
+  background-color: #F2B933 !important;
+  color: #6A3F00 !important;
+}
+
+.fi-btn svg {
+  width: 16px !important;
+  height: 16px !important;
+  stroke-width: 2 !important;
+  color: currentColor !important;
+}

@@ -20,6 +20,11 @@ class ActiveTrainingPrograms extends TableWidget
         ];
     }
 
+    protected function getTableHeading(): ?string
+    {
+        return 'Program Pelatihan Aktif';
+    }
+
     public function table(Table $table): Table
 {
     return $table

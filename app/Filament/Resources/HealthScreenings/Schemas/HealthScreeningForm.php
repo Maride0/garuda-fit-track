@@ -31,7 +31,7 @@ class HealthScreeningForm
                     | STEP 1 — Informasi Screening + Vital Signs
                     |--------------------------------------------------------------------------
                     */
-                    Step::make('Informasi Screening & Vital Signs')
+                    Step::make('Informasi Screening & Tanda Vital')
                         ->schema([
                             Hidden::make('lock_athlete')
                                 ->default(fn () => request()->has('athlete_id'))
@@ -70,9 +70,9 @@ class HealthScreeningForm
                                         ->options(function ($get) {
                                             // opsi dasar, tanpa follow-up dulu
                                             $options = [
-                                                'routine'     => 'Routine Check',
-                                                'injury'      => 'Injury Check',
-                                                'competition' => 'Competition',
+                                                'routine'     => 'Pemeriksaan Rutin',
+                                                'injury'      => 'Pemeriksaan Cedera',
+                                                'competition' => 'Kompetisi',
                                             ];
 
                                             $athleteId = $get('athlete_id');
@@ -82,7 +82,7 @@ class HealthScreeningForm
                                             if (! $athleteId) {
                                                 // tapi kalau lagi edit dan state-nya sudah follow_up, tetap tampilkan
                                                 if ($current === 'follow_up') {
-                                                    $options['follow_up'] = 'Follow-up';
+                                                    $options['follow_up'] = 'Tindak Lanjut';
                                                 }
 
                                                 return $options;
@@ -100,10 +100,10 @@ class HealthScreeningForm
                                             if ($hasActiveSchedule || $current === 'follow_up') {
                                                 // kalau kamu mau urutan sama seperti sebelumnya, bisa disisip:
                                                 $options = [
-                                                    'routine'     => 'Routine Check',
-                                                    'injury'      => 'Injury Check',
-                                                    'follow_up'   => 'Follow-up',
-                                                    'competition' => 'Competition',
+                                                    'routine'     => 'Pemeriksaan Rutin',
+                                                    'injury'      => 'Pemeriksaan Cedera',
+                                                    'follow_up'   => 'Tindak Lanjut',
+                                                    'competition' => 'Kompetisi',
                                                 ];
                                             }
 
@@ -115,7 +115,7 @@ class HealthScreeningForm
                                         ->disabled(fn ($record) => $record?->is_locked ?? false),
                                 ]),
 
-                            Section::make('Vital Signs')
+                            Section::make('Tanda Vital')
                                 ->columns(3)
                                 ->schema([
                                     TextInput::make('blood_pressure')
@@ -213,13 +213,13 @@ class HealthScreeningForm
                                         ->options(function ($record) {
                                             $options = [
                                                 'fit'             => 'Fit',
-                                                'restricted'      => 'Restricted',
-                                                'requires_therapy'=> 'Requires Therapy',
+                                                'restricted'      => 'Terbatas',
+                                                'requires_therapy'=> 'Memerlukan Terapi',
                                             ];
 
                                             // 🟡 Kalau record punya value active_therapy → tambahkan hanya untuk ditampilkan
                                             if ($record && $record->screening_result === 'active_therapy') {
-                                                $options['active_therapy'] = 'Active Therapy';
+                                                $options['active_therapy'] = 'Sedang Terapi';
                                             }
 
                                             return $options;

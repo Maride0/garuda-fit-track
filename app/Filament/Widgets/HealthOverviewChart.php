@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class HealthOverviewChart extends ChartWidget
 {
-    protected ?string $heading = 'Health Overview';
+    protected ?string $heading = 'Tinjauan Kesehatan';
     protected static ?int $sort = 1;
 
     protected int|string|array $columnSpan = [

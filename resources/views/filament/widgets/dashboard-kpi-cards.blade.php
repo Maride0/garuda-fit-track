@@ -5,7 +5,7 @@
         <div class="gft-kpi-card gft-kpi-blue">
             <div class="gft-kpi-top">
                 <div>
-                    <div class="gft-kpi-label">Total Athletes</div>
+                    <div class="gft-kpi-label">Total Atlet</div>
                     <div class="gft-kpi-value">{{ number_format($totalAthletes ?? 0) }}</div>
                 </div>
                 <div class="gft-kpi-icon">
@@ -19,7 +19,7 @@
         <div class="gft-kpi-card gft-kpi-gold">
             <div class="gft-kpi-top">
                 <div>
-                    <div class="gft-kpi-label">Gold</div>
+                    <div class="gft-kpi-label">Medali Emas</div>
                     <div class="gft-kpi-value">{{ number_format($gold ?? 0) }}</div>
                 </div>
                 <div class="gft-kpi-icon">
@@ -33,7 +33,7 @@
         <div class="gft-kpi-card gft-kpi-silver">
             <div class="gft-kpi-top">
                 <div>
-                    <div class="gft-kpi-label">Silver</div>
+                    <div class="gft-kpi-label">Medali Perak</div>
                     <div class="gft-kpi-value">{{ number_format($silver ?? 0) }}</div>
                 </div>
                 <div class="gft-kpi-icon">
@@ -47,7 +47,7 @@
         <div class="gft-kpi-card gft-kpi-bronze">
             <div class="gft-kpi-top">
                 <div>
-                    <div class="gft-kpi-label">Bronze</div>
+                    <div class="gft-kpi-label">Medali Perunggu</div>
                     <div class="gft-kpi-value">{{ number_format($bronze ?? 0) }}</div>
                 </div>
                 <div class="gft-kpi-icon">

@@ -29,7 +29,7 @@
         <div class="flex items-end justify-between">
             <div>
                 <h2 class="text-lg font-semibold !text-[#001C8E] dark:!text-blue-200">
-                    Athlete Performance Snapshot
+                    Snapshot Performa Atlet
                     <span class="mt-2 block h-1 w-16 rounded-full bg-[#A52828]"></span>
                 </h2>
             </div>

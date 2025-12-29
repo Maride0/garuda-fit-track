@@ -29,11 +29,11 @@ class TrainingProgramForm
                         Select::make('type')
                             ->label('Tipe Program')
                             ->options([
-                                'daily'           => 'Daily',
-                                'weekly'          => 'Weekly',
-                                'pre_competition' => 'Pre competition',
-                                'recovery'        => 'Recovery',
-                                'other'           => 'Other',
+                                'daily'           => 'Harian',
+                                'weekly'          => 'Mingguan',
+                                'pre_competition' => 'Pra-Kompetisi',
+                                'recovery'        => 'Pemulihan',
+                                'other'           => 'Lainnya',
                             ])
                             ->default('weekly')
                             ->required()
@@ -48,9 +48,9 @@ class TrainingProgramForm
                         Select::make('intensity')
                             ->label('Intensitas')
                             ->options([
-                                'low'    => 'Low',
-                                'medium' => 'Medium',
-                                'high'   => 'High',
+                                'low'    => 'Rendah',
+                                'medium' => 'Sedang',
+                                'high'   => 'Tinggi',
                             ])
                             ->default('medium')
                             ->required(),
@@ -190,10 +190,10 @@ class TrainingProgramForm
                         Select::make('status')
                             ->label('Status')
                             ->options([
-                                'draft'     => 'Draft',
-                                'active'    => 'Active',
-                                'completed' => 'Completed',
-                                'cancelled' => 'Cancelled',
+                                'draft'     => 'Draf',
+                                'active'    => 'Aktif',
+                                'completed' => 'Selesai',
+                                'cancelled' => 'Dibatalkan',
                             ])
                             ->default('draft')
                             ->required(),

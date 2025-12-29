@@ -19,6 +19,16 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
+    public static function getPluralLabel(): string
+    {
+        return 'Pengguna';
+    }
+
+    public static function getLabel(): string
+    {
+        return 'Pengguna';
+    }
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserCircle;
 
     protected static UnitEnum|string|null $navigationGroup = 'Sistem';
