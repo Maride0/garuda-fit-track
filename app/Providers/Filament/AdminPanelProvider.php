@@ -37,6 +37,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('Garuda Fit Track')
             ->brandLogo(asset('images/3.png')) // ✅ ganti ke DARK
             ->brandLogoHeight('4rem')
+            
 
             ->viteTheme('resources/css/filament/gft-noa-theme.css')
             ->renderHook(

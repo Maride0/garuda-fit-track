@@ -12,9 +12,11 @@ class EditPerformanceMetric extends BaseEditRecord
     protected static string $resource = PerformanceMetricResource::class;
 
     protected function getHeaderActions(): array
-    {
-        return [
-            DeleteAction::make(),
-        ];
-    }
+{
+    return [
+        \Filament\Actions\DeleteAction::make()
+            ->label('Hapus'),
+    ];
+}
+
 }
